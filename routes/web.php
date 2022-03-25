@@ -29,6 +29,14 @@ Route::get("/pelanggan", [AdminController::class, "pelanggan"]);
 Route::get("/deleteuser/{id}", [AdminController::class, "deleteuser"]);
 
 
+
+
+
+
+Route::get("/profil", [AdminController::class, "profil"]);
+
+
+
 // Produk
 
 
@@ -60,7 +68,7 @@ Route::get("/editartikel/{id}", [AdminController::class, "editartikel"]);
 Route::post("/updateartikel/{id}", [AdminController::class, "updateartikel"]);
 
 
-Route::get("/hapusartikel/{id_artikel}", [AdminController::class, "hapusartikel"]);
+Route::get("/hapusartikel/{id}", [AdminController::class, "hapusartikel"]);
 
 
 // End Artikel

@@ -14,13 +14,15 @@ class CreateArtikelsTable extends Migration
     public function up()
     {
         Schema::create('artikels', function (Blueprint $table) {
-            $table->id();
+            $table->id("id_artikel");
             $table->string("judul_artikel")->nullable();
             $table->text("isi_artikel")->nullable();
             $table->text("sumber_artikel")->nullable();
             $table->date("tglupload_artikel")->nullable();
             $table->string("gambar_artikel")->nullable();
-            $table->timestamps();
+            $table->bigInteger('noktp_pembudidaya')->unsigned()->index()->nullable();
+            // $table->foreign('noktp_pembudidaya')->references('id')->on('pembudidayas')->onDelete('cascade');
+            // $table->timestamps();
         });
     }
 

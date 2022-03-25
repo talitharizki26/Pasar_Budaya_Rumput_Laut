@@ -14,6 +14,7 @@ class Pelanggan extends Model
         'alamat_pelanggan',
         'nohp_pelanggan',
         'jk_pelanggan',
+        'foto_pelanggan',
         'id_users',
     ];
 }

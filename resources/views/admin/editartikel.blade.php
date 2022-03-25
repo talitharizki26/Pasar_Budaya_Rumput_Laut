@@ -31,7 +31,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Form Edit Artikel</h4>
-								<form class="forms-sample" action="{{url('/updateartikel',$data->id)}}" method="post" enctype="multipart/form-data">
+								<form class="forms-sample" action="{{url('/updateartikel',$data->id_artikel)}}" method="post" enctype="multipart/form-data">
 									@csrf
 									<div class="form-group">
 										<label for="judul">Judul Artikel</label>

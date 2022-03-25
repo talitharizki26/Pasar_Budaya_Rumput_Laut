@@ -46,9 +46,9 @@ class HomeController extends Controller
 
         $data = produk::all();
 
-        $data3 = order::all();
-
         $data2 = artikel::all();
+
+        $data3 = order::all();
 
         $usertype = Auth::user()->usertype;
         // $namee = Auth::user()->name;
@@ -114,7 +114,7 @@ class HomeController extends Controller
 
             $data2 = cart::select('*')->where('user_id', '=', $id)->get();
 
-            $data = cart::where('user_id', $id)->join('produks', 'carts.food_id', '=', 'produks.id')->get();
+            $data = cart::where('user_id', $id)->join('produks', 'carts.food_id', '=', 'produks.id_rumputlaut')->get();
 
             return view('showcart', compact('count', 'data', 'data2'));
         } else {

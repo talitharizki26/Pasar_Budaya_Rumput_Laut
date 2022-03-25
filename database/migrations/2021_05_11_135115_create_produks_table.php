@@ -14,7 +14,7 @@ class CreateProduksTable extends Migration
     public function up()
     {
         Schema::create('produks', function (Blueprint $table) {
-            $table->id();
+            $table->id("id_rumputlaut");
             $table->string("jenis_rumputlaut")->nullable();
             $table->text("deskripsi_rumputlaut")->nullable();
             $table->integer("harga_rumputlaut")->nullable();
@@ -22,7 +22,9 @@ class CreateProduksTable extends Migration
             $table->integer("durasitahan_rumputlaut")->nullable();
             $table->string("ketersediaan_rumputlaut")->nullable();
             $table->string("gambar_rumputlaut")->nullable();
-            $table->timestamps();
+            $table->bigInteger('noktp_pembudidaya')->unsigned()->index()->nullable();
+            // $table->foreign('noktp_pembudidaya')->references('id')->on('pembudidaya')->onDelete('cascade');
+            // $table->timestamps();
         });
     }
 

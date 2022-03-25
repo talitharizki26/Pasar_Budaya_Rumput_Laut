@@ -31,7 +31,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Form Edit Produk</h4>
-								<form class="forms-sample" action="{{url('/updateproduk',$data->id)}}" method="post" enctype="multipart/form-data">
+								<form class="forms-sample" action="{{url('/updateproduk',$data->id_rumputlaut)}}" method="post" enctype="multipart/form-data">
 									@csrf
 									<div class="form-group">
 										<label for="jenis">Jenis Rumput Laut</label>
@@ -43,7 +43,7 @@
 									</div>
 									<div class="form-group">
 										<label for="harga">Harga Rumput Laut</label>
-										<input type="number" class="form-control" name="harga_rumputlaut" value="{{$data->harga_rumputlaut}}" required>
+										<input class="form-control" name="harga_rumputlaut" value="{{$data->harga_rumputlaut}}" required>
 									</div>
 									<div class="form-group">
 										<label for="lokasi">Lokasi Rumput Laut</label>
@@ -51,7 +51,7 @@
 									</div>
 									<div class="form-group">
 										<label for="durasitahan">Durasi Ketahanan Rumput Laut</label>
-										<input type="number" class="form-control" name="durasitahan_rumputlaut" value="{{$data->durasitahan_rumputlaut}}" required>
+										<input class="form-control" name="durasitahan_rumputlaut" value="{{$data->durasitahan_rumputlaut}}" required>
 									</div>
 									<div class="form-group">
 										<div class="col-sm-5">

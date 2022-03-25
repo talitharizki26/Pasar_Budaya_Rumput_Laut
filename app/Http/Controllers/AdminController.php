@@ -13,13 +13,32 @@ use App\Models\Reservation;
 use App\Models\Artikel;
 
 use App\Models\Order;
-
+use App\Models\Pembudidaya;
 use Illuminate\Support\Facades\Auth;
 
 
 
 class AdminController extends Controller
 {
+
+
+
+
+
+  public function profil()
+  {
+
+    $data = pembudidaya::all();
+
+    return view("admin.profil", compact("data"));
+  }
+
+
+
+
+
+
+
 
 
   public function pelanggan()
@@ -56,7 +75,7 @@ class AdminController extends Controller
 
 
 
-
+  // Produk
 
   public function produk()
   {
@@ -146,15 +165,13 @@ class AdminController extends Controller
     return redirect()->back();
   }
 
+  // End Produk
 
 
 
 
 
-
-
-
-
+  // Artikel
 
   public function artikel()
   {
@@ -188,18 +205,18 @@ class AdminController extends Controller
     return redirect()->back();
   }
 
-  public function editartikel($id)
+  public function editartikel($id_artikel)
   {
 
-    $data = artikel::find($id);
+    $data = artikel::find($id_artikel);
 
     return view("admin.editartikel", compact("data"));
   }
 
-  public function updateartikel(Request $request, $id)
+  public function updateartikel(Request $request, $id_artikel)
   {
 
-    $data = artikel::find($id);
+    $data = artikel::find($id_artikel);
 
 
     $image = $request->gambar_artikel;
@@ -229,9 +246,9 @@ class AdminController extends Controller
   }
 
 
-  public function hapusartikel($id)
+  public function hapusartikel($id_artikel)
   {
-    $data = artikel::find($id);
+    $data = artikel::find($id_artikel);
 
     $data->delete();
     return redirect()->back();
@@ -239,7 +256,7 @@ class AdminController extends Controller
 
 
 
-
+  // End Artikel
 
 
 

@@ -82,7 +82,7 @@
 												<td>{{$data->sumber_artikel}}</td>
 												<td>{{$data->tglupload_artikel}}</td>
 												<td><img height="100" width="100" src="/artikelimage/{{$data->gambar_artikel}}"></td>
-												<td><a href="{{url('/editartikel',$data->id)}}">Edit</a> || <a onclick="return confirm('Apakah anda ingin menghapus data ini?')" href="{{url('/hapusartikel',$data->id)}}">Hapus</a></td>
+												<td><a href="{{url('/editartikel',$data->id_artikel)}}">Edit</a> || <a onclick="return confirm('Apakah anda ingin menghapus data ini?')" href="{{url('/hapusartikel',$data->id_artikel)}}">Hapus</a></td>
 											</tr>
 
 											@endforeach

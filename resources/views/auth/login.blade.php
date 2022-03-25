@@ -37,11 +37,11 @@
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Email</label>
+                                    <label>E-mail</label>
                                     <input type="email" class="form-control p_input" id="email" name="email" :value="old('email')" required autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
+                                    <label>Kata Sandi</label>
                                     <input type="password" class="form-control p_input" id="password" name="password" required autocomplete="current-password">
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between">
@@ -52,7 +52,7 @@
                                         </label>
                                     </div>
                                     @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}" class="forgot-pass">Lupa Password</a>
+                                    <a href="{{ route('password.request') }}" class="forgot-pass">Lupa Kata Sandi</a>
                                     @endif
                                 </div>
                                 <div class="text-center">

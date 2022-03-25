@@ -36,27 +36,30 @@
                                     <input type="text" class="form-control p_input" id="name" name="name" :value="old('name')" required autofocus autocomplete="name">
                                 </div>
                                 <div class="form-group">
-                                    <label>Email</label>
+                                    <label>Registrasi Sebagai</label>
+                                    <div class="form-check">
+                                        <label for="roleN" class="form-check-label">
+                                            <input type="radio" class="form-control p_input" name="role" id="roleN" value="Pelanggan">Pelanggan
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label for="roleA" class="form-check-label">
+                                            <input type="radio" class="form-control p_input" name="role" id="roleA" value="Pembudidaya">
+                                            Pembudidaya
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>E-mail</label>
                                     <input type="email" class="form-control p_input" id="email" name="email" :value="old('email')" required>
                                 </div>
-                                    <div class="form-check">
-                                    <input type="radio" class="form-control p_input" name="role" id="roleN" value="Pelanggan">
-                                    <label for="roleN" class="form-check-label">
-                                        Pelanggan
-                                    </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="radio" class="form-control p_input" name="role" id="roleA" value="Pembudidaya">
-                                        <label for="roleA" class="form-check-label">
-                                        Pembudidaya
-                                    </label>
-                                    </div>
+
                                 <div class="form-group">
-                                    <label>Password</label>
+                                    <label>Kata Sandi</label>
                                     <input type="password" class="form-control p_input" id="password" name="password" required autocomplete="new-password">
                                 </div>
                                 <div class="form-group">
-                                    <label>Konfirmasi Password</label>
+                                    <label>Konfirmasi Kata Sandi</label>
                                     <input type="password" class="form-control p_input" id="password_confirmation" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                                 <div class="text-center">

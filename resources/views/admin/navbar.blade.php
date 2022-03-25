@@ -24,10 +24,10 @@
         </div>
         <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-          <a href="#" class="dropdown-item preview-item">
+          <a href="{{url('/profil')}}" class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <div class="preview-icon bg-dark rounded-circle">
-                <i class="mdi mdi-account text-primary"></i>
+                <i class="mdi mdi-account-circle text-primary"></i>
               </div>
             </div>
             <div class="preview-item-content">
@@ -40,18 +40,34 @@
     </li>
 
     <li class="nav-item nav-category">
-      <span class="nav-link">Pengelolaan Data</span>
+      <span class="nav-link">Halaman Utama</span>
+    </li>
+
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{{url('/redirects')}}">
+        <span class="menu-icon">
+          <i class="mdi mdi-speedometer"></i>
+        </span>
+        <span class="menu-title">Dashboard</span>
+      </a>
+    </li>
+
+    <li class="nav-item nav-category">
+      <span class="nav-link">Lihat Data</span>
     </li>
 
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('/pelanggan')}}">
         <span class="menu-icon">
-          <i class="mdi mdi-speedometer"></i>
+          <i class="mdi mdi-account"></i>
         </span>
         <span class="menu-title">Data Pelanggan</span>
       </a>
     </li>
 
+    <li class="nav-item nav-category">
+      <span class="nav-link">Pengelolaan Data</span>
+    </li>
 
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('/produk')}}">
@@ -70,6 +86,14 @@
       </a>
     </li>
 
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{{url('/pesanan')}}">
+        <span class="menu-icon">
+          <i class="mdi mdi-chart-bar"></i>
+        </span>
+        <span class="menu-title">Data Pesanan</span>
+      </a>
+    </li>
 
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('/testimoni')}}">
@@ -82,14 +106,7 @@
 
 
 
-    <li class="nav-item menu-items">
-      <a class="nav-link" href="{{url('/pesanan')}}">
-        <span class="menu-icon">
-          <i class="mdi mdi-chart-bar"></i>
-        </span>
-        <span class="menu-title">Data Pesanan</span>
-      </a>
-    </li>
+
 
   </ul>
 

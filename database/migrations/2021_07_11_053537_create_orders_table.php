@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->string("testimoni");
             $table->timestamps();
         });
     }

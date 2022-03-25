@@ -106,7 +106,7 @@
                         <td>{{$data->ketersediaan_rumputlaut}}</td>
                         <td><img height="200" width="200" src="/produkimage/{{$data->gambar_rumputlaut}}"></td>
 
-                        <td><a href="{{url('/editproduk',$data->id)}}">Edit</a> || <a onclick="return confirm('Apakah anda ingin menghapus data ini?')" href="{{url('/hapusproduk',$data->id)}}">Hapus</a></td>
+                        <td><a href="{{url('/editproduk',$data->id_rumputlaut)}}">Edit</a> || <a onclick="return confirm('Apakah anda ingin menghapus data ini?')" href="{{url('/hapusproduk',$data->id_rumputlaut)}}">Hapus</a></td>
 
                       </tr>
                       @endforeach

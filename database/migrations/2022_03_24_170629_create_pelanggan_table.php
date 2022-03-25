@@ -19,6 +19,7 @@ class CreatePelangganTable extends Migration
             $table->string('alamat_pelanggan')->nullable();
             $table->string('nohp_pelanggan')->nullable();
             $table->string('jk_pelanggan')->nullable();
+            $table->string('foto_pelanggan')->nullable();
             $table->bigInteger('id_users')->unsigned()->index()->nullable();
             $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
