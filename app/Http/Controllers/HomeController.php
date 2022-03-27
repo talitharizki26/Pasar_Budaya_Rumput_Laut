@@ -83,16 +83,17 @@ class HomeController extends Controller
 
         if (Auth::id()) {
 
-            $user_id = Auth::id();
-            $foodid = $id;
+            $no_ktp = Auth::id();
+            $id_rumputlaut = $id;
             $jumlah = $request->jumlah;
 
             $cart = new cart;
-            $cart->user_id = $user_id;
-            $cart->food_id = $foodid;
+            $cart->user_id = $no_ktp;
+            $cart->id_rumputlaut = $id_rumputlaut;
             $cart->jumlah = $jumlah;
 
             $cart->save();
+
 
             return redirect()->back();
         } else {
@@ -110,7 +111,7 @@ class HomeController extends Controller
 
         if (Auth::id() == $id) {
 
-            $data = cart::where('user_id', $id)->join('produks', 'carts.food_id', '=', 'produks.id_rumputlaut')->get();
+            $data = cart::where('user_id', $id)->join('produks', 'carts.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
             $data2 = cart::select('*')->where('user_id', '=', $id)->get();
 
@@ -133,22 +134,23 @@ class HomeController extends Controller
     {
 
 
-        foreach ($request->foodname as $key => $foodname) {
+        foreach ($request->user_id as $key => $user_id) {
 
             $data = new Pesanan();
 
-            $data->foodname = $foodname;
+            $data->user_id = $user_id;
 
-            $data->price = $request->price[$key];
+            $data->id_rumputlaut = $request->id_rumputlaut[$key];
 
-            $data->jumlah = $request->jumlah[$key];
 
-            $data->name = $request->name;
+            //$data->harga_rumputlaut = $request->harga_rumputlaut[$key];
 
-            $data->phone = $request->phone;
-
-            $data->address = $request->address;
-            $data->testimoni = $request->pesan;
+            $data->jumlah_pesanan = $request->jumlah_pesanan[$key];
+            $data->total_pesanan = $request->total_pesanan[$key];
+            $data->bukti_pembayaran = $request->bukti_pembayaran;
+            $data->ekspedisi_pesanan = $request->ekspedisi_pesanan;
+            // $data->address = $request->address;
+            // $data->testimoni = $request->pesan;
 
 
             $data->save();

@@ -17,14 +17,19 @@ class CreatePesanansTable extends Migration
             $table->id('id_pesanan');
             $table->date('tgl_pesanan')->nullable();
             $table->time('waktu_pesanan')->nullable();
+            $table->string('id_rumputlaut')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('jumlah_pesanan')->nullable();
             $table->integer('total_pesanan')->nullable();
             $table->string('status_pesanan')->nullable();
             $table->string('ekspedisi_pesanan')->nullable();
+            $table->string('konfirmasi_pesanan')->nullable();
+            $table->string('bukti_pembayaran')->nullable();
             $table->text('isi_testimoni')->nullable();
             $table->date("tgl_testimoni")->nullable();
             $table->text("balasan_testimoni")->nullable();
             $table->integer("bintang testimoni")->nullable();
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

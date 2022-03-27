@@ -169,7 +169,7 @@ https://templatemo.com/tm-558-klassy-cafe
     <div id="top" style="overflow-x: hidden; height: 400px;">
 
 
-        <table style="margin-top:70px; border-radius:10px" width=" 70%" align="center" bgcolor="#89C9D1">
+        <table style="margin-top:70px; border-radius:10px" width=" 80%" align="center" bgcolor="#89C9D1">
             <tr class="text-center">
                 <!-- <th style="padding: 30px;">No. KTP</th> -->
                 <th style="padding: 30px;">Jenis Pesanan</th>
@@ -178,73 +178,82 @@ https://templatemo.com/tm-558-klassy-cafe
                 <th style="padding: 30px;">Total Harga</th>
                 <th style="padding: 30px;">Aksi</th>
             </tr>
-            <form action="{{url('orderconfirm')}}" method="POST">
+            <form action="{{url('orderconfirm')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @foreach($data as $data)
                 <tr align="center">
+                    <input type="text" name="user_id[]" value="{{$data->user_id}}" hidden="">
                     <!-- <td>
-                        <input type="text" name="user_id[]" value="{{$data->user_id}}" hidden="">
+
                         {{$data->user_id}}
                     </td> -->
                     <td>
-                        <input type="text" name="jenis_rumputlaut[]" value="{{$data->jenis_rumputlaut}}" hidden="">
+                        <input type="text" name="id_rumputlaut[]" value="{{$data->id_rumputlaut}}" hidden="">
                         {{$data->jenis_rumputlaut}}
                     </td>
                     <td>
-                        <input type="text" name="harga_rumputlaut[]" value="{{$data->harga_rumputlaut}}" hidden="">
                         {{$data->harga_rumputlaut}}
                     </td>
                     <td>
-                        <input type="text" name="jumlah[]" value="{{$data->jumlah}}" hidden="">
+                        <input type="text" name="jumlah_pesanan[]" value="{{$data->jumlah}}" hidden="">
                         {{$data->jumlah}}
                     </td>
                     <td>
-                        <input type="text" name="total_harga[]" value="{{$data->harga_rumputlaut}}*{{$data->jumlah}}" hidden="">
-                        {{$data->harga_rumputlaut}}{{$data->jumlah}}
+                        <input type="text" name="total_pesanan[]" value="{{$data->harga_rumputlaut*$data->jumlah}}" hidden="">
+                        {{$data->harga_rumputlaut*$data->jumlah}}
                     </td>
 
                 </tr>
                 @endforeach
-                <tr>@foreach($data2 as $data2)
-                    <!-- <tr style="position: relative; top: -80px; left:360px;"> -->
+                @foreach($data2 as $data2)
+                <tr style="position: relative; top: -70px; left:960px;">
+
                     <td>
-                        <a class="btn btn-danger" href="{{url('/remove',$data2->id)}}">Remove</a>
+                        <a class="btn btn-danger" style="padding-top:2px;" href="{{url('/remove',$data2->id)}}">Hapus</a>
                     </td>
-                    <!-- </tr> -->
-                    @endforeach
+
                 </tr>
+                @endforeach
 
         </table>
 
 
         <div align="center" style="padding: 30px;">
-            <button style="padding: 8px;" class="btn btn-new" type="button" id="order">Order Now</button>
+            <button style="padding: 8px;" class="btn btn-new" type="button" id="order">Pesan Sekarang</button>
         </div>
-
-
-
 
         <div id="appear" align="center" style="padding: 10px; display: none;">
 
 
-            <div style="padding: 10px;">
-                <label>Name</label>
-                <input type="text" name="name" placeholder="Name">
+            <div class="form-group">
+                <label>Ekspedisi Pesanan</label>
+                <div class="col-sm-7">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-control p_input" name="ekspedisi_pesanan" id="ekspedisi" value="JNE/J&T"> JNE/J&T </label>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-control p_input" name="ekspedisi_pesanan" id="manual" value="Mitra"> Mitra Pembudidaya </label>
+                    </div>
+                </div>
             </div>
 
             <div style="padding: 10px;">
-                <label>Phone</label>
-                <input type="number" name="phone" placeholder="Phone Number">
+                <label>Bukti Pembayaran</label>
+                <input type="file" name="bukti_pembayaran">
             </div>
 
-            <div style="padding: 10px;">
+            <!-- <div style="padding: 10px;">
                 <label>Address</label>
                 <input type="text" name="address" placeholder="Address">
             </div>
             <div style="padding: 10px;">
                 <label>Pesan</label>
                 <input type="text" name="pesan" placeholder="pesan">
-            </div>
+            </div> -->
 
 
             <div style="padding: 10px;">
