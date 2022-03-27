@@ -1,10 +1,10 @@
 <x-jet-form-section submit="updateProfileInformation">
     <x-slot name="title">
-        {{ __('Profile Information') }}
+        {{ __('Informasi Profil') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Update your account\'s profile information and email address.') }}
+        {{ __('Untuk mempermudah proses transaksi jual beli rumput laut, lengkapi data diri anda.') }}
     </x-slot>
 
     <x-slot name="form">
@@ -50,15 +50,15 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Name') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
-            <x-jet-input-error for="name" class="mt-2" />
+            <x-jet-label for="no_ktp" value="{{ __('No. KTP') }}" />
+            <x-jet-input id="no_ktp" type="text" class="mt-1 block w-full" wire:model.defer="state.no_ktp" autocomplete="no_ktp" />
+            <x-jet-input-error for="no_ktp" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Name') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
-            <x-jet-input-error for="name" class="mt-2" />
+            <x-jet-label for="nama" value="{{ __('Nama') }}" />
+            <x-jet-input id="nama" type="text" class="mt-1 block w-full" wire:model.defer="state.nama" autocomplete="nama" />
+            <x-jet-input-error for="nama" class="mt-2" />
         </div>
 
         <!-- Email -->
@@ -67,15 +67,44 @@
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="no_hp" value="{{ __('No. HP') }}" />
+            <x-jet-input id="no_hp" type="text" class="mt-1 block w-full" wire:model.defer="state.no_hp" autocomplete="no_hp" />
+            <x-jet-input-error for="no_hp" class="mt-2" />
+        </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="tgl_lahir" value="{{ __('Tanggal Lahir') }}" />
+            <x-jet-input id="tgl_lahir" type="date" class="mt-1 block w-full" wire:model.defer="state.tgl_lahir" autocomplete="tgl_lahir" />
+            <x-jet-input-error for="tgl_lahir" class="mt-2" />
+        </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="jenkel" value="{{ __('Jenis Kelamin') }}" />
+            <x-jet-input id="jenkel" type="radio" class="mt-1 block w-full" wire:model.defer="state.jenkel" autocomplete="jenkel" />
+            <x-jet-input id="jenkel" type="radio" class="mt-1 block w-full" wire:model.defer="state.jenkel" autocomplete="jenkel" />
+            <x-jet-input-error for="jenkel" class="mt-2" />
+        </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="alamat" value="{{ __('Alamat') }}" />
+            <x-jet-input id="alamat" type="text" class="mt-1 block w-full" wire:model.defer="state.alamat" autocomplete="alamat" />
+            <x-jet-input-error for="alamat" class="mt-2" />
+        </div>
+
+
+
+
     </x-slot>
 
     <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
-            {{ __('Saved.') }}
+            {{ __('Simpan') }}
         </x-jet-action-message>
 
         <x-jet-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
+            {{ __('Simpan') }}
         </x-jet-button>
     </x-slot>
 </x-jet-form-section>

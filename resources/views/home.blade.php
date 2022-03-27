@@ -87,7 +87,7 @@ https://templatemo.com/tm-558-klassy-cafe
 
                                 @auth
 
-                                <a href="{{url('/showcart',Auth::user()->id)}}">
+                                <a href="{{url('/showcart',Auth::user()->no_ktp)}}">
 
                                     <i class="fa fa-shopping-cart"></i>{{$count}}
 

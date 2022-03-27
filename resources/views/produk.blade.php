@@ -40,7 +40,7 @@
 
                         <div style="margin-top:10px;" class="contact-form">
                             <fieldset>
-                                <input type="number" name="quantity" min="1" value="1" style="width: 100%;">
+                                <input type="number" name="jumlah" min="1" value="1" style="width: 100%;">
                             </fieldset>
                         </div>
                         <input type="submit" class="btn btn-new" value="Tambah Keranjang" style="width: 100%;">

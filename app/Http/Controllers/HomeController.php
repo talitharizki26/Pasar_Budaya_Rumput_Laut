@@ -50,7 +50,7 @@ class HomeController extends Controller
 
         $data2 = artikel::all();
 
-        $data3 = Pesanan::all();
+        $data3 = pesanan::all();
 
         $usertype = Auth::user()->usertype;
         // $namee = Auth::user()->name;
@@ -84,21 +84,15 @@ class HomeController extends Controller
         if (Auth::id()) {
 
             $user_id = Auth::id();
-
             $foodid = $id;
-
-            $quantity = $request->quantity;
+            $jumlah = $request->jumlah;
 
             $cart = new cart;
-
             $cart->user_id = $user_id;
-
             $cart->food_id = $foodid;
-
-            $cart->quantity = $quantity;
+            $cart->jumlah = $jumlah;
 
             $cart->save();
-
 
             return redirect()->back();
         } else {
@@ -106,7 +100,6 @@ class HomeController extends Controller
             return redirect('/login');
         }
     }
-
 
 
     public function showcart(Request $request, $id)
@@ -117,9 +110,9 @@ class HomeController extends Controller
 
         if (Auth::id() == $id) {
 
-            $data2 = cart::select('*')->where('user_id', '=', $id)->get();
-
             $data = cart::where('user_id', $id)->join('produks', 'carts.food_id', '=', 'produks.id_rumputlaut')->get();
+
+            $data2 = cart::select('*')->where('user_id', '=', $id)->get();
 
             return view('showcart', compact('count', 'data', 'data2'));
         } else {
@@ -128,27 +121,11 @@ class HomeController extends Controller
         }
     }
 
-
-
-
     public function remove($id)
-
     {
-
         $data = cart::find($id);
-
-
         $data->delete();
-
-
         return redirect()->back();
-    }
-
-    public function showarticle(Request $request, $id)
-    {
-        $data2 = artikel::select('*')->where('id', '=', $id)->get();
-
-        return view('article', compact('data2'));
     }
 
 
@@ -164,7 +141,7 @@ class HomeController extends Controller
 
             $data->price = $request->price[$key];
 
-            $data->quantity = $request->quantity[$key];
+            $data->jumlah = $request->jumlah[$key];
 
             $data->name = $request->name;
 
@@ -179,6 +156,26 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
+
+
+
+    public function showarticle(Request $request, $id)
+    {
+        $data2 = artikel::select('*')->where('id', '=', $id)->get();
+
+        return view('article', compact('data2'));
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     // public function editprofile()
     // {

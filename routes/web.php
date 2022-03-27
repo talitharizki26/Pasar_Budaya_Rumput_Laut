@@ -17,7 +17,7 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-
+// User
 
 
 Route::get("/", [HomeController::class, "index"]);
@@ -28,15 +28,7 @@ Route::get("/pelanggan", [AdminController::class, "pelanggan"]);
 
 Route::get("/deleteuser/{id}", [AdminController::class, "deleteuser"]);
 
-
-
-
-
-
-Route::get("/profil", [AdminController::class, "profil"]);
-
-Route::get("/editprofile", [HomeController::class, "editprofile"]);
-
+// End User
 
 // Produk
 
@@ -72,46 +64,41 @@ Route::post("/updateartikel/{id}", [AdminController::class, "updateartikel"]);
 Route::get("/hapusartikel/{id}", [AdminController::class, "hapusartikel"]);
 
 
+Route::get("/showarticle/{id}", [HomeController::class, "showarticle"]);
+
 // End Artikel
 
 
-
-
-
-
-
-
-Route::post("/reservation", [AdminController::class, "reservation"]);
-
-
-Route::get("/testimoni", [AdminController::class, "testimoni"]);
-
-
-
-
-
-
-
+// Keranjang
 
 
 Route::post("/addcart/{id}", [HomeController::class, "addcart"]);
 
 Route::get("/showcart/{id}", [HomeController::class, "showcart"]);
 
-Route::get("/showarticle/{id}", [HomeController::class, "showarticle"]);
-
+Route::post("/reservation", [AdminController::class, "reservation"]);
 
 
 Route::get("/remove/{id}", [HomeController::class, "remove"]);
 
 
-
 Route::post("/orderconfirm", [HomeController::class, "orderconfirm"]);
 
 
+// End Keranjang
+
+
+// Pesanan
 
 Route::get("/pesanan", [AdminController::class, "pesanan"]);
 
+// End Pesanan
+
+// Testimoni
+
+Route::get("/testimoni", [AdminController::class, "testimoni"]);
+
+//End Testimoni
 
 
 Route::get("/search", [AdminController::class, "search"]);

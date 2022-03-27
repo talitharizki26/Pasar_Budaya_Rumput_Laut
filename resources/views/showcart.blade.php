@@ -66,7 +66,7 @@ https://templatemo.com/tm-558-klassy-cafe
                     <nav class="main-nav">
 
                         <!-- ***** Logo Start ***** -->
-                        <a href="#" class="logo">
+                        <a href="{{url('/redirects')}}" class="logo">
                             <img src="assets/images/pbrl-logo.png" align="klassy cafe html template" width="70%">
                         </a>
                         <!-- ***** Logo End ***** -->
@@ -74,19 +74,19 @@ https://templatemo.com/tm-558-klassy-cafe
 
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Beranda</a></li>
-                            <li class="scroll-to-section"><a href="#about">Tentang</a></li>
-                            <li class="scroll-to-section"><a href="#menu">Produk</a></li>
-                            <li class="scroll-to-section"><a href="#chefs">Artikel</a></li>
-                            <li class="scroll-to-section"><a href="#testi">Testi</a></li>
-                            <li class="scroll-to-section"><a href="#reservation">Kontak</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects')}}" class="active">Beranda</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects#about')}}">Tentang</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects#menu')}}">Produk</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects#chefs')}}">Artikel</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects#testi')}}">Testi</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects#reservation')}}">Kontak</a></li>
 
 
                             <li class="scroll-to-section" style="background-color: #d5fdff;  padding-top:8px; padding-bottom:2px;">
 
                                 @auth
 
-                                <a href="{{url('/showcart',Auth::user()->id)}}">
+                                <a href="{{url('/showcart',Auth::user()->no_ktp)}}">
 
                                     <i class="fa fa-shopping-cart"></i>{{$count}}
 
@@ -116,9 +116,27 @@ https://templatemo.com/tm-558-klassy-cafe
                                     @auth
                             </li>
 
-                            <x-app-layout>
-                            </x-app-layout>
-
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                                    <div class="navbar-profile row">
+                                        <img class="img-xs rounded-circle" width="22%" src="admin/assets/images/faces/face15.jpg" alt="">
+                                        <p style="margin-top: 5px; margin-left: 15px;" class="mb-0 d-none d-sm-block navbar-profile-name"> {{ Auth::user()->nama }}</p>
+                                        <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                                    <h6 class="p-3 mb-0">Edit Profil Anda atau Keluar dari Aplikasi?</h6>
+                                    <div class="dropdown-divider"></div>
+                                    <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                        {{ __('Edit Profil') }}
+                                    </x-jet-dropdown-link><br>
+                                    <div class="dropdown-divider"></div>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <x-jet-dropdown-link class="text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                this.closest('form').submit();"><i class="mdi mdi-logout text-danger"></i> {{ __(' Keluar') }}</x-jet-dropdown-link>
+                                    </form><br>
+                                </div>
                             </li>
                             @else
                             <li><a href="{{ route('login') }}" class="text-sm text-gray-700 underline">
@@ -148,76 +166,59 @@ https://templatemo.com/tm-558-klassy-cafe
     </header>
 
 
-    <div id="top" style="overflow-x: hidden;">
+    <div id="top" style="overflow-x: hidden; height: 400px;">
 
 
-        <table align="center" bgcolor="yellow">
-
-
-            <tr>
-                <th style="padding: 30px;">Food Name</th>
-                <th style="padding: 30px;">Price</th>
-                <th style="padding: 30px;">Quantity</th>
-                <th style="padding: 30px;">Action</th>
-
+        <table style="margin-top:70px; border-radius:10px" width=" 70%" align="center" bgcolor="#89C9D1">
+            <tr class="text-center">
+                <!-- <th style="padding: 30px;">No. KTP</th> -->
+                <th style="padding: 30px;">Jenis Pesanan</th>
+                <th style="padding: 30px;">Harga Satuan</th>
+                <th style="padding: 30px;">Jumlah Pesanan</th>
+                <th style="padding: 30px;">Total Harga</th>
+                <th style="padding: 30px;">Aksi</th>
             </tr>
-
-
-
             <form action="{{url('orderconfirm')}}" method="POST">
-
                 @csrf
-
                 @foreach($data as $data)
-
-
                 <tr align="center">
-
-                    <td>
-
-                        <input type="text" name="foodname[]" value="{{$data->user_id}}" hidden="">
+                    <!-- <td>
+                        <input type="text" name="user_id[]" value="{{$data->user_id}}" hidden="">
                         {{$data->user_id}}
-                    </td>
-
+                    </td> -->
                     <td>
-                        <input type="text" name="price[]" value="{{$data->food_id}}" hidden="">
-                        {{$data->food_id}}
-
+                        <input type="text" name="jenis_rumputlaut[]" value="{{$data->jenis_rumputlaut}}" hidden="">
+                        {{$data->jenis_rumputlaut}}
                     </td>
-                    <input type="text" name="quantity[]" value="{{$data->quantity}}" hidden="">
-
-                    <td>{{$data->quantity}}</td>
-
-
-
-                </tr>
-
-                @endforeach
-
-
-                @foreach($data2 as $data2)
-
-
-                <tr style="position: relative; top: -80px; left:360px;">
-
                     <td>
-                        <a class="btn btn-warning" href="{{url('/remove',$data2->id)}}">Remove</a>
+                        <input type="text" name="harga_rumputlaut[]" value="{{$data->harga_rumputlaut}}" hidden="">
+                        {{$data->harga_rumputlaut}}
+                    </td>
+                    <td>
+                        <input type="text" name="jumlah[]" value="{{$data->jumlah}}" hidden="">
+                        {{$data->jumlah}}
+                    </td>
+                    <td>
+                        <input type="text" name="total_harga[]" value="{{$data->harga_rumputlaut}}*{{$data->jumlah}}" hidden="">
+                        {{$data->harga_rumputlaut}}{{$data->jumlah}}
                     </td>
 
                 </tr>
-
                 @endforeach
-
-
-
+                <tr>@foreach($data2 as $data2)
+                    <!-- <tr style="position: relative; top: -80px; left:360px;"> -->
+                    <td>
+                        <a class="btn btn-danger" href="{{url('/remove',$data2->id)}}">Remove</a>
+                    </td>
+                    <!-- </tr> -->
+                    @endforeach
+                </tr>
 
         </table>
 
 
-        <div align="center" style="padding: 10px;">
-
-            <button class="btn btn-primary" type="button" id="order">Order Now</button>
-
+        <div align="center" style="padding: 30px;">
+            <button style="padding: 8px;" class="btn btn-new" type="button" id="order">Order Now</button>
         </div>
 
 
@@ -260,29 +261,9 @@ https://templatemo.com/tm-558-klassy-cafe
 
 
 
-        @include("footer")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
+
+    @include("footer")
 
 
     <script type="text/javascript">

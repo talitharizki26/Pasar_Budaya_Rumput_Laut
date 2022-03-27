@@ -17,8 +17,8 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->string('user_id')->nullable();
             $table->string('food_id')->nullable();
-            $table->string('quantity')->nullable();
-            $table->timestamps();
+            $table->integer('jumlah')->nullable();
+            // $table->timestamps();
         });
     }
 
