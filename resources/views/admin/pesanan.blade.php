@@ -48,14 +48,15 @@
 										<thead>
 											<tr align="center">
 												<th> ID Pesanan </th>
+												<!-- <th> Tgl Pesan </th> -->
 												<th> ID Pelanggan </th>
-												<th> Tgl Pesan </th>
-												<th> Waktu Pesan </th>
-												<th> Ekspedisi Pesanan </th>
+												<!-- <th> Waktu Pesan </th> -->
+												<th> ID Rumput Laut </th>
+												<th> Jumlah Pesanan </th>
+												<th> Ekspedisi</th>
 												<th> Total Pesanan </th>
-												<th> Kirim Instruksi Bayar </th>
-												<th> Instruksi Pesanan </th>
-												<th> Bukti Pembayaran </th>
+												<th> Bukti Bayar</th>
+												<th> Konfirmasi Pesanan</th>
 												<th> Status Pesanan </th>
 											</tr>
 										</thead>
@@ -63,13 +64,18 @@
 											@foreach($data as $data)
 
 											<tr align="center" style="background-color: black;">
-												<td>{{$data->name}}</td>
-												<td>{{$data->phone}}</td>
-												<td>{{$data->address}}</td>
-												<td>{{$data->foodname}}</td>
-												<td>{{$data->price}}$</td>
-												<td>{{$data->testimoni}}</td>
-												<td>{{$data->quantity}}</td>
+												<td>{{$data->id_pesanan}}</td>
+												<!-- <td>{{$data->tgl_pesanan}}</td> -->
+												<td>{{$data->user_id}}</td>
+												<!-- <td>{{$data->waktu_pesanan}}</td> -->
+												<td>{{$data->id_rumputlaut}}</td>
+												<td>{{$data->jumlah_pesanan}}</td>
+												<td>{{$data->ekspedisi_pesanan}}</td>
+												<td>Rp. {{$data->total_pesanan}}</td>
+												<td>{{$data->bukti_pembayaran}}</td>
+												<td><a href="" class="btn btn-primary">Konfirmasi</a></td>
+												<td>Tes{{$data->status_pesanan}}</td>
+
 											</tr>
 											@endforeach
 										</tbody>
