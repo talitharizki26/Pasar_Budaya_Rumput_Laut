@@ -22,9 +22,8 @@ class CreateProduksTable extends Migration
             $table->integer("durasitahan_rumputlaut")->nullable();
             $table->string("ketersediaan_rumputlaut")->nullable();
             $table->string("gambar_rumputlaut")->nullable();
-            $table->bigInteger('noktp_pembudidaya')->unsigned()->index()->nullable();
-            // $table->foreign('noktp_pembudidaya')->references('id')->on('pembudidaya')->onDelete('cascade');
-            // $table->timestamps();
+            $table->bigInteger('no_ktp')->unsigned()->index()->nullable();
+            $table->foreign('no_ktp')->references('no_ktp')->on('users')->onDelete('cascade');
         });
     }
 

@@ -24,11 +24,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'no_ktp',
+        'nama',
         'email',
         'password',
         'role',
         'usertype',
+        'jenkel',
+        'no_hp',
+        'tgl_lahir',
+        'alamat',
+        'foto',
     ];
 
     /**
@@ -39,10 +45,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
+        // 'two_factor_recovery_codes',
+        // 'two_factor_secret',
     ];
+    protected $primaryKey = 'no_ktp';
 
+    public $incrementing = false;
+
+    public $timestamps = false;
     /**
      * The attributes that should be cast to native types.
      *

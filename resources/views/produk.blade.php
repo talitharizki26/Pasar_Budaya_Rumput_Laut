@@ -18,7 +18,7 @@
 
                 @foreach($data as $data)
 
-                <form action="{{url('/addcart',$data->id)}}" method="post">
+                <form action="{{url('/addcart',$data->id_rumputlaut)}}" method="post">
 
                     @csrf
 

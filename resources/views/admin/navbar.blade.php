@@ -19,12 +19,12 @@
             <span class="count bg-success"></span>
           </div>
           <div class="profile-name">
-            <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+            <h5 class="mb-0 font-weight-normal">{{ Auth::user()->nama }}</h5>
           </div>
         </div>
         <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-          <a href="{{url('/profil')}}" class="dropdown-item preview-item">
+          <a href="{{ route('profile.show') }}" class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <div class="preview-icon bg-dark rounded-circle">
                 <i class="mdi mdi-account-circle text-primary"></i>
@@ -128,32 +128,26 @@
       </li>
     </ul>
     <ul class="navbar-nav navbar-nav-right">
-      <x-app-layout>
 
-      </x-app-layout>
 
       <li class="nav-item dropdown">
         <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
           <div class="navbar-profile">
             <img class="img-xs rounded-circle" src="admin/assets/images/faces/face15.jpg" alt="">
-            <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+            <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ Auth::user()->nama }}</p>
             <i class="mdi mdi-menu-down d-none d-sm-block"></i>
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
           <h6 class="p-3 mb-0">Ingin keluar dari aplikasi?</h6>
           <div class="dropdown-divider"></div>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-dark rounded-circle">
-                <i class="mdi mdi-logout text-danger"></i>
-              </div>
-            </div>
-            <div class="preview-item-content">
-              <p class="preview-subject mb-1">Keluar</p>
-            </div>
-          </a>
+          <div class="dropdown-divider"></div><br>
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <x-jet-dropdown-link class="text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                this.closest('form').submit();"><i class="mdi mdi-logout text-danger"></i> {{ __(' Keluar') }}</x-jet-dropdown-link>
+
+          </form><br>
         </div>
       </li>
     </ul>

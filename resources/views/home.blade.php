@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.css">
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
     <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
+    <link rel="stylesheet" href="admin/assets/css/style.css">
 
     <link href="assets/images/pbrl-tab.png" rel="icon">
     <title>Pasar Budaya Rumput Laut</title>
@@ -76,6 +77,7 @@ https://templatemo.com/tm-558-klassy-cafe
                             <li class="scroll-to-section"><a href="#top" class="active">Beranda</a></li>
                             <li class="scroll-to-section"><a href="#about">Tentang</a></li>
                             <li class="scroll-to-section"><a href="#menu">Produk</a></li>
+                            <!-- <li class="scroll-to-section"><a href="{{url('/editprofile')}}">edit</a></li> -->
                             <li class="scroll-to-section"><a href="#chefs">Artikel</a></li>
                             <li class="scroll-to-section"><a href="#testi">Testi</a></li>
                             <li class="scroll-to-section"><a href="#reservation">Kontak</a></li>
@@ -115,8 +117,28 @@ https://templatemo.com/tm-558-klassy-cafe
                                     @auth
                             </li>
 
-                            <x-app-layout>
-                            </x-app-layout>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                                    <div class="navbar-profile row">
+                                        <img class="img-xs rounded-circle" width="22%" src="admin/assets/images/faces/face15.jpg" alt="">
+                                        <p style="margin-top: 5px; margin-left: 15px;" class="mb-0 d-none d-sm-block navbar-profile-name"> {{ Auth::user()->nama }}</p>
+                                        <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                                    <h6 class="p-3 mb-0">Edit Profil Anda atau Keluar dari Aplikasi?</h6>
+                                    <div class="dropdown-divider"></div>
+                                    <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                        {{ __('Edit Profil') }}
+                                    </x-jet-dropdown-link><br>
+                                    <div class="dropdown-divider"></div>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <x-jet-dropdown-link class="text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                this.closest('form').submit();"><i class="mdi mdi-logout text-danger"></i> {{ __(' Keluar') }}</x-jet-dropdown-link>
+                                    </form><br>
+                                </div>
+                            </li>
 
                             </li>
                             @else

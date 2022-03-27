@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 
+use App\Models\Pelanggan;
+
 use App\Models\Produk;
 
 use App\Models\Artikel;
 
 use App\Models\Cart;
 
-use App\Models\Order;
+use App\Models\Pesanan;
 
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +34,7 @@ class HomeController extends Controller
 
         $data2 = artikel::all();
 
-        $data3 = order::all();
+        $data3 = pesanan::all();
 
         return view("home", compact("data", "data2", "data3"));
     }
@@ -48,7 +50,7 @@ class HomeController extends Controller
 
         $data2 = artikel::all();
 
-        $data3 = order::all();
+        $data3 = Pesanan::all();
 
         $usertype = Auth::user()->usertype;
         // $namee = Auth::user()->name;
@@ -65,6 +67,9 @@ class HomeController extends Controller
 
             $count = cart::where('user_id', $user_id)->count();
 
+            $user = DB::table('users')->where('no_ktp', $user_id)->first('nama');
+            // dd($user);
+            // $orang = Auth::where('user_')
 
 
             return view('home', compact('data', 'data2', 'count', 'data3'));
@@ -153,7 +158,7 @@ class HomeController extends Controller
 
         foreach ($request->foodname as $key => $foodname) {
 
-            $data = new order;
+            $data = new Pesanan();
 
             $data->foodname = $foodname;
 
@@ -174,4 +179,31 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
+
+    // public function editprofile()
+    // {
+    //     $user_id = Auth::id();
+
+    //     $user = DB::table('users')->where('id', $user_id)->first('name');
+    //     $data = json_decode(json_encode($user), true);
+    //     $userfix = Pelanggan::where('nama_pelanggan', $data)->get('id');
+    //     foreach ($userfix as $student) {
+
+    //         $id = ($student['id']
+    //         );
+    //     }
+    //     $data5 = Pelanggan::select('*')->where('id', '=', $id)->get();
+
+    //     // $id = json_decode(json_encode($userfix), true);
+
+
+    //     $id2 = json_encode($data5);
+    //     // $k = $dataPoints;
+    //     // dd($k);
+    //     // $data4 = Pelanggan::findOrFail($id);
+    //     // dd($id2);
+    //     // $orang = Auth::where('user_')
+
+    //     return view('editprofile', compact('userfix', 'data5'));
+    // }
 }

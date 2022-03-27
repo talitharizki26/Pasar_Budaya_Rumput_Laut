@@ -14,6 +14,7 @@ use App\Models\Artikel;
 
 use App\Models\Order;
 use App\Models\Pembudidaya;
+use App\Models\Pesanan;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -120,6 +121,7 @@ class AdminController extends Controller
   {
 
     $data = produk::find($id);
+    // dd($data);
     return view("admin.editproduk", compact("data"));
   }
 
@@ -334,7 +336,7 @@ class AdminController extends Controller
   public function pesanan()
   {
 
-    $data = order::all();
+    $data = Pesanan::all();
 
 
     return view('admin.pesanan', compact('data'));
@@ -360,7 +362,7 @@ class AdminController extends Controller
 
     $search = $request->search;
 
-    $data = order::where('name', 'Like', '%' . $search . '%')->orWhere('foodname', 'Like', '%' . $search . '%')
+    $data = Pesanan::where('name', 'Like', '%' . $search . '%')->orWhere('foodname', 'Like', '%' . $search . '%')
       ->get();
 
 

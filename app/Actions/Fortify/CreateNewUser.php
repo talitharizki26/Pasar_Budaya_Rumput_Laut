@@ -2,9 +2,8 @@
 
 namespace App\Actions\Fortify;
 
+use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Pelanggan;
-use App\Models\Pembudidaya;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -23,33 +22,33 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'no_ktp' => ['required', 'integer'],
+            'no_hp' => ['required', 'integer'],
+            'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'foto' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
-            if($input['role'] == "Pelanggan"){
-                $o = "0";
-            $langgan = new Pelanggan;
-            $langgan->nama_pelanggan = $input['name'];
-            $langgan->save();
-            } else{
-                $daya = new Pembudidaya;
-                $daya->nama_pembudidaya = $input['name'];
-                $daya->save();
-                $o = "1";
-            }
+        if ($input['role'] == "Pelanggan") {
+            $o = "0";
+        } else {
+            $o = "1";
+        }
+
 
         return User::create([
-            'name' => $input['name'],
+            'no_ktp' => $input['no_ktp'],
+            'nama' => $input['nama'],
             'email' => $input['email'],
             'role' => $input['role'],
             'usertype' => $o,
             'password' => Hash::make($input['password']),
+            'jenkel' => $input['jenkel'],
+            'no_hp' => $input['no_hp'],
+            'tgl_lahir' => $input['tgl_lahir'],
+            'alamat' => $input['alamat'],
+            'foto' => $input['foto'],
         ]);
-
-       
-
     }
-    
 }

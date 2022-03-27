@@ -35,6 +35,7 @@ Route::get("/deleteuser/{id}", [AdminController::class, "deleteuser"]);
 
 Route::get("/profil", [AdminController::class, "profil"]);
 
+Route::get("/editprofile", [HomeController::class, "editprofile"]);
 
 
 // Produk

@@ -20,8 +20,8 @@ class CreateArtikelsTable extends Migration
             $table->text("sumber_artikel")->nullable();
             $table->date("tglupload_artikel")->nullable();
             $table->string("gambar_artikel")->nullable();
-            $table->bigInteger('noktp_pembudidaya')->unsigned()->index()->nullable();
-            // $table->foreign('noktp_pembudidaya')->references('id')->on('pembudidayas')->onDelete('cascade');
+            $table->bigInteger('no_ktp')->unsigned()->index()->nullable();
+            $table->foreign('no_ktp')->references('no_ktp')->on('users')->onDelete('cascade');
             // $table->timestamps();
         });
     }
