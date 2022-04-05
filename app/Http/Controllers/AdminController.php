@@ -294,15 +294,13 @@ class AdminController extends Controller
   {
 
 
-    if (Auth::id()) {
+    $id = Auth::id();
 
-      $data = Pesanan::all();
+    $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
-      return view("admin.testimoni", compact("data"));
-    } else {
+    return view("admin.testimoni", compact("data"));
 
-      return redirect('login');
-    }
+    //return redirect('login');
   }
 
 
