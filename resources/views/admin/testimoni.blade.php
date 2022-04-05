@@ -47,12 +47,12 @@
 
 											<tr align="center">
 
-												<td>{{$data->name}}</td>
-												<td>{{$data->email}}</td>
-												<td>{{$data->phone}}</td>
-												<td>{{$data->date}}</td>
-												<td>{{$data->time}}</td>
-												<td>{{$data->message}}</td>
+												<td>{{$data->id_pesanan}}</td>
+												<td>{{$data->user_id}}</td>
+												<td>{{$data->tgl_testimoni}}</td>
+												<td>{{$data->isi_testimoni}}</td>
+												<td>{{$data->bintang_testimoni}}</td>
+												<td>{{$data->balasan_testimoni}}</td>
 												<td> <a href="" class="btn btn-success">Balas Testimoni</a> </td>
 
 

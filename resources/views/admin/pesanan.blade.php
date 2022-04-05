@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	
+
 
 	@include("admin.admincss")
 
@@ -49,17 +49,17 @@
 										<thead>
 											<tr align="center">
 												<th> ID Pesanan </th>
-												<th> Tgl Pesan </th>
+												<!-- <th> Tanggal </th> -->
+												<!-- <th> Waktu </th> -->
 												<th> ID Pelanggan </th>
-												 <th> Waktu Pesan </th> 
 												<th> ID Rumput Laut </th>
-												<th> Jumlah Pesanan </th>
+												<th> Jumlah</th>
 												<th> Ekspedisi</th>
-												<th> Total Pesanan </th>
+												<th> Total</th>
 												<th> Bukti Bayar</th>
-												<th> Konfirmasi Pesanan</th>
-												<th> Status Pesanan </th>
-												<th> Action </th>
+												<th> Konfirmasi</th>
+												<th> Status</th>
+												<th> Aksi </th>
 											</tr>
 										</thead>
 
@@ -69,9 +69,9 @@
 
 											<tr align="center" style="background-color: black;">
 												<td>{{$data->id_pesanan}}</td>
-												 <td>{{$data->tgl_pesanan}}</td> 
+												<!-- <td>{{$data->tgl_pesanan}}</td>
+												<td>{{$data->waktu_pesanan}}</td> -->
 												<td>{{$data->user_id}}</td>
-												 <td>{{$data->waktu_pesanan}}</td> 
 												<td>{{$data->id_rumputlaut}}</td>
 												<td>{{$data->jumlah_pesanan}}</td>
 												<td>{{$data->ekspedisi_pesanan}}</td>
@@ -85,81 +85,75 @@
 												</td>
 												<td>
 													<button class="btn btn-primary" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Update</button>
-													</td>
+												</td>
 
 											</tr>
 
-														<!-- Modal Update Barang-->
-<div class="modal fade" id="modalUpdateBarang{{ $data->id_pesanan }}" tabindex="0" aria-labelledby="modalUpdateBarang" aria-hidden="true">
-	<div class="modal-dialog">
-	<div class="modal-content">
-	<div class="modal-header">
-	<h5 class="modal-title">Update Barang</h5>
-	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	<span aria-hidden="true">&times;</span>
-	</button>
-	</div>
-	<div class="modal-body">
-	<!--FORM UPDATE BARANG-->
-	<form action="/pesanan/{{ $data->id_pesanan }}" method="post">
-	@csrf
-	@method('put')
-	<div class="form-group">
-	{{-- <label for="">Nama Barang</label>
-	<input type="text" class="form-control" id="updateNamaBarang" name="updateNamaBarang"
-	value="{{ $data->jumlah_pesanan}}">
-	</div>
-	<div class="form-group">
-	<label for="">Jumlah Barang</label>
-	<input type="text" class="form-control" id="updateJumlahBarang" name="updateJumlahBarang"
-	value="{{ $data->status_pesanan}}">
-	</div> --}}
+											<!-- Modal Update Barang-->
+											<div class="modal fade" id="modalUpdateBarang{{ $data->id_pesanan }}" tabindex="0" aria-labelledby="modalUpdateBarang" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title">Konfirmasi Status Pesanan</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<!--FORM UPDATE BARANG-->
+															<form action="/pesanan/{{ $data->id_pesanan }}" method="post">
+																@csrf
+																@method('put')
+																<div class="form-group">
+																	{{-- <label for="">Nama Barang</label>
+																	<input type="text" class="form-control" id="updateNamaBarang" name="updateNamaBarang"
+																	value="{{ $data->jumlah_pesanan}}">
+																</div>
+																<div class="form-group">
+																	<label for="">Jumlah Barang</label>
+																	<input type="text" class="form-control" id="updateJumlahBarang" name="updateJumlahBarang" value="{{ $data->status_pesanan}}">
+																</div> --}}
 
-	<label for="">Konfirmasi Pesanan</label>
-	<div class="form-check form-check-inline">
-		<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Pesanan dikonfirmasi"
-		{{ $data->konfirmasi_pesanan == 'Pesanan dikonfirmasi' ? 'checked' : '' }} >
-		<label class="form-check-label" for="inlineRadio1">Pesanan dikonfirmasi</label>
-	  </div>
-	  <div class="form-check form-check-inline">
-		<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Pesanan ditolak"
-		{{ $data->konfirmasi_pesanan == 'Pesanan ditolak' ? 'checked' : '' }} >
-		<label class="form-check-label" for="inlineRadio2">Pesanan Ditoalk</label>
-	  </div>
+																<label for="">Konfirmasi Pesanan</label>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Dikonfirmasi" {{ $data->konfirmasi_pesanan == 'Dikonfirmasi' ? 'checked' : '' }}>
+																	<label class="form-check-label" for="inlineRadio1">Pesanan Dikonfirmasi</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Ditolak" {{ $data->konfirmasi_pesanan == 'Ditolak' ? 'checked' : '' }}>
+																	<label class="form-check-label" for="inlineRadio2">Pesanan Ditolak</label>
+																</div>
 
-	  <label for="">Konfirmasi Status</label>
-	  <div class="form-check form-check-inline">
-		  <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio11" value="Pesanan Disiapkan"
-		  {{ $data->status_pesanan == 'Pesanan Disiapkan' ? 'checked' : '' }} >
-		  <label class="form-check-label" for="inlineRadio11">Pesanan Disiapkan</label>
-		</div>
-		<div class="form-check form-check-inline">
-		  <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio22" value="Pesanan Diantar"
-		  {{ $data->status_pesanan == 'Pesanan Diantar' ? 'checked' : '' }} >
-		  <label class="form-check-label" for="inlineRadio22">Pesanan Diantar</label>
-		</div>
-		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="Pesanan Selesai"
-			{{ $data->status_pesanan == 'Pesanan Selesai' ? 'checked' : '' }} >
-			<label class="form-check-label" for="inlineRadio33">Pesanan Selesai</label>
-		  </div>
+																<label for="">Konfirmasi Status</label>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio11" value="Disiapkan" {{ $data->status_pesanan == 'Disiapkan' ? 'checked' : '' }}>
+																	<label class="form-check-label" for="inlineRadio11">Pesanan Disiapkan</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio22" value="Diantar" {{ $data->status_pesanan == 'Diantar' ? 'checked' : '' }}>
+																	<label class="form-check-label" for="inlineRadio22">Pesanan Diantar</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="Selesai" {{ $data->status_pesanan == 'Selesai' ? 'checked' : '' }}>
+																	<label class="form-check-label" for="inlineRadio33">Pesanan Selesai</label>
+																</div>
 
 
-	<button type="submit" class="btn btn-primary">Perbarui Data</button>
-	</form>
-	<!--END FORM UPDATE BARANG-->
-	</div>
-	</div>
-	</div>
-	</div>
-	<!-- End Modal UPDATE Barang-->
+																<button type="submit" class="btn btn-primary">Konfirmasi Pesanan</button>
+															</form>
+															<!--END FORM UPDATE BARANG-->
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- End Modal UPDATE Barang-->
 
 											@endforeach
 										</tbody>
 									</table>
-									
-											
-					
+
+
+
 
 								</div>
 							</div>
@@ -174,11 +168,11 @@
 
 
 
-<!-- Button trigger modal -->
+			<!-- Button trigger modal -->
 
-  
-  <!-- Modal -->
-  {{-- <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+			<!-- Modal -->
+			{{-- <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 	  <div class="modal-content">
 		<div class="modal-header">
@@ -193,27 +187,27 @@
 			<a href="{{url('/editbatal',$data->id_pesanan)}}" class="badge badge-outline-danger">Pesanan dibatalkan</a>
 
 			<p>Status</p>
-			<a href="{{url('/statussiap',$data->id_pesanan)}}"class="badge badge-outline-primary">Pesanan disiapkan</a>
+			<a href="{{url('/statussiap',$data->id_pesanan)}}" class="badge badge-outline-primary">Pesanan disiapkan</a>
 			<a href="{{url('/statusantar',$data->id_pesanan)}}" class="btn btn-warning">Pesanan diantar</a>
 			<a href="{{url('/statusselesai',$data->id_pesanan)}}" class="btn btn-primary">Pesanan selesai</a>
 
 
 			{{-- <td>{{$data->id_pesanan}}</td> --}}
-	
+
 		</div>
 		{{-- <div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		  <button type="button" class="btn btn-primary">Save changes</button>
 		</div> --}}
-	  </div>
 	</div>
-	
-  </div> 
+	</div>
 
-  
-			<!-- content-wrapper ends -->
-			@include("admin.footer")
-		</div>
+	</div>
+
+
+	<!-- content-wrapper ends -->
+	@include("admin.footer")
+	</div>
 
 
 
@@ -229,12 +223,11 @@
 
 
 
-  <script >
-	$(document).ready(function() {
-	  $('#myTable').DataTable();
-  } );
- 
- </script>
+	<script>
+		$(document).ready(function() {
+			$('#myTable').DataTable();
+		});
+	</script>
 </body>
 
 </html>

@@ -82,13 +82,13 @@ class AdminController extends Controller
   {
 
     $no_ktp = Auth::id();
-    
+
     // $data2 = produk::all();
     // $data3 = DB::table('produks')->where('no_ktp', $no_ktp)->first();
-    $data = produk::where('no_ktp',$no_ktp)->get();
+    $data = produk::where('no_ktp', $no_ktp)->get();
 
     // $data = json_decode(json_encode($data3), true);
-//  dd($data3);
+    //  dd($data3);
 
     // $data = produk::where('no_ktp',$no_ktp);
 
@@ -194,10 +194,10 @@ class AdminController extends Controller
   public function artikel()
   {
     $no_ktp = Auth::id();
-    
+
     // $data2 = produk::all();
     // $data3 = DB::table('produks')->where('no_ktp', $no_ktp)->first();
-    $data = artikel::where('no_ktp',$no_ktp)->get();
+    $data = artikel::where('no_ktp', $no_ktp)->get();
 
     // $data = artikel::all();
     return view("admin.artikel", compact("data"));
@@ -290,55 +290,13 @@ class AdminController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-  public function reservation(Request $request)
-  {
-
-    $data = new reservation;
-
-    $data->name = $request->name;
-
-    $data->email = $request->email;
-
-    $data->phone = $request->phone;
-
-    $data->guest = $request->guest;
-
-    $data->date = $request->date;
-
-    $data->time = $request->time;
-
-    $data->message = $request->message;
-
-    $data->save();
-
-    return redirect()->back()->with('alert', 'Reserved!');
-  }
-
-
-
-
-
-
-
-
-
-
-
   public function testimoni()
   {
 
 
     if (Auth::id()) {
 
-      $data = reservation::all();
+      $data = Pesanan::all();
 
       return view("admin.testimoni", compact("data"));
     } else {
@@ -351,18 +309,12 @@ class AdminController extends Controller
 
 
 
-
-
-
-
-
-
-
-
   public function pesanan()
   {
-
-    $data = Pesanan::all();
+    $id = Auth::id();
+    //$data = Pesanan::all();
+    //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
+    $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
 
     return view('admin.pesanan', compact('data'));
@@ -402,68 +354,72 @@ class AdminController extends Controller
 
 
 
-public function edittolak($id_pesanan){
-  $data=Pesanan::find($id_pesanan);
-  // dd($data);
-  Pesanan::where('id_pesanan',$id_pesanan)->update([
-    'konfirmasi_pesanan' => "Pesanan Dikonfirmasi"
-  ]); 
+  public function edittolak($id_pesanan)
+  {
+    $data = Pesanan::find($id_pesanan);
+    // dd($data);
+    Pesanan::where('id_pesanan', $id_pesanan)->update([
+      'konfirmasi_pesanan' => "Pesanan Dikonfirmasi"
+    ]);
 
-  return redirect()->back();
-}
+    return redirect()->back();
+  }
 
-public function editbatal($id_pesanan){
-  $data=Pesanan::find($id_pesanan);
-  // dd($data);
-  Pesanan::where('id_pesanan',$id_pesanan)->update([
-    'konfirmasi_pesanan' => "Pesanan Dibatalkan"
-  ]); 
+  public function editbatal($id_pesanan)
+  {
+    $data = Pesanan::find($id_pesanan);
+    // dd($data);
+    Pesanan::where('id_pesanan', $id_pesanan)->update([
+      'konfirmasi_pesanan' => "Pesanan Dibatalkan"
+    ]);
 
-  return redirect()->back();
-}
+    return redirect()->back();
+  }
 
-public function statussiap($id_pesanan){
-  $data=Pesanan::find($id_pesanan);
-  // dd($data);
-  Pesanan::where('id_pesanan',$id_pesanan)->update([
-    'status_pesanan' => "Pesanan Disiapkan"
-  ]); 
+  public function statussiap($id_pesanan)
+  {
+    $data = Pesanan::find($id_pesanan);
+    // dd($data);
+    Pesanan::where('id_pesanan', $id_pesanan)->update([
+      'status_pesanan' => "Pesanan Disiapkan"
+    ]);
 
-  return redirect()->back();
-}
+    return redirect()->back();
+  }
 
-public function statusantar($id_pesanan){
-  $data=Pesanan::find($id_pesanan);
-  // dd($data);
-  Pesanan::where('id_pesanan',$id_pesanan)->update([
-    'status_pesanan' => "Pesanan Diantar"
-  ]); 
+  public function statusantar($id_pesanan)
+  {
+    $data = Pesanan::find($id_pesanan);
+    // dd($data);
+    Pesanan::where('id_pesanan', $id_pesanan)->update([
+      'status_pesanan' => "Pesanan Diantar"
+    ]);
 
-  return redirect()->back();
-}
+    return redirect()->back();
+  }
 
-public function statusselesai($id_pesanan){
-  $data=Pesanan::find($id_pesanan);
-  // dd($data);
-  Pesanan::where('id_pesanan',$id_pesanan)->update([
-    'status_pesanan' => "Pesanan Selesai"
-  ]); 
+  public function statusselesai($id_pesanan)
+  {
+    $data = Pesanan::find($id_pesanan);
+    // dd($data);
+    Pesanan::where('id_pesanan', $id_pesanan)->update([
+      'status_pesanan' => "Pesanan Selesai"
+    ]);
 
-  return redirect()->back();
-}
+    return redirect()->back();
+  }
 
 
-public function updatepesanan(Request $request, $id)
-{
-$update_barang = Pesanan::find($id);
-// $coba = $request->inlineRadioOptions;
-$update_barang->konfirmasi_pesanan = $request->inlineRadioOptions;
-$update_barang->status_pesanan = $request->inlineRadioOptions2;
-// $update_barang->jumlah_barang = $request->updateJumlahBarang;
-// dd($update_barang);
-$update_barang->save();
-// return dd($update_barang);
-return redirect()->back();
-}
-
+  public function updatepesanan(Request $request, $id)
+  {
+    $update_barang = Pesanan::find($id);
+    // $coba = $request->inlineRadioOptions;
+    $update_barang->konfirmasi_pesanan = $request->inlineRadioOptions;
+    $update_barang->status_pesanan = $request->inlineRadioOptions2;
+    // $update_barang->jumlah_barang = $request->updateJumlahBarang;
+    // dd($update_barang);
+    $update_barang->save();
+    // return dd($update_barang);
+    return redirect()->back();
+  }
 }

@@ -13,7 +13,7 @@ use App\Models\Pelanggan;
 use App\Models\Produk;
 
 use App\Models\Artikel;
-    
+
 use App\Models\Cart;
 
 use App\Models\Pesanan;
@@ -56,7 +56,6 @@ class HomeController extends Controller
             $data4 = cart::where('user_id', $id)->join('produks', 'carts.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
             $data5 = pesanan::select('*')->where('user_id', '=', $id)->get();
-
         }
         // dd($data5);
         //  else {
@@ -75,7 +74,7 @@ class HomeController extends Controller
         $usertype = Auth::user()->usertype;
         // $namee = Auth::user()->name;
         // $emaill = Auth::user()->emaill;
-// dd($usertype);
+        // dd($usertype);
         // $user = DB::table('users')->where('name', $namee)->first('id');
         // $ii = $user;
         // dd($ii);
@@ -92,7 +91,7 @@ class HomeController extends Controller
             // $orang = Auth::where('user_')
 
 
-            return view('home', compact('data', 'data2', 'count', 'data3','data4','data5'));
+            return view('home', compact('data', 'data2', 'count', 'data3', 'data4', 'data5'));
         }
     }
 

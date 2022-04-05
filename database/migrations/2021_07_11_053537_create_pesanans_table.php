@@ -18,6 +18,10 @@ class CreatePesanansTable extends Migration
             $table->date('tgl_pesanan')->nullable();
             $table->time('waktu_pesanan')->nullable();
             $table->string('id_rumputlaut')->nullable();
+            // $table->bigInteger('id_rumputlaut')->unsigned()->index()->nullable();
+            // $table->bigInteger('user_id')->unsigned()->index()->nullable();
+            // $table->foreign('id_rumputlaut')->references('id_rumputlaut')->on('produks')->onDelete('cascade');
+            // $table->foreign('user_id')->references('no_ktp')->on('users')->onDelete('cascade');
             $table->string('user_id')->nullable();
             $table->string('jumlah_pesanan')->nullable();
             $table->integer('total_pesanan')->nullable();
@@ -28,7 +32,7 @@ class CreatePesanansTable extends Migration
             $table->text('isi_testimoni')->nullable();
             $table->date("tgl_testimoni")->nullable();
             $table->text("balasan_testimoni")->nullable();
-            $table->integer("bintang testimoni")->nullable();
+            $table->integer("bintang_testimoni")->nullable();
             //$table->timestamps();
         });
     }
