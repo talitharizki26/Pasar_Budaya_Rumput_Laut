@@ -201,31 +201,60 @@ https://templatemo.com/tm-558-klassy-cafe
             </div>
         </div>
     </header>
+    <div class="container">
+        <div id="top" style="overflow-x: hidden;" bgcolor="#89C9D1">
 
-    <div class="row">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Isi Testimoni</h4>
+            <h2 style="margin-top:20px;" align="center">Testimoni Pesanan Anda</h2>
+            <div class="col-lg-12 ">
+                <div class="contact-form">
+                    <form id="contact" action="{{url('/uploadtestimoni',$data2->id_pesanan)}}" method="post">
 
-                    <form class="forms-sample" action="{{url('/uploadtestimoni',$data2->id_pesanan)}}" method="post">
                         @csrf
-                        <div class="form-group">
-                            <label for="judul">Keterangan Isian Testimoni</label>
-                            <input class="form-control" name="isi_testimoni" value="{{$data2->balasan_testimoni}}" required>
-                        </div>
-                        <!-- <div class="form-group">
-                        <label for="judul">Judul Artikel</label>
-                        <input class="form-control" name="judul_artikel" value="{{$data2->total_pesanan}}" required>
-                    </div> -->
-                        <button type="submit" class="btn btn-primary mr-2" value="Update">Submit testim</button>
-                        <button type="reset" class="btn btn-dark">Batal</button>
-                    </form>
 
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <textarea name="isi_testimoni" id="isi_testimoni" placeholder="Isi Testimoni" value="{{$data2->balasan_testimoni}}" required></textarea>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <select name="bintang_testimoni" id="bintang_testimoni">
+                                        <option value="-">Berapa Penilaian Pesanan ini?</option>
+                                        <option value=1>1</option>
+                                        <option value=2>2</option>
+                                        <option value=3>3</option>
+                                        <option value=4>4</option>
+                                        <option value=5>5</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="main-button-icon" style="margin-top: 10px;;">Kirim Testimoni</button>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-6">
+
+                                <button type="reset" class="btn btn-danger" style="margin-top: 10px;">Batal</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
+
+
+
         </div>
+
+
     </div>
+
+
 
     @include("footer")
 

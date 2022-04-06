@@ -41,7 +41,7 @@
                </div>
                <div class="col-lg-12">
                  <fieldset>
-                   <textarea name="pemilik_alatbayar" id="pemilik_alatbayar" placeholder="Saran atau Masukan anda" required></textarea>
+                   <textarea name="saran" id="saran" placeholder="Saran atau Masukan anda" required></textarea>
                  </fieldset>
                </div>
                <div class="col-lg-12">

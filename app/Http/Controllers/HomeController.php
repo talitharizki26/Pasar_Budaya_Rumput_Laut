@@ -192,7 +192,7 @@ class HomeController extends Controller
 
 
 
-    public function showtes(Request $request, $id)
+    public function showtes(Request $request, $id_pesanan)
     {
 
         $id = Auth::id();
@@ -202,7 +202,7 @@ class HomeController extends Controller
 
         if (Auth::id() == $id) {
 
-            $data2 = Pesanan::find($id);
+            $data2 = Pesanan::find($id_pesanan);
             $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
 
 
@@ -220,6 +220,7 @@ class HomeController extends Controller
         $data = Pesanan::find($id);
 
         $data->isi_testimoni = $request->isi_testimoni;
+        $data->bintang_testimoni = $request->bintang_testimoni;
 
         $data->save();
         // dd($data);
