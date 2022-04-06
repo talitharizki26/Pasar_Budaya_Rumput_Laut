@@ -75,51 +75,38 @@ https://templatemo.com/tm-558-klassy-cafe
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top" class="active">Beranda</a></li>
-                            <li class="scroll-to-section"><a href="#about">Tentang</a></li>
+                            <!-- <li class="scroll-to-section"><a href="#about">Tentang</a></li> -->
                             <li class="scroll-to-section"><a href="#menu">Produk</a></li>
                             <!-- <li class="scroll-to-section"><a href="{{url('/editprofile')}}">edit</a></li> -->
                             <li class="scroll-to-section"><a href="#chefs">Artikel</a></li>
                             <li class="scroll-to-section"><a href="#testi">Testi</a></li>
                             <li class="scroll-to-section"><a href="#reservation">Kontak</a></li>
-
-
-                            <li class="scroll-to-section" style="background-color: #d5fdff;  padding-top:8px; padding-bottom:2px;">
-
+                            <li class="scroll-to-section border-left">
                                 @auth
-
                                 <a href="{{url('/showcart',Auth::user()->no_ktp)}}">
-
-                                    <i class="fa fa-shopping-cart"></i>{{$count}}
-
+                                    <i class="fa fa-shopping-cart"></i> {{$count}}
                                 </a>
-
-
                                 @endauth
-
-
                                 @guest
-
                                 <i class="fa fa-shopping-cart"></i>[0]
-
                                 @endguest
-
                                 </a>
                             </li>
-                            {{--
-                            <li class="scroll-to-section" style="background-color: #d5fdff;  padding-top:8px; padding-bottom:2px;">
 
+
+                            {{--
+                            <li class="scroll-to-section" style="background-color: #d5fdff;">
                                 <select name="" id="">
                                     @foreach ($data5 as $item)
                                     <option> </option>
                                         <option value="{{$item->id_pesanan}}"><a href="index.htm">{{$item->status_pesanan}}asd{{$item->status_pesanan}}</a></option>
                             @endforeach
-
                             </select>
                             {{-- @auth
 
                                 <a href="{{url('/showcart',Auth::user()->no_ktp)}}">
 
-                            <i class="fa fa-bell-o"></i>{{$count}}
+                            <i class="fa fa-shopping-cart"></i>{{$count}}
 
                             </a>
 
@@ -128,20 +115,16 @@ https://templatemo.com/tm-558-klassy-cafe
 
                             @guest
 
-                            <i class="fa fa-bell-o"></i>[0]
+                            <i class="fa fa-shopping-cart"></i>[0]
 
                             @endguest --}}
+                            </li>
 
-
-
-
-                            <li class="nav-item dropdown border-left">
-                                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                                    <i class="mdi mdi-bell"></i>
-                                    <span class="count bg-danger"></span>
+                            <li class="scroll-to-section dropdown border-left border-right">
+                                <a class=" fa fa-bell " id="notificationDropdown" href="#" data-toggle="dropdown">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                                    <h6 class="p-3 mb-0">Notifications</h6>
+                                    <h6 class="p-3 mb-0">Notifikasi Anda</h6>
                                     <div class="dropdown-divider"></div>
 
                                     @auth
@@ -149,28 +132,20 @@ https://templatemo.com/tm-558-klassy-cafe
 
                                     <div class="preview-item-content">
                                         <a href="{{url('/showtes',$item->id_pesanan)}}" class="dropdown-item preview-item">
-                                            <!-- <p class="preview-subject mb-1">{{$item->id_rumputlaut}}</p> -->
-
-
                                             <p class="text-muted ellipsis mb-2">{{$item->id_pesanan}} : <b>{{$item->status_pesanan}} </b></p>
                                         </a>
-                                        <!-- <p href="{{url('/editproduk',$item->id_rumputlaut)}}">Edit</p> -->
                                         @endforeach
                                     </div>
-
-
-                                    <div class="dropdown-divider"></div>
-                                    <p class="p-3 mb-0 text-center">See all notifications</p>
                                 </div>
                             </li>
 
-                            @endauth
+                            <!-- @endauth
 
                             @guest
 
                             <i class="fa fa-shopping-cart"></i>[0]
 
-                            @endguest
+                            @endguest -->
 
 
                             <li>
@@ -203,31 +178,27 @@ https://templatemo.com/tm-558-klassy-cafe
                                 </div>
                             </li>
 
-                            </li>
                             @else
                             <li><a href="{{ route('login') }}" class="text-sm text-gray-700 underline">
                                     <i class="fa fa-user fa-2x"></i>
                                 </a>
                             </li>
 
+
+
                             @if (Route::has('register'))
                             <li> <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline"><i class="fa fa-pencil-square-o fa-2x"></i></a>
                             </li>
                             @endif
                             @endauth
+                            @endif
+
+                        </ul>
+
+                        <!-- ***** Menu End ***** -->
+                    </nav>
                 </div>
-                @endif
-
-                </li>
-
-                </ul>
-
-
-
-                <!-- ***** Menu End ***** -->
-                </nav>
             </div>
-        </div>
         </div>
     </header>
     <!-- ***** Header Area End ***** -->

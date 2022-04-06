@@ -135,7 +135,9 @@ class HomeController extends Controller
 
             $data2 = cart::select('*')->where('user_id', '=', $id)->get();
 
-            return view('showcart', compact('count', 'data', 'data2'));
+            $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
+
+            return view('showcart', compact('count', 'data', 'data2', 'data5'));
         } else {
 
             return redirect()->back();
