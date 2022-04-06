@@ -190,13 +190,30 @@ class HomeController extends Controller
         return view('article', compact('data2'));
     }
 
+
+
     public function showtes(Request $request, $id)
     {
-        $data2 = Pesanan::find($id);
 
-        // dd($data2);
-        return view('isitestimoni', compact('data2'));
+        $id = Auth::id();
+
+        $count = cart::where('user_id', $id)->count();
+
+
+        if (Auth::id() == $id) {
+
+            $data2 = Pesanan::find($id);
+            $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
+
+
+
+
+            // dd($data2);
+            return view('isitestimoni', compact('data2', 'data5', 'count'));
+        }
     }
+
+
 
     public function uploadtestimoni(Request $request, $id)
     {

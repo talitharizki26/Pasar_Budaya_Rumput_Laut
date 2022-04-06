@@ -66,7 +66,7 @@ https://templatemo.com/tm-558-klassy-cafe
                     <nav class="main-nav">
 
                         <!-- ***** Logo Start ***** -->
-                        <a href="#" class="logo">
+                        <a href="{{url('/redirects')}}" class="logo">
                             <img src="assets/images/pbrl-logo.png" align="klassy cafe html template" width="70%">
                         </a>
                         <!-- ***** Logo End ***** -->
@@ -158,8 +158,8 @@ https://templatemo.com/tm-558-klassy-cafe
                             <li class="nav-item dropdown">
                                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                                     <div class="navbar-profile row">
-                                        <img class="img-xs rounded-circle" width="22%" src="admin/assets/images/faces/face15.jpg" alt="">
-                                        <p style="margin-top: 5px; margin-left: 15px;" class="mb-0 d-none d-sm-block navbar-profile-name"> {{ Auth::user()->nama }}</p>
+                                        <img class="img-xs rounded-circle" width="17%" src="admin/assets/images/faces/face15.jpg" alt="">
+                                        <p style="margin-top: 5px; margin-left: 5px;" class="mb-0 d-none d-sm-block navbar-profile-name"> {{ Auth::user()->nama }}</p>
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                     </div>
                                 </a>
@@ -203,10 +203,10 @@ https://templatemo.com/tm-558-klassy-cafe
     </header>
 
 
-    <div id="top" style="overflow-x: hidden; height: 400px;">
+    <div id="top" style="overflow-x: hidden;">
 
-
-        <table style="margin-top:70px; border-radius:10px" width=" 80%" align="center" bgcolor="#89C9D1">
+        <h2 style="margin-top:20px;" align="center">Keranjang Anda</h2>
+        <table style=" margin-top:50px; border-radius:10px" width=" 80%" align="center" bgcolor="#89C9D1">
             <tr class="text-center">
                 <!-- <th style="padding: 30px;">No. KTP</th> -->
                 <th style="padding: 30px;">Jenis Pesanan</th>
@@ -239,10 +239,13 @@ https://templatemo.com/tm-558-klassy-cafe
                         <input type="text" name="total_pesanan[]" value="{{$data->harga_rumputlaut*$data->jumlah}}" hidden="">
                         {{$data->harga_rumputlaut*$data->jumlah}}
                     </td>
+                    <td>
+                        <a class="btn btn-danger" style="padding-top:2px;" href="{{url('/remove',$data->id)}}">Hapus</a>
+                    </td>
 
                 </tr>
                 @endforeach
-                @foreach($data2 as $data2)
+                <!-- @foreach($data2 as $data2)
                 <tr style="position: relative; top: -70px; left:960px;">
 
                     <td>
@@ -250,35 +253,31 @@ https://templatemo.com/tm-558-klassy-cafe
                     </td>
 
                 </tr>
-                @endforeach
+                @endforeach -->
 
         </table>
 
 
         <div align="center" style="padding: 30px;">
-            <button style="padding: 8px;" class="btn btn-new" type="button" id="order">Pesan Sekarang</button>
+            <button style="padding: 8px;" class="btn btn-new" type="button" id="order">Lanjut Pesan</button>
         </div>
 
-        <div id="appear" align="center" style="padding: 10px; display: none;">
+        <div id="appear" align="center" style=" display: none;">
 
 
             <div class="form-group">
                 <label>Ekspedisi Pesanan</label>
-                <div class="col-sm-7">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-control p_input" name="ekspedisi_pesanan" id="ekspedisi" value="JNE/J&T"> JNE/J&T </label>
-                    </div>
-                </div>
-                <div class="col-sm-7">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-control p_input" name="ekspedisi_pesanan" id="manual" value="Mitra"> Mitra Pembudidaya </label>
-                    </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-control p_input" name="ekspedisi_pesanan" id="ekspedisi" value="JNE/J&T"> JNE/J&T </label>
+                </div><br>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-control p_input" name="ekspedisi_pesanan" id="manual" value="Mitra"> Mitra Pembudidaya </label>
                 </div>
             </div>
 
-            <div style="padding: 10px;">
+            <div class="form-group" style="padding: 10px;">
                 <label>Bukti Pembayaran</label>
                 <input type="file" name="bukti_pembayaran">
             </div>
@@ -293,11 +292,11 @@ https://templatemo.com/tm-558-klassy-cafe
             </div> -->
 
 
-            <div style="padding: 10px;">
+            <div style="padding: 10px; margin-bottom:20px;">
 
-                <input class="btn btn-success" type="submit" value="Order Confirm">
+                <input class="btn btn-success" type="submit" value="Pesan Sekarang">
 
-                <button id="close" type="button" class="btn btn-danger">Close</button>
+                <button id="close" type="button" class="btn btn-danger">Batal</button>
             </div>
 
 

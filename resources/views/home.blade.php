@@ -66,7 +66,7 @@ https://templatemo.com/tm-558-klassy-cafe
                     <nav class="main-nav">
 
                         <!-- ***** Logo Start ***** -->
-                        <a href="#" class="logo">
+                        <a href="{{url('/redirects')}}" class="logo">
                             <img src="assets/images/pbrl-logo.png" align="klassy cafe html template" width="70%">
                         </a>
                         <!-- ***** Logo End ***** -->
@@ -139,13 +139,13 @@ https://templatemo.com/tm-558-klassy-cafe
                                 </div>
                             </li>
 
-                            <!-- @endauth
+                            @endauth
 
                             @guest
 
-                            <i class="fa fa-shopping-cart"></i>[0]
 
-                            @endguest -->
+
+                            @endguest
 
 
                             <li>

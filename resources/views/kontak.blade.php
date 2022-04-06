@@ -37,33 +37,16 @@
 
              <div class="row">
                <div class="col-lg-12">
-                 <h4>Tambahkan Metode Pembayaran Anda</h4>
+                 <h4>Kirimkan saran anda untuk Pasar Budaya Rumput Laut</h4>
                </div>
                <div class="col-lg-12">
                  <fieldset>
-
-                   <select name="nama_alatbayar" id="nama_alatbayar">
-                     <option value="-">Pilih Alat Bayar</option>
-                     <option value="BRI">Bank BRI</option>
-                     <option value="BNI">Bank BNI</option>
-                     <option value="Mandiri">Bank Mandiri</option>
-                     <option value="DANA">DANA</option>
-                   </select>
+                   <textarea name="pemilik_alatbayar" id="pemilik_alatbayar" placeholder="Saran atau Masukan anda" required></textarea>
                  </fieldset>
                </div>
                <div class="col-lg-12">
                  <fieldset>
-                   <input name="norek_alatbayar" id="norek_alatbayar" placeholder="Nomor Rekening" required></input>
-                 </fieldset>
-               </div>
-               <div class="col-lg-12">
-                 <fieldset>
-                   <input name="pemilik_alatbayar" id="pemilik_alatbayar" placeholder="Pemilik Rekening" required></input>
-                 </fieldset>
-               </div>
-               <div class="col-lg-12">
-                 <fieldset>
-                   <button type="submit" id="form-submit" class="main-button-icon" style="margin-top: 10px;;">Tambah ALat Bayar</button>
+                   <button type="submit" id="form-submit" class="main-button-icon" style="margin-top: 10px;;">Kirim Saran</button>
                  </fieldset>
                </div>
              </div>

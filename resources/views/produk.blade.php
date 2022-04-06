@@ -44,6 +44,7 @@
                             </fieldset>
                         </div>
                         <input type="submit" class="btn btn-new" value="Tambah Keranjang" style="width: 100%;">
+                        <a href="https::/wa.me" class="btn btn-new" value="" style="width: 100%; margin-top:10px;">Chat Pembudidaya</a>
                     </div>
                 </form>
                 @endforeach
