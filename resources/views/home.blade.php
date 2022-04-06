@@ -105,68 +105,72 @@ https://templatemo.com/tm-558-klassy-cafe
 
                                 </a>
                             </li>
-{{-- 
+                            {{--
                             <li class="scroll-to-section" style="background-color: #d5fdff;  padding-top:8px; padding-bottom:2px;">
 
                                 <select name="" id="">
                                     @foreach ($data5 as $item)
                                     <option> </option>
                                         <option value="{{$item->id_pesanan}}"><a href="index.htm">{{$item->status_pesanan}}asd{{$item->status_pesanan}}</a></option>
-                                    @endforeach
+                            @endforeach
 
-                                </select>
-                                {{-- @auth
+                            </select>
+                            {{-- @auth
 
                                 <a href="{{url('/showcart',Auth::user()->no_ktp)}}">
 
-                                    <i class="fa fa-bell-o"></i>{{$count}}
+                            <i class="fa fa-bell-o"></i>{{$count}}
 
-                                </a>
+                            </a>
 
 
-                                @endauth
+                            @endauth
 
-                                @guest
+                            @guest
 
-                                <i class="fa fa-bell-o"></i>[0]
+                            <i class="fa fa-bell-o"></i>[0]
 
-                                @endguest --}}
-               
+                            @endguest --}}
 
-          
+
+
 
                             <li class="nav-item dropdown border-left">
                                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                                  <i class="mdi mdi-bell"></i>
-                                  <span class="count bg-danger"></span>
+                                    <i class="mdi mdi-bell"></i>
+                                    <span class="count bg-danger"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                                  <h6 class="p-3 mb-0">Notifications</h6>
-                                  <div class="dropdown-divider"></div>
-                                  <a href="#" class="dropdown-item preview-item">
+                                    <h6 class="p-3 mb-0">Notifications</h6>
+                                    <div class="dropdown-divider"></div>
+
                                     @auth
+                                    @foreach ($data5 as $item)
+
                                     <div class="preview-item-content">
-                                        @foreach ($data5 as $item)
-                                        <p class="preview-subject mb-1">{{$item->id_rumputlaut}}</p>
-                                      
+                                        <a href="{{url('/showtes',$item->id_pesanan)}}" class="dropdown-item preview-item">
+                                            <!-- <p class="preview-subject mb-1">{{$item->id_rumputlaut}}</p> -->
 
-                                      <p class="text-muted ellipsis mb-0">{{$item->status_pesanan}} </p>
-                                      @endforeach
+
+                                            <p class="text-muted ellipsis mb-2">{{$item->id_pesanan}} : <b>{{$item->status_pesanan}} </b></p>
+                                        </a>
+                                        <!-- <p href="{{url('/editproduk',$item->id_rumputlaut)}}">Edit</p> -->
+                                        @endforeach
                                     </div>
-                                  </a>
 
-                                  <div class="dropdown-divider"></div>
-                                  <p class="p-3 mb-0 text-center">See all notifications</p>
+
+                                    <div class="dropdown-divider"></div>
+                                    <p class="p-3 mb-0 text-center">See all notifications</p>
                                 </div>
-                              </li>
+                            </li>
 
-                              @endauth
+                            @endauth
 
-                              @guest
+                            @guest
 
-                              <i class="fa fa-shopping-cart"></i>[0]
+                            <i class="fa fa-shopping-cart"></i>[0]
 
-                              @endguest
+                            @endguest
 
 
                             <li>

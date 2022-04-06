@@ -17,6 +17,17 @@
 
 			<div class="main-panel">
 				<div class="content-wrapper">
+					<div class="row">
+						<form action="{{url('/search')}}" method="get">
+
+							@csrf
+
+							<input type="text" name="search" style="color:blue;">
+
+							<input type="submit" value="Search" class="btn btn-success">
+
+						</form>
+					</div>
 					<div class="page-header">
 						<h3 class="page-title"> Lihat Daftar Pelanggan Anda </h3>
 						<nav aria-label="breadcrumb">
@@ -35,23 +46,26 @@
 										<table class="table table-striped">
 											<thead>
 												<tr align="center">
-													<th> Nama </th>
-													<th> Email </th>
-													<th> Aksi </th>
+													<th> No. KTP Pelanggan</th>
+													<th> Nama Pelanggan</th>
+													<th> No.HP Pelanggan</th>
+													<th> Alamat Pelanggan</th>
 												</tr>
 											</thead>
 											<tbody>
 												@foreach($data as $data)
 												<tr align="center">
-													<td>{{$data->name}}</td>
-													<td>{{$data->email}}</td>
+													<td>{{$data->no_ktp}}</td>
+													<td>{{$data->nama}}</td>
+													<td>{{$data->no_hp}}</td>
+													<td>{{$data->alamat}}</td>
 
-													@if($data->usertype=="0")
+													<!-- @if($data->usertype=="0")
 													<td><a href="{{url('/deleteuser',$data->id)}}">Delete</a></td>
 													@else
 													<td><a>Not Allowed</a></td>
 
-													@endif
+													@endif -->
 
 												</tr>
 

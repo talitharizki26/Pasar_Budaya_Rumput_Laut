@@ -53,7 +53,7 @@
 												<td>{{$data->isi_testimoni}}</td>
 												<td>{{$data->bintang_testimoni}}</td>
 												<td>{{$data->balasan_testimoni}}</td>
-												<td> <a href="" class="btn btn-success">Balas Testimoni</a> </td>
+												<td> <a href="{{url('/balastestimoni',$data->id_pesanan)}}" class="btn btn-success">Balas Testimoni</a> </td>
 
 
 

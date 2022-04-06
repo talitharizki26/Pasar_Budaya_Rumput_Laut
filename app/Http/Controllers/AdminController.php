@@ -44,20 +44,22 @@ class AdminController extends Controller
 
   public function pelanggan()
   {
+    //$id = Auth::id();
     $data = user::all();
+    //$data = user::where('no_ktp', $id)->join('pesanans', 'pesanans.user_id', '=', 'users.no_ktp')->get();
     return view("admin.pelanggan", compact("data"));
   }
 
 
 
 
-  public function deleteuser($id)
-  {
+  // public function deleteuser($id)
+  // {
 
-    $data = user::find($id);
-    $data->delete();
-    return redirect()->back();
-  }
+  //   $data = user::find($id);
+  //   $data->delete();
+  //   return redirect()->back();
+  // }
 
 
 
@@ -287,8 +289,23 @@ class AdminController extends Controller
   // End Artikel
 
 
+  // Pesanan
 
 
+  public function pesanan()
+  {
+    $id = Auth::id();
+    //$data = Pesanan::all();
+    //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
+    $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+
+
+    return view('admin.pesanan', compact('data'));
+  }
+
+  // End Pesanan
+
+  // Testimoni
 
   public function testimoni()
   {
@@ -303,25 +320,27 @@ class AdminController extends Controller
     //return redirect('login');
   }
 
-
-
-
-
-  public function pesanan()
+  public function balastestimoni(Request $request, $id_pesanan)
   {
-    $id = Auth::id();
-    //$data = Pesanan::all();
-    //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
-    $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
+    $data = pesanan::find($id_pesanan);
 
-    return view('admin.pesanan', compact('data'));
+    $data->balasan_testimoni = $request->balasan_testimoni;
+
+    $data->save();
+
+    return redirect()->back();
   }
 
 
 
 
 
+
+
+
+
+  // End Testimoni
 
 
 
@@ -337,13 +356,17 @@ class AdminController extends Controller
   {
 
     $search = $request->search;
+    $id = Auth::id();
 
-    $data = Pesanan::where('name', 'Like', '%' . $search . '%')->orWhere('foodname', 'Like', '%' . $search . '%')
+    $data = Pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orWhere('status_pesanan', 'Like', '%' . $search . '%')->orWhere('konfirmasi_pesanan', 'Like', '%' . $search . '%')
       ->get();
 
 
-    return view('admin.orders', compact('data'));
+    return view('admin.pesanan', compact('data'));
   }
+
+
+
 
 
 

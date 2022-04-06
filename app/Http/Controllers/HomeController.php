@@ -19,6 +19,7 @@ use App\Models\Cart;
 use App\Models\Pesanan;
 
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\FuncCall;
 
 class HomeController extends Controller
 {
@@ -54,8 +55,8 @@ class HomeController extends Controller
         if (Auth::id() == $id) {
 
             $data4 = cart::where('user_id', $id)->join('produks', 'carts.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
-
-            $data5 = pesanan::select('*')->where('user_id', '=', $id)->get();
+            $status = "Selesai";
+            $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
         }
         // dd($data5);
         //  else {
@@ -185,6 +186,26 @@ class HomeController extends Controller
         $data2 = artikel::select('*')->where('id', '=', $id)->get();
 
         return view('article', compact('data2'));
+    }
+
+    public function showtes(Request $request, $id)
+    {
+        $data2 = Pesanan::find($id);
+
+        // dd($data2);
+        return view('isitestimoni', compact('data2'));
+    }
+
+    public function uploadtestimoni(Request $request, $id)
+    {
+        $data = Pesanan::find($id);
+
+        $data->isi_testimoni = $request->isi_testimoni;
+
+        $data->save();
+        // dd($data);
+        return redirect('redirects');
+        // return view('/redirects');
     }
 
 

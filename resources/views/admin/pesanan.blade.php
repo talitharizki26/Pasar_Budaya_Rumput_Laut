@@ -84,7 +84,7 @@
 													{{$data->status_pesanan}}
 												</td>
 												<td>
-													<button class="btn btn-primary" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Update</button>
+													<button class="btn btn-primary" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Konfirmasi</button>
 												</td>
 
 											</tr>

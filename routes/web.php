@@ -90,20 +90,28 @@ Route::post("/orderconfirm", [HomeController::class, "orderconfirm"]);
 
 // Pesanan
 
-Route::put('/pesanan/{Pesanan}', [AdminController::class,'updatepesanan']);
+Route::put('/pesanan/{Pesanan}', [AdminController::class, 'updatepesanan']);
 
 Route::get("/pesanan", [AdminController::class, "pesanan"]);
-Route::get('/edittolak/{id}',[AdminController::class,'edittolak']);
-Route::get('/editbatal/{id}',[AdminController::class,'editbatal']);
+Route::get('/edittolak/{id}', [AdminController::class, 'edittolak']);
+Route::get('/editbatal/{id}', [AdminController::class, 'editbatal']);
 
-Route::get('/statussiap/{id}',[AdminController::class,'statussiap']);
-Route::get('/statusantar/{id}',[AdminController::class,'statusantar']);
-Route::get('/statusselesai/{id}',[AdminController::class,'statusselesai']);
+Route::get('/statussiap/{id}', [AdminController::class, 'statussiap']);
+Route::get('/statusantar/{id}', [AdminController::class, 'statusantar']);
+Route::get('/statusselesai/{id}', [AdminController::class, 'statusselesai']);
 // End Pesanan
 
 // Testimoni
 
 Route::get("/testimoni", [AdminController::class, "testimoni"]);
+
+Route::post("/balastestimoni/{id}", [AdminController::class, "balastestimoni"]);
+
+Route::get("/balastestimoni/{id}", [AdminController::class, "balastestimoni"]);
+
+Route::get("/showtes/{id}", [HomeController::class, "showtes"]);
+
+Route::post("/uploadtestimoni/{id}", [HomeController::class, "uploadtestimoni"]);
 
 //End Testimoni
 
