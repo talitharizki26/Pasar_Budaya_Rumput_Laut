@@ -30,8 +30,8 @@
                     <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Form Balas Tetsimoni</h4>
-                                <form class="forms-sample" action="{{url('/balastestimoni',$data->id_pesanan)}}" method="post" enctype="multipart/form-data">
+                                <h4 class="card-title">Form Balas Testimoni</h4>
+                                <form class="forms-sample" action="{{url('/updatebalasan',$data->id_pesanan)}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <label for="balasan_testimoni">Balasan Testimoni</label>

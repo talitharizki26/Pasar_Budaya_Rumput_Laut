@@ -43,7 +43,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Tabel Pesanan</h4>
-								</p>
+								<a href="{{url('/cetaklaporan')}}"><button class="btn btn-success">Cetak Laporan</button></a>
 								<div class="table-responsive">
 									<table class="table table-striped">
 										<thead>
@@ -151,9 +151,6 @@
 											@endforeach
 										</tbody>
 									</table>
-
-
-
 
 								</div>
 							</div>

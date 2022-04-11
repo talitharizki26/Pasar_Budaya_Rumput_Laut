@@ -303,6 +303,17 @@ class AdminController extends Controller
     return view('admin.pesanan', compact('data'));
   }
 
+  public function cetaklaporan()
+  {
+    $id = Auth::id();
+    //$data = Pesanan::all();
+    //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
+    $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+
+
+    return view('admin.cetaklaporan', compact('data'));
+  }
+
   // End Pesanan
 
   // Testimoni
@@ -320,7 +331,15 @@ class AdminController extends Controller
     //return redirect('login');
   }
 
-  public function balastestimoni(Request $request, $id_pesanan)
+  public function balastestimoni($id_pesanan)
+  {
+
+    $data = pesanan::find($id_pesanan);
+
+    return view("admin.balastestimoni", compact("data"));
+  }
+
+  public function updatebalasan(Request $request, $id_pesanan)
   {
 
     $data = pesanan::find($id_pesanan);
@@ -331,6 +350,9 @@ class AdminController extends Controller
 
     return redirect()->back();
   }
+
+
+
 
 
 

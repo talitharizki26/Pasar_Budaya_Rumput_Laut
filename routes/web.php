@@ -93,6 +93,8 @@ Route::post("/orderconfirm", [HomeController::class, "orderconfirm"]);
 Route::put('/pesanan/{Pesanan}', [AdminController::class, 'updatepesanan']);
 
 Route::get("/pesanan", [AdminController::class, "pesanan"]);
+Route::get("/cetaklaporan", [AdminController::class, "cetaklaporan"]);
+
 Route::get('/edittolak/{id}', [AdminController::class, 'edittolak']);
 Route::get('/editbatal/{id}', [AdminController::class, 'editbatal']);
 
@@ -105,9 +107,9 @@ Route::get('/statusselesai/{id}', [AdminController::class, 'statusselesai']);
 
 Route::get("/testimoni", [AdminController::class, "testimoni"]);
 
-Route::post("/balastestimoni/{id}", [AdminController::class, "balastestimoni"]);
-
 Route::get("/balastestimoni/{id}", [AdminController::class, "balastestimoni"]);
+
+Route::post("/updatebalasan/{id}", [AdminController::class, "updatebalasan"]);
 
 Route::get("/showtes/{id}", [HomeController::class, "showtes"]);
 

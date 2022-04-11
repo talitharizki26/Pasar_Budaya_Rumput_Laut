@@ -120,15 +120,28 @@
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
       <span class="mdi mdi-menu"></span>
     </button>
-    <ul class="navbar-nav w-125">
-      <li class="nav-item w-125">
-        <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-          <input type="text" class="form-control" placeholder="Cari Produk">
-        </form>
-      </li>
-    </ul>
     <ul class="navbar-nav navbar-nav-right">
-
+      <li class="nav-item dropdown border-right">
+        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+          <i class="mdi mdi-bell"></i>
+          <span class="count bg-danger"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+          <h6 class="p-3 mb-0">Notifikasi</h6>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-calendar text-success"></i>
+              </div>
+            </div>
+            <div class="preview-item-content">
+              <p class="preview-subject mb-1">Pesanan Masuk</p>
+              <p class="text-muted ellipsis mb-0"> Periksa Pesanan Masuk Anda </p>
+            </div>
+          </a>
+        </div>
+      </li>
 
       <li class="nav-item dropdown">
         <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
