@@ -114,42 +114,13 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Diagram Progres Penjualan Rumput Laut</h4>
-
-                <script src="https://code.highcharts.com/highcharts.js"></script>
-                <script src="https://code.highcharts.com/modules/exporting.js"></script>
-                <script src="https://code.highcharts.com/modules/export-data.js"></script>
-                <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
-                <figure class="highcharts-figure">
-                  <div id="container"></div>
-                </figure>
-
-                <script type="text/javascript">
+                <script>
                   var pendapatan = <?php echo json_encode($total_pesanan) ?>;
                   var bulan = <?php echo json_encode($bulan) ?>;
-                  Highcharts.chart('container', {
-
-                    title: {
-                      text: 'Logarithmic axis demo'
-                    },
-
-                    xAxis: {
-                      categories: bulan
-                    },
-
-                    yAxis: {
-                      title: {
-                        text: 'nominal pendapatan'
-                      }
-                    },
-
-                    series: [{
-                      data: pendapatan,
-                      name: 'nominal',
-                    }]
-                  });
                 </script>
-
+                <figure class="highcharts-figure">
+                  <canvas id="areaChart" style="height:200px"></canvas>
+                </figure>
               </div>
             </div>
           </div>
@@ -170,57 +141,11 @@
                         <th> ID Rumput Laut </th>
                         <th> Jumlah</th>
                         <th> Total</th>
-                        <th> Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <p>Henry Klein</p>
-                        </td>
-                        <td>
-                          <p>Henry Klein</p>
-                        </td>
-                        <td> 02312 </td>
-                        <td> $14,500 </td>
-                        <td> Dashboard </td>
-                        <td> Credit card </td>
-                        <td> 04 Dec 2019 </td>
-                        <td>
-                          <div class="badge badge-outline-success">Approved</div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>Henry Klein</p>
-                        </td>
-                        <td>
-                          <p>Estella Bryan</p>
-                        </td>
-                        <td> 02312 </td>
-                        <td> $14,500 </td>
-                        <td> Website </td>
-                        <td> Cash on delivered </td>
-                        <td> 04 Dec 2019 </td>
-                        <td>
-                          <div class="badge badge-outline-warning">Pending</div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>Henry Klein</p>
-                        </td>
-                        <td>
-                          <p>Lucy Abbott</p>
-                        </td>
-                        <td> 02312 </td>
-                        <td> $14,500 </td>
-                        <td> App design </td>
-                        <td> Credit card </td>
-                        <td> 04 Dec 2019 </td>
-                        <td>
-                          <div class="badge badge-outline-danger">Rejected</div>
-                        </td>
+                      <tr align="center" style="background-color: black;">
+
                       </tr>
                     </tbody>
                   </table>

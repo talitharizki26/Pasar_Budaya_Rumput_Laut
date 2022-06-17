@@ -28,6 +28,8 @@ Route::get("/pelanggan", [AdminController::class, "pelanggan"]);
 
 Route::get("/deleteuser/{id}", [AdminController::class, "deleteuser"]);
 
+Route::get("/chart", [AdminController::class, "chart"]);
+
 // End User
 
 // Produk
@@ -94,7 +96,7 @@ Route::put('/pesanan/{Pesanan}', [AdminController::class, 'updatepesanan']);
 
 Route::get("/pesanan", [AdminController::class, "pesanan"]);
 
-Route::get("/chart", [AdminController::class, "chart"]);
+
 
 
 Route::get('/edittolak/{id}', [AdminController::class, 'edittolak']);

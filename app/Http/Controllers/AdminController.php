@@ -36,6 +36,8 @@ class AdminController extends Controller
 
 
 
+  // Dashboard
+
   public function chart()
   {
     $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
@@ -51,6 +53,7 @@ class AdminController extends Controller
 
 
 
+  // End Dashboard
 
 
 
@@ -187,9 +190,6 @@ class AdminController extends Controller
   // End Produk
 
 
-
-
-
   // Artikel
 
   public function artikel()
@@ -302,6 +302,19 @@ class AdminController extends Controller
     return view('admin.pesanan', compact('data'));
   }
 
+  public function updatepesanan(Request $request, $id)
+  {
+    $update_barang = Pesanan::find($id);
+    // $coba = $request->inlineRadioOptions;
+    $update_barang->konfirmasi_pesanan = $request->inlineRadioOptions;
+    $update_barang->status_pesanan = $request->inlineRadioOptions2;
+    // $update_barang->jumlah_barang = $request->updateJumlahBarang;
+    // dd($update_barang);
+    $update_barang->save();
+    // return dd($update_barang);
+    return redirect()->back();
+  }
+
   public function laporanpenjualan()
   {
     $id = Auth::id();
@@ -359,26 +372,9 @@ class AdminController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
   // End Testimoni
 
-
-
-
-
-
-
-
-
-
+  // Cari
 
   public function search_pesanan(Request $request)
   {
@@ -406,6 +402,15 @@ class AdminController extends Controller
 
     return view('admin.artikel', compact('data'));
   }
+
+  // End Cari
+
+
+
+
+
+
+
 
 
 
@@ -486,20 +491,6 @@ class AdminController extends Controller
       'status_pesanan' => "Pesanan Selesai"
     ]);
 
-    return redirect()->back();
-  }
-
-
-  public function updatepesanan(Request $request, $id)
-  {
-    $update_barang = Pesanan::find($id);
-    // $coba = $request->inlineRadioOptions;
-    $update_barang->konfirmasi_pesanan = $request->inlineRadioOptions;
-    $update_barang->status_pesanan = $request->inlineRadioOptions2;
-    // $update_barang->jumlah_barang = $request->updateJumlahBarang;
-    // dd($update_barang);
-    $update_barang->save();
-    // return dd($update_barang);
     return redirect()->back();
   }
 }
