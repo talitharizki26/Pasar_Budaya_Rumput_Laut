@@ -38,7 +38,7 @@
                                         <input class="form-control" name="balasan_testimoni" value="{{$data->balasan_testimoni}}" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-2" value="Update Chef">Balas Testimoni</button>
-                                    <button type="reset" class="btn btn-dark">Batal</button>
+                                    <a href="{{url('/testimoni')}}" class="btn btn-dark">Batal</a>
                                 </form>
                             </div>
                         </div>

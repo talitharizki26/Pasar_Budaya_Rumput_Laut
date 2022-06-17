@@ -28,8 +28,14 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Tabel Testimoni</h4>
-								</p>
-								<div class="table-responsive">
+								<div class="row" style="float:right">
+									<form action="{{url('/search')}}" method="get" class="nav-link mt-md-0 d-none d-lg-flex search">
+										@csrf
+										<input class="form-control" type="text" name="search" style="color:white; width:300px" placeholder="Cari testimoni">
+										<button style="margin-left:25px" type="submit" value="Search" class="btn btn-primary"><i style="padding-left:5px" class="mdi mdi-magnify"></i></button>
+									</form>
+								</div><br>
+								<div class="table-responsive"><br>
 									<table class="table table-striped">
 										<thead>
 											<tr align="center">

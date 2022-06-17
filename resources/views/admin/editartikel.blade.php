@@ -50,7 +50,7 @@
 										<input type="date" class="form-control" name="tglupload_artikel" value="{{$data->tglupload_artikel}}" required>
 									</div>
 									<div class="form-group">
-										<label for="gambar">Gambar Sebelumnya</label>
+										<label for="gambar">Gambar Sebelumnya</label><br>
 										<img height="250" width="250" src="/artikelimage/{{$data->gambar_artikel}}">
 									</div>
 									<div class="form-group">
@@ -58,7 +58,7 @@
 										<input type="file" class="form-control" name="gambar_artikel">
 									</div>
 									<button type="submit" class="btn btn-primary mr-2" value="Update Chef">Edit Artikel</button>
-									<button type="reset" class="btn btn-dark">Batal</button>
+									<a href="{{url('/artikel')}}" class="btn btn-dark">Batal</a>
 								</form>
 							</div>
 						</div>

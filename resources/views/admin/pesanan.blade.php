@@ -18,17 +18,7 @@
 
 		<div class="main-panel">
 			<div class="content-wrapper">
-				<div class="row">
-					<form action="{{url('/search')}}" method="get">
 
-						@csrf
-
-						<input type="text" name="search" style="color:blue;">
-
-						<input type="submit" value="Search" class="btn btn-success">
-
-					</form>
-				</div>
 				<div class="page-header">
 
 					<h3 class="page-title"> Lihat Daftar Pesanan dari Pelanggan Anda </h3>
@@ -43,12 +33,20 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Tabel Pesanan</h4>
-								<a href="{{url('/cetaklaporan')}}"><button class="btn btn-success">Cetak Laporan</button></a>
+								<!-- <a href="{{url('/cetaklaporan')}}"><button class="btn btn-success">Cetak Laporan</button></a> -->
+								<div class="row" style="float:right">
+									<form action="{{url('/search_pesanan')}}" method="get" class="nav-link mt-md-0 d-none d-lg-flex search">
+										@csrf
+										<input class="form-control" type="text" name="search_pesanan" style="color:white; width:300px" placeholder="Cari pesanan">
+										<button style="margin-left:25px" type="submit" value="Search" class="btn btn-primary"><i style="padding-left:5px" class="mdi mdi-magnify"></i></button>
+									</form>
+								</div><br>
 								<div class="table-responsive">
 									<table class="table table-striped">
 										<thead>
 											<tr align="center">
-												<th> ID Pesanan </th>
+												<th> Bukti Bayar</th>
+												<!-- <th> ID Pesanan </th> -->
 												<!-- <th> Tanggal </th> -->
 												<!-- <th> Waktu </th> -->
 												<th> ID Pelanggan </th>
@@ -56,7 +54,6 @@
 												<th> Jumlah</th>
 												<th> Ekspedisi</th>
 												<th> Total</th>
-												<th> Bukti Bayar</th>
 												<th> Konfirmasi</th>
 												<th> Status</th>
 												<th> Aksi </th>
@@ -68,15 +65,17 @@
 											@foreach($data as $data)
 
 											<tr align="center" style="background-color: black;">
-												<td>{{$data->id_pesanan}}</td>
+												<td>
+													<a href="/bukti_pembayaran/{{$data->bukti_pembayaran}}"><img height="200" width="200" src="/bukti_pembayaran/{{$data->bukti_pembayaran}}"></a>
+												</td>
+												<!-- <td>{{$data->id_pesanan}}</td> -->
 												<!-- <td>{{$data->tgl_pesanan}}</td>
 												<td>{{$data->waktu_pesanan}}</td> -->
 												<td>{{$data->user_id}}</td>
 												<td>{{$data->id_rumputlaut}}</td>
-												<td>{{$data->jumlah_pesanan}}</td>
+												<td>{{$data->jumlah_pesanan}} Kg</td>
 												<td>{{$data->ekspedisi_pesanan}}</td>
-												<td>Rp. {{$data->total_pesanan}}</td>
-												<td>{{$data->bukti_pembayaran}}</td>
+												<td>Rp. {{number_format($data->total_pesanan)}}</td>
 												<td>
 													{{$data->konfirmasi_pesanan}}
 												</td>
@@ -84,7 +83,7 @@
 													{{$data->status_pesanan}}
 												</td>
 												<td>
-													<button class="btn btn-primary" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Konfirmasi</button>
+													<button class="btn btn-success" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Konfirmasi</button>
 												</td>
 
 											</tr>
@@ -139,7 +138,7 @@
 																</div>
 
 
-																<button type="submit" class="btn btn-primary">Konfirmasi Pesanan</button>
+																<button type="submit" class="btn btn-primary">Konfirmasi Pesanan dan Status</button>
 															</form>
 															<!--END FORM UPDATE BARANG-->
 														</div>
@@ -168,43 +167,10 @@
 			<!-- Button trigger modal -->
 
 
-			<!-- Modal -->
-			{{-- <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		  </button>
+
+			<!-- content-wrapper ends -->
+			@include("admin.footer")
 		</div>
-		<div class="modal-body">
-			<p>Konfirmasi</p>
-			<a href="{{url('/edittolak',$data->id_pesanan)}}"class="badge badge-outline-success">Pesanan dikonfirmasi</a>
-			<a href="{{url('/editbatal',$data->id_pesanan)}}" class="badge badge-outline-danger">Pesanan dibatalkan</a>
-
-			<p>Status</p>
-			<a href="{{url('/statussiap',$data->id_pesanan)}}" class="badge badge-outline-primary">Pesanan disiapkan</a>
-			<a href="{{url('/statusantar',$data->id_pesanan)}}" class="btn btn-warning">Pesanan diantar</a>
-			<a href="{{url('/statusselesai',$data->id_pesanan)}}" class="btn btn-primary">Pesanan selesai</a>
-
-
-			{{-- <td>{{$data->id_pesanan}}</td> --}}
-
-		</div>
-		{{-- <div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		  <button type="button" class="btn btn-primary">Save changes</button>
-		</div> --}}
-	</div>
-	</div>
-
-	</div>
-
-
-	<!-- content-wrapper ends -->
-	@include("admin.footer")
-	</div>
 
 
 
@@ -214,7 +180,7 @@
 
 	@include("admin.adminscript")
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
@@ -224,7 +190,7 @@
 		$(document).ready(function() {
 			$('#myTable').DataTable();
 		});
-	</script>
+	</script> -->
 </body>
 
 </html>

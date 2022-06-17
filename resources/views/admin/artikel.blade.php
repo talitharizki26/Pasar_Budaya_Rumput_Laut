@@ -61,15 +61,20 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Tabel Artikel</h4>
-								</p>
+								<div class="row" style="float:right">
+									<form action="{{url('/search_artikel')}}" method="get" class="nav-link mt-md-0 d-none d-lg-flex search">
+										@csrf
+										<input class="form-control" type="text" name="search_artikel" style="color:white; width:300px" placeholder="Cari artikel">
+										<button style="margin-left:25px" type="submit" value="Search" class="btn btn-primary"><i style="padding-left:5px" class="mdi mdi-magnify"></i></button>
+									</form>
+								</div><br>
 								<div class="table-responsive">
 									<table class="table table-striped">
 										<thead>
 											<tr align="center">
+												<th> Gambar</th>
 												<th> Judul</th>
 												<th> Sumber</th>
-												<th> Tgl Upload</th>
-												<th> Gambar</th>
 												<th> Aksi </th>
 											</tr>
 										</thead>
@@ -77,12 +82,12 @@
 											@foreach($data as $data)
 
 											<tr align="center">
-
+												<td>
+													<a href="/artikelimage/{{$data->gambar_artikel}}"><img height="200" width="200" src="/artikelimage/{{$data->gambar_artikel}}"></a>
+												</td>
 												<td>{{$data->judul_artikel}}</td>
 												<td>{{$data->sumber_artikel}}</td>
-												<td>{{$data->tglupload_artikel}}</td>
-												<td><img height="100" width="100" src="/artikelimage/{{$data->gambar_artikel}}"></td>
-												<td><a href="{{url('/editartikel',$data->id_artikel)}}">Edit</a> || <a onclick="return confirm('Apakah anda ingin menghapus data ini?')" href="{{url('/hapusartikel',$data->id_artikel)}}">Hapus</a></td>
+												<td><a class="btn-sm btn-success" href="{{url('/editartikel',$data->id_artikel)}}">Edit</a> <a class="btn-sm btn-danger delete" href="#" id-artikel="{{$data->id_artikel}}">Hapus</a></td>
 											</tr>
 
 											@endforeach
@@ -109,5 +114,31 @@
 
 
 </body>
+
+
+
+<script>
+	$('.delete').click(function() {
+		var id_artikel = $(this).attr('id-artikel');
+		swal({
+				title: "Ingin Menghapus Artikel?",
+				text: "Data tidak dapat dikembalikan!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+			.then((willDelete) => {
+				console.log(willDelete);
+				if (willDelete) {
+					window.location = "{{url('/hapusartikel',$data->id_artikel)}}";
+					swal("Artikel Berhasil Dihapus!", {
+						icon: "success",
+					});
+				} else {
+					swal("Data Gagal Dihapus!");
+				}
+			});
+	});
+</script>
 
 </html>

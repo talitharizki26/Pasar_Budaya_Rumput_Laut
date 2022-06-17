@@ -3,6 +3,10 @@
 <html lang="en">
 
 <head>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
   @include("admin.admincss")
 
@@ -70,11 +74,82 @@
           </div>
         </div>
         <div class="row">
+          <div class="col-sm-6 grid-margin">
+            <div class="card">
+              <div class="card-body">
+                <h5>Pendapatan Keseluruhan</h5>
+                <div class="row">
+                  <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                    <div class="d-flex d-sm-block d-md-flex align-items-center">
+                      <h2 class="mb-0">Rp. 103.500.000</h2>
+                    </div>
+                  </div>
+                  <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                    <i class="icon-lg mdi mdi-tag text-info ml-auto"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 grid-margin">
+            <div class="card">
+              <div class="card-body">
+                <h5>Penilaian Pelanggan</h5>
+                <div class="row">
+                  <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                    <div class="d-flex d-sm-block d-md-flex align-items-center">
+                      <h2 class="mb-0">4.8 Poin</h2>
+                    </div>
+                  </div>
+                  <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                    <i class="icon-lg mdi mdi-star text-warning ml-auto"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Diagram Progres Penjualan Rumput Laut</h4>
-                <canvas id="barChart" style="height:230px"></canvas>
+
+                <script src="https://code.highcharts.com/highcharts.js"></script>
+                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+                <figure class="highcharts-figure">
+                  <div id="container"></div>
+                </figure>
+
+                <script type="text/javascript">
+                  var pendapatan = <?php echo json_encode($total_pesanan) ?>;
+                  var bulan = <?php echo json_encode($bulan) ?>;
+                  Highcharts.chart('container', {
+
+                    title: {
+                      text: 'Logarithmic axis demo'
+                    },
+
+                    xAxis: {
+                      categories: bulan
+                    },
+
+                    yAxis: {
+                      title: {
+                        text: 'nominal pendapatan'
+                      }
+                    },
+
+                    series: [{
+                      data: pendapatan,
+                      name: 'nominal',
+                    }]
+                  });
+                </script>
+
               </div>
             </div>
           </div>
@@ -87,21 +162,21 @@
                 <div class="table-responsive">
                   <table class="table">
                     <thead>
-                      <tr>
-                        <th> Foto </th>
-                        <th> Client Name </th>
-                        <th> Order No </th>
-                        <th> Product Cost </th>
-                        <th> Project </th>
-                        <th> Payment Mode </th>
-                        <th> Start Date </th>
-                        <th> Payment Status </th>
+                      <tr align="center">
+                        <th> ID Pesanan </th>
+                        <th> Tanggal </th>
+                        <th> Waktu </th>
+                        <th> ID Pelanggan </th>
+                        <th> ID Rumput Laut </th>
+                        <th> Jumlah</th>
+                        <th> Total</th>
+                        <th> Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>
-                          <img src="admin/assets/images/faces/face1.jpg" alt="image" />
+                          <p>Henry Klein</p>
                         </td>
                         <td>
                           <p>Henry Klein</p>
@@ -116,7 +191,9 @@
                         </td>
                       </tr>
                       <tr>
-                        <td><img src="admin/assets/images/faces/face2.jpg" alt="image" /></td>
+                        <td>
+                          <p>Henry Klein</p>
+                        </td>
                         <td>
                           <p>Estella Bryan</p>
                         </td>
@@ -130,7 +207,9 @@
                         </td>
                       </tr>
                       <tr>
-                        <td><img src="admin/assets/images/faces/face5.jpg" alt="image" /></td>
+                        <td>
+                          <p>Henry Klein</p>
+                        </td>
                         <td>
                           <p>Lucy Abbott</p>
                         </td>
@@ -159,7 +238,6 @@
   </div>
 
   </div>
-
 
 
 

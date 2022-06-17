@@ -46,9 +46,22 @@
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('/redirects')}}">
         <span class="menu-icon">
-          <i class="mdi mdi-speedometer"></i>
+          <i class="mdi mdi-chart-bar"></i>
         </span>
         <span class="menu-title">Dashboard</span>
+      </a>
+    </li>
+
+    <li class="nav-item nav-category">
+      <span class="nav-link">Pesanan dan Pembayaran</span>
+    </li>
+
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{{url('/pesanan')}}">
+        <span class="menu-icon">
+          <i class="mdi mdi-format-list-bulleted"></i>
+        </span>
+        <span class="menu-title">Data Pesanan</span>
       </a>
     </li>
 
@@ -59,52 +72,55 @@
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('/pelanggan')}}">
         <span class="menu-icon">
-          <i class="mdi mdi-account"></i>
+          <i class="mdi mdi-account-multiple"></i>
         </span>
         <span class="menu-title">Data Pelanggan</span>
       </a>
     </li>
 
     <li class="nav-item nav-category">
-      <span class="nav-link">Pengelolaan Data</span>
+      <span class="nav-link">Kelola Data</span>
     </li>
 
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('/produk')}}">
         <span class="menu-icon">
-          <i class="mdi mdi-playlist-play"></i>
+          <i class="mdi mdi-package-variant-closed"></i>
         </span>
-        <span class="menu-title">Data Rumput Laut</span>
+        <span class="menu-title">Kelola Rumput Laut</span>
       </a>
     </li>
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('/artikel')}}">
         <span class="menu-icon">
-          <i class="mdi mdi-table-large"></i>
+          <i class="mdi mdi-newspaper"></i>
         </span>
-        <span class="menu-title">Data Artikel</span>
+        <span class="menu-title">Kelola Artikel</span>
       </a>
     </li>
 
-    <li class="nav-item menu-items">
-      <a class="nav-link" href="{{url('/pesanan')}}">
-        <span class="menu-icon">
-          <i class="mdi mdi-chart-bar"></i>
-        </span>
-        <span class="menu-title">Data Pesanan</span>
-      </a>
-    </li>
 
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('/testimoni')}}">
         <span class="menu-icon">
-          <i class="mdi mdi-chart-bar"></i>
+          <i class="mdi mdi-star"></i>
         </span>
-        <span class="menu-title">Data Testimoni</span>
+        <span class="menu-title">Kelola Testimoni</span>
       </a>
     </li>
 
+    <li class="nav-item nav-category">
+      <span class="nav-link">Cetak Laporan</span>
+    </li>
 
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{{url('/laporanpenjualan')}}">
+        <span class="menu-icon">
+          <i class="mdi mdi-printer"></i>
+        </span>
+        <span class="menu-title">Laporan Penjualan</span>
+      </a>
+    </li>
 
 
 

@@ -42,7 +42,7 @@
 										<input class="form-control" name="deskripsi_rumputlaut" value="{{$data->deskripsi_rumputlaut}}" required>
 									</div>
 									<div class="form-group">
-										<label for="harga">Harga Rumput Laut</label>
+										<label for="harga">Harga Rumput Laut (Rupiah)</label>
 										<input class="form-control" name="harga_rumputlaut" value="{{$data->harga_rumputlaut}}" required>
 									</div>
 									<div class="form-group">
@@ -50,25 +50,29 @@
 										<input class="form-control" name="lokasi_rumputlaut" value="{{$data->lokasi_rumputlaut}}" required>
 									</div>
 									<div class="form-group">
-										<label for="durasitahan">Durasi Ketahanan Rumput Laut</label>
+										<label for="durasitahan">Durasi Ketahanan Rumput Laut (Hari)</label>
 										<input class="form-control" name="durasitahan_rumputlaut" value="{{$data->durasitahan_rumputlaut}}" required>
 									</div>
 									<div class="form-group">
+										<label for="stok">Stok Rumput Laut (Kilogram)</label>
+										<input type="number" class="form-control" name="stok_rumputlaut" value="{{$data->stok_rumputlaut}}" required>
+									</div>
+									<!-- <div class="form-group">
 										<div class="col-sm-5">
 											<div class="form-check">
 												<label class="form-check-label">
 													<input type="radio" class="form-check-input" name="ketersediaan_rumputlaut" value="Ya" id="ya" {{ ($data->ketersediaan_rumputlaut=="Ya")? 'checked' : "" }}>Tersedia </label>
 											</div>
 										</div>
-										<div class="col-sm-5">
-											<div class="form-check">
-												<label class="form-check-label">
-													<input type="radio" class="form-check-input" name="ketersediaan_rumputlaut" id="tidak" value="Tidak" {{ ($data->ketersediaan_rumputlaut=="Tidak")? 'checked' : "" }}> Tidak Tersedia </label>
-											</div>
+										<div class=" col-sm-5">
+										<div class="form-check">
+											<label class="form-check-label">
+												<input type="radio" class="form-check-input" name="ketersediaan_rumputlaut" id="tidak" value="Tidak" {{ ($data->ketersediaan_rumputlaut=="Tidak")? 'checked' : "" }}> Tidak Tersedia </label>
 										</div>
 									</div>
+							</div> -->
 									<div class="form-group">
-										<label for="gambar">Gambar Sebelumnya</label>
+										<label for="gambar">Gambar Sebelumnya</label><br>
 										<img height="250" width="250" src="/produkimage/{{$data->gambar_rumputlaut}}">
 									</div>
 									<div class="form-group">
@@ -76,7 +80,7 @@
 										<input type="file" class="form-control" name="gambar_rumputlaut">
 									</div>
 									<button type="submit" class="btn btn-primary mr-2" value="Save">Edit Produk</button>
-									<button type="reset" class="btn btn-dark">Batal</button>
+									<a href="{{url('/produk')}}" class="btn btn-dark">Batal</a>
 								</form>
 							</div>
 						</div>

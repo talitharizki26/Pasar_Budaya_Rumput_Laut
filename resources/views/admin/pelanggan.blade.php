@@ -17,17 +17,7 @@
 
 			<div class="main-panel">
 				<div class="content-wrapper">
-					<div class="row">
-						<form action="{{url('/search')}}" method="get">
 
-							@csrf
-
-							<input type="text" name="search" style="color:blue;">
-
-							<input type="submit" value="Search" class="btn btn-success">
-
-						</form>
-					</div>
 					<div class="page-header">
 						<h3 class="page-title"> Lihat Daftar Pelanggan Anda </h3>
 						<nav aria-label="breadcrumb">
@@ -41,14 +31,20 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Tabel Pelanggan</h4>
-									</p>
+									<div class="row" style="float:right">
+										<form action="{{url('/search')}}" method="get" class="nav-link mt-md-0 d-none d-lg-flex search">
+											@csrf
+											<input class="form-control" type="text" name="search" style="color:white; width:300px" placeholder="Cari pelanggan">
+											<button style="margin-left:25px" type="submit" value="Search" class="btn btn-primary"><i style="padding-left:5px" class="mdi mdi-magnify"></i></button>
+										</form>
+									</div><br>
 									<div class="table-responsive">
 										<table class="table table-striped">
 											<thead>
 												<tr align="center">
 													<th> No. KTP Pelanggan</th>
 													<th> Nama Pelanggan</th>
-													<th> No.HP Pelanggan</th>
+													<th> No. HP Pelanggan</th>
 													<th> Alamat Pelanggan</th>
 												</tr>
 											</thead>

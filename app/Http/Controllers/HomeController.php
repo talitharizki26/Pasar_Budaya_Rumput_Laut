@@ -12,6 +12,8 @@ use App\Models\Pelanggan;
 
 use App\Models\Produk;
 
+
+
 use App\Models\Artikel;
 
 use App\Models\Cart;
@@ -80,7 +82,15 @@ class HomeController extends Controller
         // $ii = $user;
         // dd($ii);
         if ($usertype == '1') {
-            return view('admin.adminhome');
+            $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
+                ->GroupBy(DB::raw("Month(tgl_pesanan)"))
+                ->pluck('jumlah_pesanan');
+
+            //dd($total_pesanan);
+            $bulan = Pesanan::select(DB::raw("MONTHNAME(tgl_pesanan) as bulan"))
+                ->GroupBy(DB::raw("MONTHNAME(tgl_pesanan)"))
+                ->pluck('bulan');
+            return view('admin.adminhome', compact('bulan', 'total_pesanan'));
         } else {
 
             $user_id = Auth::id();
@@ -90,6 +100,8 @@ class HomeController extends Controller
             $user = DB::table('users')->where('no_ktp', $user_id)->first('nama');
             // dd($user);
             // $orang = Auth::where('user_')
+
+
 
 
             return view('home', compact('data', 'data2', 'count', 'data3', 'data4', 'data5'));

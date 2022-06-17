@@ -93,7 +93,9 @@ Route::post("/orderconfirm", [HomeController::class, "orderconfirm"]);
 Route::put('/pesanan/{Pesanan}', [AdminController::class, 'updatepesanan']);
 
 Route::get("/pesanan", [AdminController::class, "pesanan"]);
-Route::get("/cetaklaporan", [AdminController::class, "cetaklaporan"]);
+
+Route::get("/chart", [AdminController::class, "chart"]);
+
 
 Route::get('/edittolak/{id}', [AdminController::class, 'edittolak']);
 Route::get('/editbatal/{id}', [AdminController::class, 'editbatal']);
@@ -117,8 +119,21 @@ Route::post("/uploadtestimoni/{id}", [HomeController::class, "uploadtestimoni"])
 
 //End Testimoni
 
+// Laporan
 
-Route::get("/search", [AdminController::class, "search"]);
+Route::get("/cetaklaporan", [AdminController::class, "cetaklaporan"]);
+
+Route::get("/laporanpenjualan", [AdminController::class, "laporanpenjualan"]);
+
+// End Laporan
+
+// Cari
+
+Route::get("/search_pesanan", [AdminController::class, "search_pesanan"]);
+
+Route::get("/search_artikel", [AdminController::class, "search_artikel"]);
+
+// End Cari
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

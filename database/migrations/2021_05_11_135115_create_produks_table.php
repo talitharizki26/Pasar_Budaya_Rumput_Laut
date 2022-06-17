@@ -20,7 +20,7 @@ class CreateProduksTable extends Migration
             $table->integer("harga_rumputlaut")->nullable();
             $table->string("lokasi_rumputlaut")->nullable();
             $table->integer("durasitahan_rumputlaut")->nullable();
-            $table->string("ketersediaan_rumputlaut")->nullable();
+            $table->string("stok_rumputlaut")->nullable();
             $table->string("gambar_rumputlaut")->nullable();
             $table->bigInteger('no_ktp')->unsigned()->index()->nullable();
             $table->foreign('no_ktp')->references('no_ktp')->on('users')->onDelete('cascade');
