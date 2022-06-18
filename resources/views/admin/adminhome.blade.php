@@ -28,7 +28,7 @@
                 <div class="row">
                   <div class="col-8 col-sm-12 col-xl-8 my-auto">
                     <div class="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 class="mb-0">23 Pesanan</h2>
+                      <h2 class="mb-0">{{$selesai}} Pesanan</h2>
                     </div>
                   </div>
                   <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
@@ -45,7 +45,7 @@
                 <div class="row">
                   <div class="col-8 col-sm-12 col-xl-8 my-auto">
                     <div class="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 class="mb-0">40 Pesanan</h2>
+                      <h2 class="mb-0">{{$diantar}} Pesanan</h2>
                     </div>
                   </div>
                   <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
@@ -62,7 +62,7 @@
                 <div class="row">
                   <div class="col-8 col-sm-12 col-xl-8 my-auto">
                     <div class="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 class="mb-0">3 Pesanan</h2>
+                      <h2 class="mb-0">{{$batal}} Pesanan</h2>
                     </div>
                   </div>
                   <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
@@ -81,7 +81,7 @@
                 <div class="row">
                   <div class="col-8 col-sm-12 col-xl-8 my-auto">
                     <div class="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 class="mb-0">Rp. 103.500.000</h2>
+                      <h2 class="mb-0">Rp. {{number_format($total)}}</h2>
                     </div>
                   </div>
                   <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
@@ -98,7 +98,7 @@
                 <div class="row">
                   <div class="col-8 col-sm-12 col-xl-8 my-auto">
                     <div class="d-flex d-sm-block d-md-flex align-items-center">
-                      <h2 class="mb-0">4.8 Poin</h2>
+                      <h2 class="mb-0">{{round($rating,2)}} Poin</h2>
                     </div>
                   </div>
                   <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">

@@ -33,7 +33,7 @@ class HomeController extends Controller
             return redirect('redirects');
         } else
 
-            $data = produk::all();
+        $data = produk::all();
 
         $data2 = artikel::all();
 
@@ -75,13 +75,33 @@ class HomeController extends Controller
         $data3 = pesanan::all();
 
         $usertype = Auth::user()->usertype;
-        // $namee = Auth::user()->name;
+        // $namee = Auth::user()->name;selesai
         // $emaill = Auth::user()->emaill;
         // dd($usertype);
         // $user = DB::table('users')->where('name', $namee)->first('id');
         // $ii = $user;
         // dd($ii);
         if ($usertype == '1') {
+
+            $id = Auth::id();
+            //$data = Pesanan::all();
+            //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
+            $data = pesanan::where('no_ktp', $id)->where('status_pesanan', 'Selesai')->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+            $selesai = $data->count();
+            // dd($data);
+
+            $data1 = pesanan::where('no_ktp', $id)->where('status_pesanan', 'Diantar')->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+            $diantar = $data1->count();
+
+            $data2 = pesanan::where('no_ktp', $id)->where('konfirmasi_pesanan', 'Ditolak')->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+            $batal = $data1->count();
+
+            $data3 = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+            $total = $data3->sum('total_pesanan');
+
+            $data4 = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+            $rating = $data4->avg('bintang_testimoni');
+
             $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
                 ->GroupBy(DB::raw("Month(tgl_pesanan)"))
                 ->pluck('jumlah_pesanan');
@@ -90,7 +110,7 @@ class HomeController extends Controller
             $bulan = Pesanan::select(DB::raw("MONTHNAME(tgl_pesanan) as bulan"))
                 ->GroupBy(DB::raw("MONTHNAME(tgl_pesanan)"))
                 ->pluck('bulan');
-            return view('admin.adminhome', compact('bulan', 'total_pesanan'));
+            return view('admin.adminhome', compact('bulan', 'total_pesanan','selesai','diantar','batal','total','rating'));
         } else {
 
             $user_id = Auth::id();

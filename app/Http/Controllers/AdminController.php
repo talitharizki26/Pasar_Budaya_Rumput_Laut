@@ -396,8 +396,16 @@ class AdminController extends Controller
     $search_artikel = $request->search_artikel;
     $id = Auth::id();
 
-    $data = Artikel::where('no_ktp', $id)->orWhere('judul_artikel', 'Like', '%' . $search_artikel . '%')->orWhere('sumber_artikel', 'Like', '%' . $search_artikel . '%')
-      ->get();
+    $data = DB::table('artikels')
+        ->where('no_ktp', $id)
+        ->where('judul_artikel', 'Like', '%' . $search_artikel . '%')
+        ->get();
+
+// dd($data);
+
+
+    // $data = Artikel::where('no_ktp', $id)->orWhere('judul_artikel', 'Like', '%' . $search_artikel . '%')->orWhere('sumber_artikel', 'Like', '%' . $search_artikel . '%')
+    //   ->get();
 
 
     return view('admin.artikel', compact('data'));
