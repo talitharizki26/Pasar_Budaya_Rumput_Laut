@@ -1,10 +1,17 @@
 <head>
+
+ <link href="assets/images/pbrl-tab.png" rel="shortcut icon">
+ <title>Pasar Budaya Rumput Laut</title>
     <style>
         h2 {
             font-family: sans-serif;
         }
 
         h3 {
+            font-family: sans-serif;
+        }
+
+        h4 {
             font-family: sans-serif;
         }
 
@@ -72,7 +79,25 @@
     <h3>LAPORAN HASIL PENJUALAN</h3><br>
 </center>
 
+
 <center>
+    <table>
+        <tr>
+            <td style="text-align:left;font-family: sans-serif">Nama Pembudidaya</td>
+            <td style="text-align:left;font-family: sans-serif">:</td>
+            <td style="text-align:left;font-family: sans-serif">{{ Auth::user()->nama }}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;font-family: sans-serif">No. KTP Pembudidaya</td>
+            <td style="text-align:left;font-family: sans-serif">:</td>
+            <td style="text-align:left;font-family: sans-serif">{{ Auth::user()->no_ktp }}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;font-family: sans-serif">No. Telepon Pembudidaya</td>
+            <td style="text-align:left;font-family: sans-serif">:</td>
+            <td style="text-align:left;font-family: sans-serif">{{ Auth::user()->no_hp }}</td>
+        </tr>
+    </table><br>
     <div class="table-responsive">
         <table class="table table-striped table1" border="5">
             <thead>

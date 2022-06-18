@@ -382,7 +382,7 @@ class AdminController extends Controller
     $search_pesanan = $request->search_pesanan;
     $id = Auth::id();
 
-    $data = Pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orWhere('status_pesanan', 'Like', '%' . $search_pesanan . '%')->orWhere('konfirmasi_pesanan', 'Like', '%' . $search_pesanan . '%')
+    $data = Pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->Where('status_pesanan', 'Like', '%' . $search_pesanan . '%')->orWhere('konfirmasi_pesanan', 'Like', '%' . $search_pesanan . '%')
       ->get();
 
 
@@ -396,19 +396,27 @@ class AdminController extends Controller
     $search_artikel = $request->search_artikel;
     $id = Auth::id();
 
-    $data = DB::table('artikels')
-        ->where('no_ktp', $id)
-        ->where('judul_artikel', 'Like', '%' . $search_artikel . '%')
-        ->get();
-
+     $data = DB::table('artikels')
+         ->where('no_ktp', $id)
+         ->where('judul_artikel', 'Like', '%' . $search_artikel . '%')
+         ->get();
 // dd($data);
 
+if($data->isNotEmpty())
+{
+  return view('admin.artikel', compact('data'))->with('toast_success', 'Login Successfully!');
+} else{
+  $no_ktp = Auth::id();
+  $data = artikel::where('no_ktp', $no_ktp)->get();
 
-    // $data = Artikel::where('no_ktp', $id)->orWhere('judul_artikel', 'Like', '%' . $search_artikel . '%')->orWhere('sumber_artikel', 'Like', '%' . $search_artikel . '%')
+  // $data = artikel::all();
+  return view("admin.artikel", compact("data"))->with('toast_success', 'Login Successfully!');
+}
+    // $data = Artikel::where('no_ktp', $id)->where('judul_artikel', 'Like', '%' . $search_artikel . '%')->orWhere('sumber_artikel', 'Like', '%' . $search_artikel . '%')
     //   ->get();
 
 
-    return view('admin.artikel', compact('data'));
+    //return view('admin.artikel', compact('data'));
   }
 
   // End Cari
