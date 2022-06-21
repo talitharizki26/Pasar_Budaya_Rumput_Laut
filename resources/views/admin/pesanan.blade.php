@@ -50,7 +50,7 @@
 												<!-- <th> Tanggal </th> -->
 												<!-- <th> Waktu </th> -->
 												<th> ID Pelanggan </th>
-												<th> ID Rumput Laut </th>
+												<th> ID Produk </th>
 												<th> Jumlah</th>
 												<th> Ekspedisi</th>
 												<th> Total</th>

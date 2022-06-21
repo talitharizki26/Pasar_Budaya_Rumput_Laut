@@ -153,16 +153,16 @@
               </div>
             </div>
 
-            
-												<!-- <td>{{$data->id_pesanan}}</td> -->
-												<!-- <td>{{$data->tgl_pesanan}}</td>
+
+            <!-- <td>{{$data->id_pesanan}}</td> -->
+            <!-- <td>{{$data->tgl_pesanan}}</td>
 												<td>{{$data->waktu_pesanan}}</td> -->
-            
+
             <div class="preview-item-content">
               <p class="preview-subject mb-1">Pesanan Masuk</p>
               <p class="text-muted ellipsis mb-0"> Pesan {{$data->jumlah_pesanan}} kg {{$data->jenis_rumputlaut}}</p>
             </div>
-            
+
           </a>@endforeach
         </div>
       </li>
