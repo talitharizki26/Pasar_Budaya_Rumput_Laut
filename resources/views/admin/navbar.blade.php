@@ -145,17 +145,25 @@
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
           <h6 class="p-3 mb-0">Notifikasi</h6>
           <div class="dropdown-divider"></div>
+          @foreach($notif as $data)
           <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <div class="preview-icon bg-dark rounded-circle">
-                <i class="mdi mdi-calendar text-success"></i>
+                <i class="mdi mdi-package-variant-closed text-success"></i>
               </div>
             </div>
+
+            
+												<!-- <td>{{$data->id_pesanan}}</td> -->
+												<!-- <td>{{$data->tgl_pesanan}}</td>
+												<td>{{$data->waktu_pesanan}}</td> -->
+            
             <div class="preview-item-content">
               <p class="preview-subject mb-1">Pesanan Masuk</p>
-              <p class="text-muted ellipsis mb-0"> Periksa Pesanan Masuk Anda </p>
+              <p class="text-muted ellipsis mb-0"> Pesan {{$data->jumlah_pesanan}} kg {{$data->jenis_rumputlaut}}</p>
             </div>
-          </a>
+            
+          </a>@endforeach
         </div>
       </li>
 

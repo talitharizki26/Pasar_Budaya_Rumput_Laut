@@ -131,11 +131,19 @@ Route::get("/laporanpenjualan", [AdminController::class, "laporanpenjualan"]);
 
 // Cari
 
+Route::get("/search_produk", [AdminController::class, "search_produk"]);
+
 Route::get("/search_pesanan", [AdminController::class, "search_pesanan"]);
 
 Route::get("/search_artikel", [AdminController::class, "search_artikel"]);
 
+Route::get("/search_testimoni", [AdminController::class, "search_testimoni"]);
+
+Route::get("/search_pelanggan", [AdminController::class, "search_pelanggan"]);
 // End Cari
+
+
+Route::get("/showarticle/{id}", [HomeController::class, "showarticle"]);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

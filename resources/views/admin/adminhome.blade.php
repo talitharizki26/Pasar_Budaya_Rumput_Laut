@@ -125,35 +125,6 @@
             </div>
           </div>
         </div>
-        <div class="row ">
-          <div class="col-12 grid-margin">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Status Pesanan</h4>
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                      <tr align="center">
-                        <th> ID Pesanan </th>
-                        <th> Tanggal </th>
-                        <th> Waktu </th>
-                        <th> ID Pelanggan </th>
-                        <th> ID Rumput Laut </th>
-                        <th> Jumlah</th>
-                        <th> Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr align="center" style="background-color: black;">
-
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- content-wrapper ends -->

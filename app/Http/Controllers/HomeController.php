@@ -84,6 +84,9 @@ class HomeController extends Controller
         if ($usertype == '1') {
 
             $id = Auth::id();
+            $no_ktp = Auth::id();
+            $id_rumputlaut = DB::table('produks')->where('no_ktp', $no_ktp)->value('id_rumputlaut');
+            //dd($id_rumputlaut);
             //$data = Pesanan::all();
             //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
             $data = pesanan::where('no_ktp', $id)->where('status_pesanan', 'Selesai')->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
@@ -104,13 +107,24 @@ class HomeController extends Controller
 
             $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
                 ->GroupBy(DB::raw("Month(tgl_pesanan)"))
+                ->Where('id_rumputlaut', $id_rumputlaut)
                 ->pluck('jumlah_pesanan');
-
+                //dd($total_pesanan);
             //dd($total_pesanan);
             $bulan = Pesanan::select(DB::raw("MONTHNAME(tgl_pesanan) as bulan"))
                 ->GroupBy(DB::raw("MONTHNAME(tgl_pesanan)"))
+                ->Where('id_rumputlaut', $id_rumputlaut)
                 ->pluck('bulan');
-            return view('admin.adminhome', compact('bulan', 'total_pesanan','selesai','diantar','batal','total','rating'));
+
+
+
+
+                $notif = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
+    
+
+         
+                //dd($no_ktp);
+         return view('admin.adminhome', compact('bulan', 'total_pesanan','selesai','diantar','batal','total','rating','notif'));
         } else {
 
             $user_id = Auth::id();
@@ -215,13 +229,25 @@ class HomeController extends Controller
 
 
 
-    public function showarticle(Request $request, $id)
+    // public function showarticle(Request $request, $id)
+    // {
+    //     $data2 = artikel::select('*')->where('id', '=', $id)->get();
+
+    //     return view('article', compact('data2'));
+    // }
+
+    public function showarticle(Request $request,$id)
     {
-        $data2 = artikel::select('*')->where('id', '=', $id)->get();
 
-        return view('article', compact('data2'));
+     $data2 = artikel::where('id_artikel', '=', $id)->get();
+
+
+     return view("viewarticle", compact("data2"));
     }
+  
+  
 
+    
 
 
     public function showtes(Request $request, $id_pesanan)
@@ -236,9 +262,6 @@ class HomeController extends Controller
 
             $data2 = Pesanan::find($id_pesanan);
             $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
-
-
-
 
             // dd($data2);
             return view('isitestimoni', compact('data2', 'data5', 'count'));

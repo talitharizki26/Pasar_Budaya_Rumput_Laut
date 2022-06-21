@@ -18,7 +18,7 @@
 
                 @foreach($data2 as $data2)
 
-                <form action="{{ URL('/showarticle',$data2->id)}}" action="post">
+                <form action="" action="post">
 
                     @csrf
 
@@ -32,7 +32,7 @@
 
                             </div>
                         </div>
-                        <input type="submit" class="btn btn-new" value="Lihat Artikel" style="width: 100%; margin-top:10px;">
+                        <a class="btn btn-new" style="width: 100%; margin-top:10px;"  href="{{url('/showarticle',$data2->id_artikel)}}">Lihat Artikel</a> 
 
 
                     </div>

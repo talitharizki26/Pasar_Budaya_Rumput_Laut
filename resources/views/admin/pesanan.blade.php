@@ -46,7 +46,7 @@
 										<thead>
 											<tr align="center">
 												<th> Bukti Bayar</th>
-												<!-- <th> ID Pesanan </th> -->
+												<th> ID Pesanan </th>
 												<!-- <th> Tanggal </th> -->
 												<!-- <th> Waktu </th> -->
 												<th> ID Pelanggan </th>
@@ -68,7 +68,7 @@
 												<td>
 													<a href="/bukti_pembayaran/{{$data->bukti_pembayaran}}"><img height="200" width="200" src="/bukti_pembayaran/{{$data->bukti_pembayaran}}"></a>
 												</td>
-												<!-- <td>{{$data->id_pesanan}}</td> -->
+												<td>{{$data->id_pesanan}}</td>
 												<!-- <td>{{$data->tgl_pesanan}}</td>
 												<td>{{$data->waktu_pesanan}}</td> -->
 												<td>{{$data->user_id}}</td>
