@@ -153,28 +153,6 @@
 
 </body>
 
-<script>
-  $('.delete').click(function() {
-    var id_artikel = $(this).attr('id-produk');
-    swal({
-        title: "Ingin Menghapus Data Rumput Laut?",
-        text: "Data tidak dapat dikembalikan!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        console.log(willDelete);
-        if (willDelete) {
-          window.location = "{{url('/hapusproduk',$data->id_rumputlaut)}}";
-          swal("Rumput Laut Berhasil Dihapus!", {
-            icon: "success",
-          });
-        } else {
-          swal("Data Gagal Dihapus!");
-        }
-      });
-  });
-</script>
+
 
 </html>

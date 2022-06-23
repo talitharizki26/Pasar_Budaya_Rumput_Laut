@@ -71,7 +71,7 @@
 												<td>{{$data->id_pesanan}}</td>
 												<!-- <td>{{$data->tgl_pesanan}}</td>
 												<td>{{$data->waktu_pesanan}}</td> -->
-												<td>{{$data->user_id}}</td>
+												<td>{{$data->noktp_pelanggan}}</td>
 												<td>{{$data->id_rumputlaut}}</td>
 												<td>{{$data->jumlah_pesanan}} Kg</td>
 												<td>{{$data->ekspedisi_pesanan}}</td>

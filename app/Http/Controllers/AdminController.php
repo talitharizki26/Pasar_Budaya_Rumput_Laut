@@ -93,17 +93,20 @@ class AdminController extends Controller
   public function produk()
   {
 
-    $no_ktp = Auth::id();
-
+    $no_ktp = Auth::user()->no_ktp;
+    //dd($no_ktp);
     // $data2 = produk::all();
     // $data3 = DB::table('produks')->where('no_ktp', $no_ktp)->first();
-    $data = produk::where('no_ktp', $no_ktp)->get();
-
+    $data = produk::where('noktp_pembudidaya', $no_ktp)->get();
+   // dd($no_ktp);
+    $usertype = Auth::user()->no_ktp;
+   
+    //$user = DB::table('pembudidayas')->where('noktp_pembudidaya', $usertype)->first('nama_pembudidaya');
     // $data = json_decode(json_encode($data3), true);
     //  dd($data3);
-
+//dd($user);
     // $data = produk::where('no_ktp',$no_ktp);
-    $notif = pesanan::where('no_ktp', $no_ktp)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
+    $notif = pesanan::where('noktp_pembudidaya', $no_ktp)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
     
 
     return view("admin.produk", compact("data","notif"));
@@ -112,8 +115,8 @@ class AdminController extends Controller
 
   public function uploadproduk(Request $request)
   {
+    $no_ktp = Auth::user()->no_ktp;
 
-    $no_ktp = Auth::id();
 
     // dd($no_ktp);
 
@@ -139,7 +142,7 @@ class AdminController extends Controller
 
     $data->stok_rumputlaut = $request->stok_rumputlaut;
 
-    $data->no_ktp = $no_ktp;
+    $data->noktp_pembudidaya = $no_ktp;
 
     $data->save();
 
@@ -309,13 +312,13 @@ class AdminController extends Controller
 
   public function pesanan()
   {
-    $id = Auth::id();
+    $id = Auth::user()->no_ktp;
     //$data = Pesanan::all();
     //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
-    $notif = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
+    $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
     
 
-    $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+    $data = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
 
     return view('admin.pesanan', compact('data','notif'));
@@ -360,6 +363,7 @@ class AdminController extends Controller
   public function laporanpenjualan()
   {
     $id = Auth::id();
+   // dd($id);
     $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->where('status_pesanan', '=', 'Selesai')->get();
     $notif = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 

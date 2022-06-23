@@ -25,16 +25,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'no_ktp',
-        'nama',
+        'id_user',
         'email',
         'password',
         'role',
         'usertype',
-        'jenkel',
-        'no_hp',
-        'tgl_lahir',
-        'alamat',
-        'foto',
+
     ];
 
     /**
@@ -48,7 +44,7 @@ class User extends Authenticatable
         // 'two_factor_recovery_codes',
         // 'two_factor_secret',
     ];
-    protected $primaryKey = 'no_ktp';
+    protected $primaryKey = 'id_user';
 
     public $incrementing = false;
 
