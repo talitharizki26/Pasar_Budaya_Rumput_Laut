@@ -54,7 +54,7 @@
 											<tr align="center">
 
 												<td>{{$data->id_pesanan}}</td>
-												<td>{{$data->user_id}}</td>
+												<td>{{$data->noktp_pelanggan}}</td>
 												<td>{{$data->tgl_testimoni}}</td>
 												<td>{{$data->isi_testimoni}}</td>
 												<td>{{$data->bintang_testimoni}}</td>

@@ -127,17 +127,7 @@
 				buttons: true,
 				dangerMode: true,
 			})
-			.then((willDelete) => {
-				console.log(willDelete);
-				if (willDelete) {
-					window.location = "{{url('/hapusartikel',$data->id_artikel)}}";
-					swal("Artikel Berhasil Dihapus!", {
-						icon: "success",
-					});
-				} else {
-					swal("Data Gagal Dihapus!");
-				}
-			});
+
 	});
 </script>
 

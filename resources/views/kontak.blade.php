@@ -21,7 +21,7 @@
                <div class="message">
                  <i class="fa fa-envelope"></i>
                  <h4>Email dan Website</h4>
-                 <span><a href="diskanlutbantaeng@yahoo.co.id">diskanlutbantaeng@yahoo.co.id</a><br><a href="www.diskanlutbantaeng.com">www.diskanlutbantaeng.com</a></span>
+                 <span><a href="canelno12@gmail.com">diskanlutbantaeng@yahoo.co.id</a><br><a href="www.diskanlutbantaeng.com">www.diskanlutbantaeng.com</a></span>
                </div>
              </div>
            </div>
@@ -31,7 +31,7 @@
 
        <div class="col-lg-6">
          <div class="contact-form">
-           <form id="contact" action="{{url('reservation')}}" method="post">
+           <form id="contact" action="{{url('saran')}}" method="post">
 
              @csrf
 

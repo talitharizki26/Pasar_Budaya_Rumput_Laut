@@ -49,12 +49,12 @@
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($data as $data)
+												@foreach($dato as $data)
 												<tr align="center">
-													<td>{{$data->user_id}}</td>
-													<td>{{$data->nama}}</td>
-													<td>{{$data->no_hp}}</td>
-													<td>{{$data->alamat}}</td>
+													<td>{{$data->noktp_pelanggan}}</td>
+													<td>{{$data->nama_pelanggan}}</td>
+													<td>{{$data->nohp_pelanggan}}</td>
+													<td>{{$data->alamat_pelanggan}}</td>
 
 													<!-- @if($data->usertype=="0")
 													<td><a href="{{url('/deleteuser',$data->id)}}">Delete</a></td>

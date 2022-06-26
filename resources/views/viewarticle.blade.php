@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/artikel_konten.css?v=<?php echo time(); ?>">
 </head>
 
+
 <body class="hero-section">
 
     <main>
@@ -25,11 +26,13 @@
                 <div class="row justify-content-between">
                     <div class="col-lg-9 col-md-9 col-sm-9 col-12 text-center">
                         <h2>{{$data2->judul_artikel}}</h2>
-                        <h6>Oleh : Clarita Andreane</h6>
+                        <h6>Sumber Artikel :<a href="{{$data2->sumber_artikel}}">{{$data2->sumber_artikel}}</a></h6>
                         <hr>
                         <img src='/artikelimage/{{$data2->gambar_artikel}}' alt="Hero Image" width="60%">
                         <!-- <a href="http://www.freepik.com">Designed by stories / Freepik</a> -->
-<table border = 1>
+                        <hr>
+                     
+<table border = 0>
     <tr>
         <td>
             <p>
@@ -38,17 +41,25 @@
         </td>
     </tr>
 </table>
-                    
+@endforeach 
                       
+
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-12 text-md-left text-center">
+                        <h4>Artikel Lainnya</h4>
+                        @foreach($data3 as $data3)
+                        <hr class="garis-judul">
+                        <a class="artikel-link" href="{{$data3->sumber_artikel}}">{{$data3->judul_artikel}}</a>
+     
+    
+                        @endforeach
+
 
                     </div>
                 </div>
             </div>
         </div>
-
-
-        @endforeach
-
 
 
 
@@ -61,7 +72,7 @@
 
     </main>
 
-    
+
 </body>
 <!-- Script -->
 <!-- Optional JavaScript -->

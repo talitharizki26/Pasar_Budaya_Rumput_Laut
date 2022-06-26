@@ -78,7 +78,7 @@ Route::post("/addcart/{id}", [HomeController::class, "addcart"]);
 
 Route::get("/showcart/{id}", [HomeController::class, "showcart"]);
 
-Route::post("/reservation", [AdminController::class, "reservation"]);
+Route::post("/saran", [HomeController::class, "saran"]);
 
 
 Route::get("/remove/{id}", [HomeController::class, "remove"]);

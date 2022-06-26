@@ -20,6 +20,8 @@ use App\Models\Cart;
 
 use App\Models\Pesanan;
 
+use App\Models\Saran;
+
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -90,57 +92,61 @@ class HomeController extends Controller
 
             $usertype = Auth::user()->no_ktp;
 //dd($id_rumputlaut);
+$da = produk::Where('noktp_pembudidaya','=',$no_ktp)->pluck('id_rumputlaut');
+$datray = [];
+foreach($da as $key=>$value){
+    $s[] =  intval($value);     
+};
+
+
+$encodedSku=  str_replace('"', "", $s);
+$s = json_encode($s);
             $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
 
-
+//dd($encodedSku);
 
 
 
             // $id = Auth::id();
             // $user = DB::table('pembudidayas')->where('noktp_pembudidaya', $no_ktp)->first('nama_pembudidaya');
-            //dd($id_rumputlaut);
-            //$data = Pesanan::all();
-            //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
-            $data = pesanan::where('id_rumputlaut', $id_rumputlaut)->where('status_pesanan', 'Selesai')->get();
+            // dd($id_rumputlaut);
+            // $data = Pesanan::all();
+            // $data = pesanan::select('*')->where('user_id', '=', $id)->get();
+            $data = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
             $selesai = $data->count();
             // dd($data);
 
-            $data1 = pesanan::where('id_rumputlaut', $id_rumputlaut)->where('status_pesanan', 'Diantar')->get();
+            $data1 = pesanan::where('id_rumputlaut',$encodedSku)->where('status_pesanan', 'Diantar')->get();
             $diantar = $data1->count();
 
-            $data2 = pesanan::where('id_rumputlaut', $id_rumputlaut)->where('konfirmasi_pesanan', 'Ditolak')->get();
+            $data2 = pesanan::where('id_rumputlaut', $encodedSku)->where('konfirmasi_pesanan', 'Ditolak')->get();
             $batal = $data2->count();
 
-            $data3 = pesanan::where('id_rumputlaut', $id_rumputlaut)->where('status_pesanan', 'Selesai')->get();
+            $data3 = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
             $total = $data3->sum('total_pesanan');
 
-            $data4 = pesanan::where('id_rumputlaut', $id_rumputlaut)->get();
+            $data4 = pesanan::where('id_rumputlaut',$encodedSku)->get();
             $rating = $data4->avg('bintang_testimoni');
 
 
 
             //dd($no_ktp);
             //  DB::table('destination')->where(array('user_id'=>'1' ))->groupBy('tenantID')->get();
-            $da = produk::Where('noktp_pembudidaya','=',$no_ktp)->get('id_rumputlaut');
+
+            //dd($da);
             $datap = DB::table('produks')->select('id_rumputlaut','noktp_pembudidaya')->where('noktp_pembudidaya','=',$no_ktp)->get('id_rumputlaut');
-            $arrayData = array_map(function($item) {
-                return (array)$item; 
-            }, $da->toArray());
 
-            //dd($arrayData);
-            $datap= json_decode( json_encode($datap), true);
 
-            //dd($datap);
             $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
                 ->GroupBy(DB::raw("Month(tgl_pesanan)"))
-                ->Wherein('id_rumputlaut', [$arrayData ])
+                ->Wherein('id_rumputlaut',   $encodedSku)
                 ->orderBy(DB::raw("Month(tgl_pesanan)"))
                 ->pluck('jumlah_pesanan');
             //dd($total_pesanan);
             //dd($total_pesanan);
             $bulan = Pesanan::select(DB::raw("MONTHNAME(tgl_pesanan) as bulan"))
                 ->GroupBy(DB::raw("MONTHNAME(tgl_pesanan)"))
-                ->Wherein('id_rumputlaut', [ $arrayData])
+                ->Wherein('id_rumputlaut',   $encodedSku)
            //     ->join('produks','pesanans.id_rumputlaut', '=','produks.')
                 ->orderBy(DB::raw("Month(tgl_pesanan)"))
                 ->pluck('bulan');
@@ -275,9 +281,10 @@ class HomeController extends Controller
     {
 
         $data2 = artikel::where('id_artikel', '=', $id)->get();
+        $data3 = DB::table('artikels')->get()->take(5);
 
 
-        return view("viewarticle", compact("data2"));
+        return view("viewarticle", compact("data2","data3"));
     }
 
 
@@ -308,14 +315,34 @@ class HomeController extends Controller
     public function uploadtestimoni(Request $request, $id)
     {
         $data = Pesanan::find($id);
-
+        $today = Carbon::today()->setTime(9,30,0);
         $data->isi_testimoni = $request->isi_testimoni;
         $data->bintang_testimoni = $request->bintang_testimoni;
-
+        $data->tgl_testimoni = $today;
         $data->save();
         // dd($data);
         return redirect('redirects');
         // return view('/redirects');
+    }
+
+    public function saran(Request $request)
+    {
+        $id = Auth::user()->no_ktp;
+        if (Auth::id() == null) {
+            return redirect()->back()->with('toast_error', 'Login terlebih dahulu!');;
+        } else{
+  
+            $data = new saran;
+            $today = Carbon::today()->setTime(9,30,0);
+            $data->isi_saran = $request->saran;
+            $data->noktp_pelanggan = $id;
+           // dd($data);
+            $data->save();
+            return redirect()->back()->with('toast_success', 'Terima kasih atas saranya ');;
+        }
+
+
+       // return view("viewarticle", compact("data2"));
     }
 
 
