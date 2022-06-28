@@ -20,8 +20,11 @@
           </div>
           <div class="profile-name">
 
-           <h5 class="mb-0 font-weight-normal"> ss</h5>
+          @foreach($user as $data)
 
+
+           <h5 class="mb-0 font-weight-normal"> {{$data->nama_pembudidaya}}</h5>
+           @endforeach
         </div>
         <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">

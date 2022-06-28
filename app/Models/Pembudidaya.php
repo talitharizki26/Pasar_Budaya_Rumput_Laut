@@ -35,5 +35,8 @@ class Pembudidaya extends Model
 
     protected $primaryKey = 'id_pembudidaya';
 
+    public function Pesanan(){
+        return $this->belongsTo('App\Models\Pesanan');
+    }
 
 }

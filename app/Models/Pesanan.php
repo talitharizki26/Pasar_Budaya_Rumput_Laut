@@ -27,4 +27,8 @@ class Pesanan extends Model
     protected $primaryKey = 'id_pesanan';
 
     public $timestamps = false;
+
+    public function Pembudidaya(){
+        return $this->hasOne('App\Models\Pembudidaya');
+    }
 }

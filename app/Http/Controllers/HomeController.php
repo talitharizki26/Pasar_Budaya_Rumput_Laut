@@ -36,7 +36,6 @@ class HomeController extends Controller
         } else
 
             $data = produk::all();
-
         $data2 = artikel::all();
 
         $data3 = pesanan::all();
@@ -77,13 +76,7 @@ class HomeController extends Controller
         $data3 = pesanan::all();
 
         $usertype = Auth::user()->usertype;
-        // dd($usertype);
-        // $namee = Auth::user()->name;selesai
-        // $emaill = Auth::user()->emaill;
-        // dd($usertype);
-        // $user = DB::table('users')->where('name', $namee)->first('id');
-        // $ii = $user;
-        // dd($ii);
+
         if ($usertype == '1') {
 
             $id = Auth::id();
@@ -93,7 +86,8 @@ class HomeController extends Controller
             $usertype = Auth::user()->no_ktp;
 //dd($id_rumputlaut);
 $da = produk::Where('noktp_pembudidaya','=',$no_ktp)->pluck('id_rumputlaut');
-$datray = [];
+if ($da->isNotEmpty()) {
+    $datray = [];
 foreach($da as $key=>$value){
     $s[] =  intval($value);     
 };
@@ -101,65 +95,61 @@ foreach($da as $key=>$value){
 
 $encodedSku=  str_replace('"', "", $s);
 $s = json_encode($s);
-            $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
+  
+    $data = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
+    $selesai = $data->count();
+    // dd($data);
 
-//dd($encodedSku);
+    $data1 = pesanan::where('id_rumputlaut',$encodedSku)->where('status_pesanan', 'Diantar')->get();
+    $diantar = $data1->count();
 
+    $data2 = pesanan::where('id_rumputlaut', $encodedSku)->where('konfirmasi_pesanan', 'Ditolak')->get();
+    $batal = $data2->count();
 
+    $data3 = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
+    $total = $data3->sum('total_pesanan');
 
-            // $id = Auth::id();
-            // $user = DB::table('pembudidayas')->where('noktp_pembudidaya', $no_ktp)->first('nama_pembudidaya');
-            // dd($id_rumputlaut);
-            // $data = Pesanan::all();
-            // $data = pesanan::select('*')->where('user_id', '=', $id)->get();
-            $data = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
-            $selesai = $data->count();
-            // dd($data);
-
-            $data1 = pesanan::where('id_rumputlaut',$encodedSku)->where('status_pesanan', 'Diantar')->get();
-            $diantar = $data1->count();
-
-            $data2 = pesanan::where('id_rumputlaut', $encodedSku)->where('konfirmasi_pesanan', 'Ditolak')->get();
-            $batal = $data2->count();
-
-            $data3 = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
-            $total = $data3->sum('total_pesanan');
-
-            $data4 = pesanan::where('id_rumputlaut',$encodedSku)->get();
-            $rating = $data4->avg('bintang_testimoni');
+    $data4 = pesanan::where('id_rumputlaut',$encodedSku)->get();
+    $rating = $data4->avg('bintang_testimoni');
 
 
 
-            //dd($no_ktp);
-            //  DB::table('destination')->where(array('user_id'=>'1' ))->groupBy('tenantID')->get();
+    //dd($no_ktp);
+    //  DB::table('destination')->where(array('user_id'=>'1' ))->groupBy('tenantID')->get();
 
-            //dd($da);
-            $datap = DB::table('produks')->select('id_rumputlaut','noktp_pembudidaya')->where('noktp_pembudidaya','=',$no_ktp)->get('id_rumputlaut');
+    //dd($da);
+    $datap = DB::table('produks')->select('id_rumputlaut','noktp_pembudidaya')->where('noktp_pembudidaya','=',$no_ktp)->get('id_rumputlaut');
 
 
-            $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
-                ->GroupBy(DB::raw("Month(tgl_pesanan)"))
-                ->Wherein('id_rumputlaut',   $encodedSku)
-                ->orderBy(DB::raw("Month(tgl_pesanan)"))
-                ->pluck('jumlah_pesanan');
-            //dd($total_pesanan);
-            //dd($total_pesanan);
-            $bulan = Pesanan::select(DB::raw("MONTHNAME(tgl_pesanan) as bulan"))
-                ->GroupBy(DB::raw("MONTHNAME(tgl_pesanan)"))
-                ->Wherein('id_rumputlaut',   $encodedSku)
-           //     ->join('produks','pesanans.id_rumputlaut', '=','produks.')
-                ->orderBy(DB::raw("Month(tgl_pesanan)"))
-                ->pluck('bulan');
+    $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
+        ->GroupBy(DB::raw("Month(tgl_pesanan)"))
+        ->Wherein('id_rumputlaut',   $encodedSku)
+        ->orderBy(DB::raw("Month(tgl_pesanan)"))
+        ->pluck('jumlah_pesanan');
+    //dd($total_pesanan);
+    //dd($total_pesanan);
+    $bulan = Pesanan::select(DB::raw("MONTHNAME(tgl_pesanan) as bulan"))
+        ->GroupBy(DB::raw("MONTHNAME(tgl_pesanan)"))
+        ->Wherein('id_rumputlaut',   $encodedSku)
+   //     ->join('produks','pesanans.id_rumputlaut', '=','produks.')
+        ->orderBy(DB::raw("Month(tgl_pesanan)"))
+        ->pluck('bulan');
+
+    } 
+
+
+$user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
+//dd($user);
 
 
 
 
             $notif = pesanan::where('noktp_pelanggan', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
-
+$saran = Saran::all();
 
             //dd($no_ktp);
-            return view('admin.adminhome', compact('user','bulan', 'total_pesanan', 'selesai', 'diantar', 'batal', 'total', 'rating', 'notif'));
+            return view('admin.adminhome', compact('saran','user','bulan', 'total_pesanan', 'selesai', 'diantar', 'batal', 'total', 'rating', 'notif'));
         } else {
 
             $user_id = Auth::id();
