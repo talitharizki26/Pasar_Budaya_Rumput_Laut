@@ -71,7 +71,7 @@ class CreateNewUser implements CreatesNewUsers
 
         } else {
             $o = "1";
-            $data = new Pelanggan;
+            $data = new Pembudidaya;
             $data->nama_pembudidaya = $input['nama'];
             $data->noktp_pembudidaya = $input['no_ktp'];
             $data->alamat_pembudidaya = $input['alamat'];

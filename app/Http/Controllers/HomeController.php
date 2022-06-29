@@ -86,6 +86,7 @@ class HomeController extends Controller
             $usertype = Auth::user()->no_ktp;
 //dd($id_rumputlaut);
 $da = produk::Where('noktp_pembudidaya','=',$no_ktp)->pluck('id_rumputlaut');
+// dd($da);
 if ($da->isNotEmpty()) {
     $datray = [];
 foreach($da as $key=>$value){
@@ -136,6 +137,46 @@ $s = json_encode($s);
         ->pluck('bulan');
 
     } 
+    else{
+
+        $data = pesanan::where('id_rumputlaut',$no_ktp )->where('status_pesanan', 'Selesai')->get();
+        $selesai = $data->count();
+        // dd($data);
+    
+        $data1 = pesanan::where('id_rumputlaut',$no_ktp)->where('status_pesanan', 'Diantar')->get();
+        $diantar = $data1->count();
+    
+        $data2 = pesanan::where('id_rumputlaut', $no_ktp)->where('konfirmasi_pesanan', 'Ditolak')->get();
+        $batal = $data2->count();
+    
+        $data3 = pesanan::where('id_rumputlaut', $no_ktp)->where('status_pesanan', 'Selesai')->get();
+        $total = $data3->sum('total_pesanan');
+    
+        $data4 = pesanan::where('id_rumputlaut',$no_ktp)->get();
+        $rating = $data4->avg('bintang_testimoni');
+    
+        $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
+        ->GroupBy(DB::raw("Month(tgl_pesanan)"))
+        ->where('id_rumputlaut',   $no_ktp)
+        ->orderBy(DB::raw("Month(tgl_pesanan)"))
+        ->pluck('jumlah_pesanan');
+    //dd($total_pesanan);
+    //dd($total_pesanan);
+    $bulan = Pesanan::select(DB::raw("MONTHNAME(tgl_pesanan) as bulan"))
+        ->GroupBy(DB::raw("MONTHNAME(tgl_pesanan)"))
+        ->where('id_rumputlaut',   $no_ktp)
+   //     ->join('produks','pesanans.id_rumputlaut', '=','produks.')
+        ->orderBy(DB::raw("Month(tgl_pesanan)"))
+        ->pluck('bulan');
+    
+        
+        $notif = pesanan::where('noktp_pelanggan', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
+
+    $saran = Saran::all();
+    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
+        return view('admin.adminhome', compact('saran','user','bulan', 'total_pesanan', 'selesai', 'diantar', 'batal', 'total', 'rating', 'notif'));
+     
+    }
 
 
 $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
