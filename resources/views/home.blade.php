@@ -166,9 +166,9 @@ https://templatemo.com/tm-558-klassy-cafe
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                                     <h6 class="p-3 mb-0">Edit Profil Anda atau Keluar dari Aplikasi?</h6>
                                     <div class="dropdown-divider"></div>
-                                    <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                    <a href="{{url('/editprofil',Auth::user()->no_ktp)}}">
                                         {{ __('Edit Profil') }}
-                                    </x-jet-dropdown-link><br>
+                                </a><br>
                                     <div class="dropdown-divider"></div>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf

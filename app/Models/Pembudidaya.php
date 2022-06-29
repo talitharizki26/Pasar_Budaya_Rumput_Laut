@@ -15,6 +15,7 @@ class Pembudidaya extends Model
      *
      * @var array
      */
+    protected $table = "pembudidayas";
     protected $fillable = [
         'id_pembudidaya',
         'noktp_pembudidaya',
@@ -33,10 +34,10 @@ class Pembudidaya extends Model
      * @var array
      */
 
-    protected $primaryKey = 'id_pembudidaya';
+    protected $primaryKey = 'noktp_pembudidaya';
 
-    public function Pesanan(){
-        return $this->belongsTo('App\Models\Pesanan');
+    public function produk(){
+        return $this->hasOne(produk::class, 'id_rumputlaut');
     }
 
 }

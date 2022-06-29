@@ -35,12 +35,12 @@ class HomeController extends Controller
             return redirect('redirects');
         } else
 
-            $data = produk::all();
+            $produk = produk::all();
         $data2 = artikel::all();
 
         $data3 = pesanan::all();
 
-        return view("home", compact("data", "data2", "data3"));
+        return view("home", compact("produk", "data2", "data3"));
     }
 
 
@@ -69,7 +69,7 @@ class HomeController extends Controller
 
 
 
-        $data = produk::all();
+        $produk = produk::all();
 
         $data2 = artikel::all();
 
@@ -165,7 +165,7 @@ $saran = Saran::all();
 
 
 
-            return view('home', compact('data', 'data2', 'count', 'data3', 'data4', 'data5','user'));
+            return view('home', compact('produk', 'data2', 'count', 'data3', 'data4', 'data5','user'));
         }
     }
 
@@ -336,9 +336,46 @@ $saran = Saran::all();
     }
 
 
+    public function editprofil($id)
+    {
+        $data = pelanggan::find($id);
+       // dd($data);
+return view("editprofile", compact('data'));
+    }
 
 
-
+    public function updateprofil(Request $request, $id)
+    {
+      $data = pelanggan::find($id);
+  
+      $image = $request->gambar;
+  
+      if ($image) {
+  
+        $imagename = time() . '.' . $image->getClientOriginalExtension();
+  
+        $request->gambar->move('userimage', $imagename);
+  
+        $data->foto_pelanggan = $imagename;
+      }
+  
+  
+      $data->nama_pelanggan = $request->nama_pelanggan;
+  
+      $data->alamat_pelanggan = $request->alamat_pelanggan;
+  
+      $data->nohp_pelanggan = $request->nohp_pelanggan;
+  
+      $data->jenkel_pelanggan = $request->jenkel_pelanggan;
+  
+      $data->tgllahir_pelanggan = $request->tgllahir_pelanggan;
+  
+  
+      $data->save();
+  dd("oke");
+      return redirect('produk')->with('toast_success', 'Rumput Laut Berhasil Diedit!');;
+    }
+  
 
 
 

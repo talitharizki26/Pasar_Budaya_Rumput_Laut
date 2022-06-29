@@ -276,7 +276,7 @@ https://templatemo.com/tm-558-klassy-cafe
                         <input type="radio" class="form-control p_input" name="ekspedisi_pesanan" id="manual" value="Mitra"> Mitra Pembudidaya </label>
                 </div>
             </div>
-
+<p>Silahkan Transfer kerekening ..</p>
             <div class="form-group" style="padding: 10px;">
                 <label>Bukti Pembayaran</label>
                 <input type="file" name="bukti_pembayaran">

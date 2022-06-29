@@ -15,27 +15,27 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Form Edit Produk</h4>
-								<form class="forms-sample" action="{{url('/updateprofil',$data->noktp_pelanggan)}}" method="post" enctype="multipart/form-data">
+								<form class="forms-sample" action="{{url('/updateprofile',$data->noktp_pembudidaya)}}" method="post" enctype="multipart/form-data">
 									@csrf
 									<div class="form-group">
 										<label for="jenis">Nama </label>
-										<input class="form-control" name="nama_pelanggan" value="{{$data->nama_pelanggan}}" required>
+										<input class="form-control" name="nama_pembudidaya" value="{{$data->nama_pembudidaya}}" required>
 									</div>
 									<div class="form-group">
 										<label for="deskripsi">Alamat</label>
-										<input class="form-control" name="alamat_pelanggan" value="{{$data->alamat_pelanggan}}" required>
+										<input class="form-control" name="alamat_pembudidaya" value="{{$data->alamat_pembudidaya}}" required>
 									</div>
 									<div class="form-group">
 										<label for="harga">No HP </label>
-										<input class="form-control" name="nohp_pelanggan" value="{{$data->nohp_pelanggan}}" required>
+										<input class="form-control" name="nohp_pembudidaya" value="{{$data->nohp_pembudidaya}}" required>
 									</div>
 									<div class="form-group">
 										<label for="lokasi">Jenis Kelamin</label>
-										<input class="form-control" name="jenkel_pelanggan" value="{{$data->jenkel_pelanggan}}" required>
+										<input class="form-control" name="jenkel_pembudidaya" value="{{$data->jenkel_pembudidaya}}" required>
 									</div>
 									<div class="form-group">
 										<label for="durasitahan">Tanggal Lahir</label>
-										<input class="form-control" name="tgllahir_pelanggan" value="{{$data->tgllahir_pelanggan}}" required>
+										<input class="form-control" name="tgllahir_pembudidaya" value="{{$data->tgllahir_pembudidaya}}" required>
 									</div>
 
 									<!-- <div class="form-group">
@@ -54,7 +54,7 @@
 							</div> -->
 									<div class="form-group">
 										<label for="gambar">Gambar Sebelumnya</label><br>
-										<img height="250" width="250" src="/userimage/{{$data->foto_pelanggan}}">
+										<img height="250" width="250" src="/userimage/{{$data->foto_pembudidaya}}">
 									</div>
 									<div class="form-group">
 										<label for="gambar">Gambar Baru</label>

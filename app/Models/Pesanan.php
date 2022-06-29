@@ -28,7 +28,5 @@ class Pesanan extends Model
 
     public $timestamps = false;
 
-    public function Pembudidaya(){
-        return $this->hasOne('App\Models\Pembudidaya');
-    }
+
 }

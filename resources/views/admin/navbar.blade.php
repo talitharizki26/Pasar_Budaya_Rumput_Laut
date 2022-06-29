@@ -28,7 +28,8 @@
         </div>
         <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-          <a href="{{ route('profile.show') }}" class="dropdown-item preview-item">
+        <a href="{{url('/editprofile',Auth::user()->no_ktp)}}" class="dropdown-item preview-item">
+            
             <div class="preview-thumbnail">
               <div class="preview-icon bg-dark rounded-circle">
                 <i class="mdi mdi-account-circle text-primary"></i>

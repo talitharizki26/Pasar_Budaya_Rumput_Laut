@@ -33,7 +33,7 @@ class Pelanggan extends Model
      * @var array
      */
 
-    protected $primaryKey = 'id_pelanggan';
+    protected $primaryKey = 'noktp_pelanggan';
 
 
 }

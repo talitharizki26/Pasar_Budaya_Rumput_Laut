@@ -170,8 +170,10 @@ class AdminController extends Controller
     $no_ktp = Auth::id();
     $data = produk::find($id);
     $notif = pesanan::where('noktp_pembudidaya', $no_ktp)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
+    $usertype = Auth::user()->no_ktp;
+    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
     // dd($data);
-    return view("admin.editproduk", compact("data","notif"));
+    return view("admin.editproduk", compact("data","notif","user"));
   }
 
 
@@ -612,9 +614,43 @@ if($data->isNotEmpty())
   // End Cari
 
 
+  public function editprofile($id)
+  {
+      $data = pembudidaya::find($id);
+     // dd($data);
+return view("admin.editadminprofil", compact('data'));
+  }
+
+  public function updateprofile(Request $request, $id)
+  {
+    $data = pembudidaya::find($id);
+
+    $image = $request->gambar;
+
+    if ($image) {
+
+      $imagename = time() . '.' . $image->getClientOriginalExtension();
+
+      $request->gambar->move('userimage', $imagename);
+
+      $data->foto_pembudidaya = $imagename;
+    }
 
 
+    $data->nama_pembudidaya = $request->nama_pembudidaya;
 
+    $data->alamat_pembudidaya = $request->alamat_pembudidaya;
+
+    $data->nohp_pembudidaya = $request->nohp_pembudidaya;
+
+    $data->jenkel_pembudidaya = $request->jenkel_pembudidaya;
+
+    $data->tgllahir_pembudidaya = $request->tgllahir_pembudidaya;
+
+
+    $data->save();
+dd("oke");
+}
 
 
 

@@ -16,14 +16,14 @@
 
 
 
-                @foreach($data as $data)
+                @foreach($produk as $data)
 
                 <form action="{{url('/addcart',$data->id_rumputlaut)}}" method="post">
 
                     @csrf
 
                     <div class="item">
-echo ({{$data->nohp_pembudidaya}});
+
                         <div style="background-image: url('/produkimage/{{$data->gambar_rumputlaut}}');" class='card'>
 
 

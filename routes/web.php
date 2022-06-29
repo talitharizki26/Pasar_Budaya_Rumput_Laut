@@ -68,6 +68,13 @@ Route::get("/hapusartikel/{id}", [AdminController::class, "hapusartikel"]);
 
 Route::get("/showarticle/{id}", [HomeController::class, "showarticle"]);
 
+
+
+Route::get("/editprofil/{id}", [HomeController::class, "editprofil"]);
+Route::post("/updateprofil/{id}", [HomeController::class, "updateprofil"]);
+
+Route::get("/editprofile/{id}", [AdminController::class, "editprofile"]);
+Route::post("/updateprofile/{id}", [AdminController::class, "updateprofile"]);
 // End Artikel
 
 
