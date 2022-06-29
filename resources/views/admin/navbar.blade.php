@@ -14,34 +14,35 @@
     <li class="nav-item profile">
       <div class="profile-desc">
         <div class="profile-pic">
+          @foreach($user as $data)
           <div class="count-indicator">
-            <img class="img-xs rounded-circle " src="admin/assets/images/faces/face15.jpg" alt="">
+            <img class="img-xs rounded-circle " src="userimage/{{$data->foto_pembudidaya}}" alt="">
             <span class="count bg-success"></span>
           </div>
           <div class="profile-name">
 
-          @foreach($user as $data)
 
 
-           <h5 class="mb-0 font-weight-normal"> {{$data->nama_pembudidaya}}</h5>
-           @endforeach
-        </div>
-        <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
-        <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-        <a href="{{url('/editprofile',Auth::user()->no_ktp)}}" class="dropdown-item preview-item">
-            
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-dark rounded-circle">
-                <i class="mdi mdi-account-circle text-primary"></i>
+
+            <h5 class="mb-0 font-weight-normal"> {{$data->nama_pembudidaya}}</h5>
+            @endforeach
+          </div>
+          <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+          <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+            <a href="{{url('/editprofile',Auth::user()->no_ktp)}}" class="dropdown-item preview-item">
+
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-dark rounded-circle">
+                  <i class="mdi mdi-account-circle text-primary"></i>
+                </div>
               </div>
-            </div>
-            <div class="preview-item-content">
-              <p class="preview-subject ellipsis mb-1 text-small">Edit Profil</p>
-            </div>
-          </a>
+              <div class="preview-item-content">
+                <p class="preview-subject ellipsis mb-1 text-small">Edit Profil</p>
+              </div>
+            </a>
 
+          </div>
         </div>
-      </div>
     </li>
 
     <li class="nav-item nav-category">
@@ -175,8 +176,10 @@
       <li class="nav-item dropdown">
         <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
           <div class="navbar-profile">
-            <img class="img-xs rounded-circle" src="admin/assets/images/faces/face15.jpg" alt="">
-            <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ Auth::user()->nama }}</p>
+            @foreach($user as $data)
+            <img class="img-xs rounded-circle" src="userimage/{{$data->foto_pembudidaya}}" alt="">
+            <p class="mb-0 d-none d-sm-block navbar-profile-name">{{$data->nama_pembudidaya}}</p>
+            @endforeach
             <i class="mdi mdi-menu-down d-none d-sm-block"></i>
           </div>
         </a>

@@ -43,8 +43,8 @@
                                 <div class="form-group">
                                     <label>Kata Sandi</label>
                                     <input type="password" class="form-control p_input" id="password" name="password" required autocomplete="current-password">
-                                </div>
-                                <div class="form-group d-flex align-items-center justify-content-between">
+                                </div><br>
+                                <!-- <div class="form-group d-flex align-items-center justify-content-between">
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             <x-jet-checkbox id="remember_me" name="remember" />
@@ -54,7 +54,7 @@
                                     @if (Route::has('password.request'))
                                     <a href="{{ route('password.request') }}" class="forgot-pass">Lupa Kata Sandi</a>
                                     @endif
-                                </div>
+                                </div> -->
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary btn-block enter-btn">Masuk</button>
                                 </div>

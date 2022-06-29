@@ -48,7 +48,7 @@ class AdminController extends Controller
     $bulan = Pesanan::select(DB::raw("MONTHNAME(tgl_pesanan) as bulan"))
       ->GroupBy(DB::raw("MONTHNAME(tgl_pesanan)"))
       ->pluck('bulan');
-   // return view('admin.chart', compact('total_pesanan', 'bulan'));
+    // return view('admin.chart', compact('total_pesanan', 'bulan'));
   }
 
 
@@ -63,29 +63,29 @@ class AdminController extends Controller
 
     $usertype = Auth::user()->no_ktp;
 
-    $da = produk::Where('noktp_pembudidaya','=',$usertype)->pluck('id_rumputlaut');
-   
-    foreach($da as $key=>$value){
-        $s[] =  intval($value);     
+    $da = produk::Where('noktp_pembudidaya', '=', $usertype)->pluck('id_rumputlaut');
+
+    foreach ($da as $key => $value) {
+      $s[] =  intval($value);
     };
-    
-    
-    $encodedSku=  str_replace('"', "", $s);
+
+
+    $encodedSku =  str_replace('"', "", $s);
     // $s = json_encode($s);
 
     //$data = user::all();
     //$data = pesanan::where('no_ktp', $id)->join('users', 'pesanans.id_rumputlaut', '=', 'users.no_ktp')->get();
     //dd($data);
-   // $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
-  //  $users = DB::table('pesanans')
-  //  ->join('users', 'pesanans.user_id', '=', 'users.no_ktp')
-  //  ->get(); 
-  $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
+    // $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+    //  $users = DB::table('pesanans')
+    //  ->join('users', 'pesanans.user_id', '=', 'users.no_ktp')
+    //  ->get(); 
+    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
     $data = pesanan::whereIn('id_rumputlaut', $encodedSku)->pluck('noktp_pelanggan');
-    $dato = pelanggan::whereIn('noktp_pelanggan' , $data)->get();
+    $dato = pelanggan::whereIn('noktp_pelanggan', $data)->get();
     //dd($dato);
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
-    return view("admin.pelanggan", compact("dato","notif",'user'));
+    return view("admin.pelanggan", compact("dato", "notif", 'user'));
   }
 
 
@@ -113,18 +113,18 @@ class AdminController extends Controller
     // $data2 = produk::all();
     // $data3 = DB::table('produks')->where('no_ktp', $no_ktp)->first();
     $data = produk::where('noktp_pembudidaya', $no_ktp)->get();
-   // dd($no_ktp);
+    // dd($no_ktp);
     $usertype = Auth::user()->no_ktp;
     $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $no_ktp)->get();
     //$user = DB::table('pembudidayas')->where('noktp_pembudidaya', $usertype)->first('nama_pembudidaya');
     // $data = json_decode(json_encode($data3), true);
     //  dd($data3);
-//dd($user);
+    //dd($user);
     // $data = produk::where('no_ktp',$no_ktp);
     $notif = pesanan::where('noktp_pembudidaya', $no_ktp)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
-    
 
-    return view("admin.produk", compact("data","notif",'user'));
+
+    return view("admin.produk", compact("data", "notif", 'user'));
   }
 
 
@@ -173,7 +173,7 @@ class AdminController extends Controller
     $usertype = Auth::user()->no_ktp;
     $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
     // dd($data);
-    return view("admin.editproduk", compact("data","notif","user"));
+    return view("admin.editproduk", compact("data", "notif", "user"));
   }
 
 
@@ -225,16 +225,15 @@ class AdminController extends Controller
 
   public function artikel()
   {
-    $no_ktp = Auth::id();
-    $id = Auth::user()->no_ktp;
+    $no_ktp = Auth::user()->no_ktp;
     // $data2 = produk::all();
     // $data3 = DB::table('produks')->where('no_ktp', $no_ktp)->first();
-    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
+    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $no_ktp)->get();
     $notif = pesanan::where('noktp_pelanggan', $no_ktp)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
     $data = artikel::where('no_ktp', $no_ktp)->get();
 
     // $data = artikel::all();
-    return view("admin.artikel", compact("data",'notif','user'));
+    return view("admin.artikel", compact("data", 'notif', 'user'));
   }
 
 
@@ -244,7 +243,7 @@ class AdminController extends Controller
   {
     $data = new artikel;
 
-    $no_ktp = Auth::id();
+    $no_ktp = Auth::user()->no_ktp;
 
     $image = $request->gambar_artikel;
 
@@ -270,13 +269,16 @@ class AdminController extends Controller
     return redirect()->back()->with('toast_success', 'Artikel Berhasil Ditambahkan!');
   }
 
-  public function editartikel(Request $request,$id_artikel)
+  public function editartikel(Request $request, $id_artikel)
   {
     $id = Auth::id();
     $data = artikel::find($id_artikel);
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
-    return view("admin.editartikel", compact("data",'notif'));
+    $usertype = Auth::user()->no_ktp;
+    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
+
+    return view("admin.editartikel", compact("data", 'notif', 'user'));
   }
 
   public function updateartikel(Request $request, $id_artikel)
@@ -312,9 +314,9 @@ class AdminController extends Controller
   }
 
 
-  public function hapusartikel($id_artikel)
+  public function hapusartikel($id)
   {
-    $data = artikel::find($id_artikel);
+    $data = artikel::find($id);
 
     $data->delete();
     return redirect()->back()->with('toast_success', 'Artikel Berhasil Dihapus!');
@@ -335,12 +337,12 @@ class AdminController extends Controller
     //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
     $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
-    
+
 
     $data = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
 
-    return view('admin.pesanan', compact('data','notif','user'));
+    return view('admin.pesanan', compact('data', 'notif', 'user'));
   }
 
   public function updatepesanan(Request $request, $id)
@@ -362,16 +364,16 @@ class AdminController extends Controller
 
 
     //dd($kurang);
-    if($kurang == "Dikonfirmasi" && $tambah == "Disiapkan"){
+    if ($kurang == "Dikonfirmasi" && $tambah == "Disiapkan") {
       $sisa = $stock - $totalbeli;
-      $update_stok->stok_rumputlaut =$sisa;
+      $update_stok->stok_rumputlaut = $sisa;
       $update_stok->save();
       // $data = produk::where('id_rumputlaut', $id_rumputlaut)->get();
-     // dd($update_barang);
+      // dd($update_barang);
     }
 
-  
-  
+
+
     // $update_barang->jumlah_barang = $request->updateJumlahBarang;
     // dd($update_barang);
     $update_barang->save();
@@ -383,42 +385,42 @@ class AdminController extends Controller
   {
     $id = Auth::id();
     $usertype = Auth::user()->no_ktp;
-    $da = produk::Where('noktp_pembudidaya','=',$usertype)->pluck('id_rumputlaut');
-$datray = [];
-foreach($da as $key=>$value){
-    $s[] =  intval($value);     
-};
+    $da = produk::Where('noktp_pembudidaya', '=', $usertype)->pluck('id_rumputlaut');
+    $datray = [];
+    foreach ($da as $key => $value) {
+      $s[] =  intval($value);
+    };
 
 
-$encodedSku=  str_replace('"', "", $s);
-//dd($encodedSku);
-$s = json_encode($s);
+    $encodedSku =  str_replace('"', "", $s);
+    //dd($encodedSku);
+    $s = json_encode($s);
     $id = Auth::id();
     $data = pesanan::whereIn('id_rumputlaut', $encodedSku)->where('status_pesanan', '=', 'Selesai')->get();
     $notif = pesanan::whereIn('id_rumputlaut', $encodedSku)->get()->take(5);
-//dd($data);
-$user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
-    return view('admin.laporanpenjualan', compact('data','notif','user'));
+    //dd($data);
+    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
+    return view('admin.laporanpenjualan', compact('data', 'notif', 'user'));
   }
 
   public function cetaklaporan()
   {
     $usertype = Auth::user()->no_ktp;
-    $da = produk::Where('noktp_pembudidaya','=',$usertype)->pluck('id_rumputlaut');
-$datray = [];
-foreach($da as $key=>$value){
-    $s[] =  intval($value);     
-};
+    $da = produk::Where('noktp_pembudidaya', '=', $usertype)->pluck('id_rumputlaut');
+    $datray = [];
+    foreach ($da as $key => $value) {
+      $s[] =  intval($value);
+    };
 
 
-$encodedSku=  str_replace('"', "", $s);
-$s = json_encode($s);
+    $encodedSku =  str_replace('"', "", $s);
+    $s = json_encode($s);
     $id = Auth::id();
     //$data = Pesanan::all();
     //$data = pesanan::select('*')->where('user_id', '=', $id)->get();
     //dd($da);
     $data = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', '=', 'Selesai')->get();
-    
+
 
     return view('admin.cetaklaporan', compact('data'));
   }
@@ -432,15 +434,15 @@ $s = json_encode($s);
 
 
     $id = Auth::user()->no_ktp;
-   // $data = pesanan::where('no_ktp', $id)->where('bintang_testimoni',5)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
-//dd($id);
-$data = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+    // $data = pesanan::where('no_ktp', $id)->where('bintang_testimoni',5)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+    //dd($id);
+    $data = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->where('status_pesanan', '=', 'Selesai')->get();
 
-//dd($data);
-$user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
+    //dd($data);
+    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
     $notif = pesanan::where('noktp_pelanggan', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
-    return view("admin.testimoni", compact("data",'notif','user'));
+    return view("admin.testimoni", compact("data", 'notif', 'user'));
 
     //return redirect('login');
   }
@@ -448,10 +450,12 @@ $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
   public function balastestimoni($id_pesanan)
   {
     $id = Auth::id();
+    $usertype = Auth::user()->no_ktp;
+    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
     $data = pesanan::find($id_pesanan);
     $notif = pesanan::where('noktp_pelanggan', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
-    return view("admin.balastestimoni", compact("data",'notif'));
+    return view("admin.balastestimoni", compact("data", 'notif', 'user'));
   }
 
   public function updatebalasan(Request $request, $id_pesanan)
@@ -480,18 +484,16 @@ $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
 
 
     $data = pesanan::where('no_ktp', $id)->where('id_pesanan', 'Like', '%' . $search_pelanggan . '%')->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
-//dd($search_testimoni);
+    //dd($search_testimoni);
 
-  if($data->isNotEmpty())
-  {
-  return view('admin.testimoni', compact('data','notif'));
-  } else{
-    return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
-    $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+    if ($data->isNotEmpty()) {
+      return view('admin.testimoni', compact('data', 'notif'));
+    } else {
+      return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
+      $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
-  return view("admin.testimoni", compact('data','notif'));
-  }
-
+      return view("admin.testimoni", compact('data', 'notif'));
+    }
   }
 
 
@@ -504,20 +506,18 @@ $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
 
 
     $data = pesanan::where('no_ktp', $id)->where('id_pesanan', 'Like', '%' . $search_testimoni . '%')->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
-//dd($search_testimoni);
+    //dd($search_testimoni);
     $notif = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
-  if($data->isNotEmpty())
-  {
-  return view('admin.testimoni', compact('data','notif'));
-  } else{
-    return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
+    if ($data->isNotEmpty()) {
+      return view('admin.testimoni', compact('data', 'notif'));
+    } else {
+      return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
 
-    $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+      $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
-  return view("admin.testimoni", compact("data",'notif'));
-  }
-
+      return view("admin.testimoni", compact("data", 'notif'));
+    }
   }
 
 
@@ -534,17 +534,15 @@ $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
 
     $notif = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
-if($data->isNotEmpty())
-{
-return view('admin.pesanan', compact('data','notif'));
-} else{
-  $id = Auth::id();
-  $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
-  return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
-  
-return view("admin.pesanan", compact('data','notif'));
-}
+    if ($data->isNotEmpty()) {
+      return view('admin.pesanan', compact('data', 'notif'));
+    } else {
+      $id = Auth::id();
+      $data = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
+      return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
 
+      return view("admin.pesanan", compact('data', 'notif'));
+    }
   }
 
 
@@ -554,24 +552,23 @@ return view("admin.pesanan", compact('data','notif'));
     $search_artikel = $request->search_artikel;
     $id = Auth::id();
 
-     $data = DB::table('artikels')
-         ->where('no_ktp', $id)
-         ->where('judul_artikel', 'Like', '%' . $search_artikel . '%')
-         ->orwhere('sumber_artikel', 'Like', '%' . $search_artikel . '%')
-         ->get();
-// dd($data);
-$notif = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
+    $data = DB::table('artikels')
+      ->where('no_ktp', $id)
+      ->where('judul_artikel', 'Like', '%' . $search_artikel . '%')
+      ->orwhere('sumber_artikel', 'Like', '%' . $search_artikel . '%')
+      ->get();
+    // dd($data);
+    $notif = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
-if($data->isNotEmpty())
-{
-  return view('admin.artikel', compact('data','notif'));
-} else{
-  $no_ktp = Auth::id();
-  $data = artikel::where('no_ktp', $no_ktp)->get();
-  return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
-  // $data = artikel::all();
-  return view("admin.artikel", compact('data','notif'));
-}
+    if ($data->isNotEmpty()) {
+      return view('admin.artikel', compact('data', 'notif'));
+    } else {
+      $no_ktp = Auth::id();
+      $data = artikel::where('no_ktp', $no_ktp)->get();
+      return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
+      // $data = artikel::all();
+      return view("admin.artikel", compact('data', 'notif'));
+    }
     // $data = Artikel::where('no_ktp', $id)->where('judul_artikel', 'Like', '%' . $search_artikel . '%')->orWhere('sumber_artikel', 'Like', '%' . $search_artikel . '%')
     //   ->get();
 
@@ -584,25 +581,24 @@ if($data->isNotEmpty())
   {
 
     $search = $request->search;
-    $id = Auth::id();
+    $id = Auth::user()->no_ktp;
 
-     $data = DB::table('produks')
-         ->where('no_ktp', $id)
-         ->where('jenis_rumputlaut', 'Like', '%' . $search . '%')
-         ->get();
-// dd($data);
-$notif = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
+    $data = DB::table('produks')
+      ->where('no_ktp', $id)
+      ->where('jenis_rumputlaut', 'Like', '%' . $search . '%')
+      ->get();
+    // dd($data);
+    $notif = pesanan::where('no_ktp', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
-if($data->isNotEmpty())
-{
-  return view('admin.produk', compact('data','notif'));
-} else{
-  $no_ktp = Auth::id();
-  $data = produk::where('no_ktp', $no_ktp)->get();
-  return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
-  // $data = artikel::all();
-  return view("admin.produk", compact('data','notif'));
-}
+    if ($data->isNotEmpty()) {
+      return view('admin.produk', compact('data', 'notif'));
+    } else {
+      $no_ktp = Auth::id();
+      $data = produk::where('no_ktp', $no_ktp)->get();
+      return redirect()->back()->with('toast_error', 'Data tidak ditemukan!');
+      // $data = artikel::all();
+      return view("admin.produk", compact('data', 'notif'));
+    }
     // $data = Artikel::where('no_ktp', $id)->where('judul_artikel', 'Like', '%' . $search_artikel . '%')->orWhere('sumber_artikel', 'Like', '%' . $search_artikel . '%')
     //   ->get();
 
@@ -614,11 +610,14 @@ if($data->isNotEmpty())
   // End Cari
 
 
+  // Profile
+
+
   public function editprofile($id)
   {
-      $data = pembudidaya::find($id);
-     // dd($data);
-return view("admin.editadminprofil", compact('data'));
+    $data = pembudidaya::find($id);
+    // dd($data);
+    return view("admin.editprofile", compact('data'));
   }
 
   public function updateprofile(Request $request, $id)
@@ -649,10 +648,10 @@ return view("admin.editadminprofil", compact('data'));
 
 
     $data->save();
-dd("oke");
-}
+    dd("oke");
+  }
 
-
+  // End Profile
 
 
 

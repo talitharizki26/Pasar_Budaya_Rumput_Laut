@@ -53,7 +53,7 @@
 												<tr align="center">
 													<td>{{$data->noktp_pelanggan}}</td>
 													<td>{{$data->nama_pelanggan}}</td>
-													<td>{{$data->nohp_pelanggan}}</td>
+													<td>+62{{$data->nohp_pelanggan}}</td>
 													<td>{{$data->alamat_pelanggan}}</td>
 
 													<!-- @if($data->usertype=="0")

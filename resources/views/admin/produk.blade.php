@@ -128,7 +128,11 @@
                         <td>{{$data->lokasi_rumputlaut}}</td>
                         <td>{{$data->stok_rumputlaut}} Kg</td>
 
-                        <td><a class="btn-sm btn-success" href="{{url('/editproduk',$data->id_rumputlaut)}}">Edit</a> <a class="btn-sm btn-danger delete" href="#" id-produk="{{$data->id_rumputlaut}}">Hapus</a></td>
+                        <td>
+                          <a class="btn-sm btn-success" href="{{url('/editproduk',$data->id_rumputlaut)}}">Edit</a>
+                          <!-- <a class="btn-sm btn-danger delete" href="#" id-produk="{{$data->id_rumputlaut}}">Hapus</a> -->
+                          <a href="{{url('/hapusproduk',$data->id_rumputlaut)}}" class="btn-sm btn-danger" onclick=" return confirm('Yakin ingin menghapus data?')">Hapus</a>
+                        </td>
 
                       </tr>
                       @endforeach
@@ -153,6 +157,28 @@
 
 </body>
 
-
+<script>
+  // $('.delete').click(function() {
+  //   var id_artikel = $(this).attr('id-produk');
+  //   swal({
+  //       title: "Ingin Menghapus Data Rumput Laut?",
+  //       text: "Data tidak dapat dikembalikan!",
+  //       icon: "warning",
+  //       buttons: true,
+  //       dangerMode: true,
+  //     })
+  //     .then((willDelete) => {
+  //       console.log(willDelete);
+  //       if (willDelete) {
+  //         window.location = "{{url('/hapusproduk',$data->id_rumputlaut)}}";
+  //         swal("Rumput Laut Berhasil Dihapus!", {
+  //           icon: "success",
+  //         });
+  //       } else {
+  //         swal("Data Gagal Dihapus!");
+  //       }
+  //     });
+  // });
+</script>
 
 </html>

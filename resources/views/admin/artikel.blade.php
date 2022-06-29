@@ -87,7 +87,10 @@
 												</td>
 												<td>{{$data->judul_artikel}}</td>
 												<td>{{$data->sumber_artikel}}</td>
-												<td><a class="btn-sm btn-success" href="{{url('/editartikel',$data->id_artikel)}}">Edit</a> <a class="btn-sm btn-danger delete" href="#" id-artikel="{{$data->id_artikel}}">Hapus</a></td>
+												<td><a class="btn-sm btn-success" href="{{url('/editartikel',$data->id_artikel)}}">Edit</a>
+													<!-- <a class="btn-sm btn-danger delete" href="#" id-artikel="{{$data->id_artikel}}">Hapus</a> -->
+													<a href="{{url('/hapusartikel',$data->id_artikel)}}" class="btn-sm btn-danger" onclick=" return confirm('Yakin ingin menghapus data?')">Hapus</a>
+												</td>
 											</tr>
 
 											@endforeach
@@ -116,19 +119,29 @@
 </body>
 
 
-
 <script>
-	$('.delete').click(function() {
-		var id_artikel = $(this).attr('id-artikel');
-		swal({
-				title: "Ingin Menghapus Artikel?",
-				text: "Data tidak dapat dikembalikan!",
-				icon: "warning",
-				buttons: true,
-				dangerMode: true,
-			})
-
-	});
+	// $('.delete').click(function() {
+	// var id_artikel = $(this).attr('id-artikel');
+	// swal({
+	// title: "Ingin Menghapus Data Artikel?",
+	// text: "Data tidak dapat dikembalikan!",
+	// icon: "warning",
+	// buttons: true,
+	// dangerMode: true,
+	// })
+	// .then((willDelete) => {
+	// 	console.log(willDelete);
+	// 	if (willDelete) {
+	// 		window.location = "{{url('/hapusartikel',$data->id_artikel)}}";
+	// swal("Artikel Berhasil Dihapus!", {
+	// 	icon: "success",
+	// });
+	// 			} else {
+	// 				swal("Data Gagal Dihapus!");
+	// 			}
+	// 		});
+	// });
+	//
 </script>
 
 </html>

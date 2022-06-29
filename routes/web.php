@@ -30,6 +30,12 @@ Route::get("/deleteuser/{id}", [AdminController::class, "deleteuser"]);
 
 Route::get("/chart", [AdminController::class, "chart"]);
 
+Route::get("/editprofil/{id}", [HomeController::class, "editprofil"]);
+Route::post("/updateprofil/{id}", [HomeController::class, "updateprofil"]);
+
+Route::get("/editprofile/{id}", [AdminController::class, "editprofile"]);
+Route::post("/updateprofile/{id}", [AdminController::class, "updateprofile"]);
+
 // End User
 
 // Produk
@@ -70,11 +76,7 @@ Route::get("/showarticle/{id}", [HomeController::class, "showarticle"]);
 
 
 
-Route::get("/editprofil/{id}", [HomeController::class, "editprofil"]);
-Route::post("/updateprofil/{id}", [HomeController::class, "updateprofil"]);
 
-Route::get("/editprofile/{id}", [AdminController::class, "editprofile"]);
-Route::post("/updateprofile/{id}", [AdminController::class, "updateprofile"]);
 // End Artikel
 
 

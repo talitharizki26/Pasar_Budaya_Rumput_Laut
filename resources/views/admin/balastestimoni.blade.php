@@ -45,6 +45,7 @@
                     </div>
                 </div>
             </div>
+            @include("admin.footer")
         </div>
     </div>
 

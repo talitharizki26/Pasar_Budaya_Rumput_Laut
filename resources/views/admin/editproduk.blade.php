@@ -87,6 +87,8 @@
 					</div>
 				</div>
 			</div>
+			<!-- content-wrapper ends -->
+			@include("admin.footer")
 		</div>
 	</div>
 
