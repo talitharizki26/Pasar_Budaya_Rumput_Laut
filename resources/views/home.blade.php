@@ -74,13 +74,13 @@ https://templatemo.com/tm-558-klassy-cafe
 
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Beranda</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects')}}" class="active">Beranda</a></li>
                             <!-- <li class="scroll-to-section"><a href="#about">Tentang</a></li> -->
-                            <li class="scroll-to-section"><a href="#menu">Produk</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects#menu')}}">Produk</a></li>
                             <!-- <li class="scroll-to-section"><a href="{{url('/editprofile')}}">edit</a></li> -->
-                            <li class="scroll-to-section"><a href="#chefs">Artikel</a></li>
-                            <li class="scroll-to-section"><a href="#testi">Testi</a></li>
-                            <li class="scroll-to-section"><a href="#reservation">Kontak</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects#chefs')}}">Artikel</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects#testi')}}">Testi</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/redirects#reservation')}}">Kontak</a></li>
                             <li class="scroll-to-section border-left">
                                 @auth
                                 <a href="{{url('/showcart',Auth::user()->no_ktp)}}">
@@ -119,6 +119,7 @@ https://templatemo.com/tm-558-klassy-cafe
 
                             @endguest --}}
                             </li>
+
 
                             <li class="scroll-to-section dropdown border-left border-right">
                                 <a class=" fa fa-bell " id="notificationDropdown" href="#" data-toggle="dropdown">
@@ -168,7 +169,7 @@ https://templatemo.com/tm-558-klassy-cafe
                                     <div class="dropdown-divider"></div>
                                     <a href="{{url('/editprofil',Auth::user()->no_ktp)}}">
                                         {{ __('Edit Profil') }}
-                                </a><br>
+                                    </a><br>
                                     <div class="dropdown-divider"></div>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf

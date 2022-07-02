@@ -97,20 +97,20 @@ class HomeController extends Controller
                 $encodedSku =  str_replace('"', "", $s);
                 $s = json_encode($s);
 
-                $data = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
+                $data = pesanan::whereIn('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
                 $selesai = $data->count();
                 // dd($data);
 
-                $data1 = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Diantar')->get();
+                $data1 = pesanan::whereIn('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Diantar')->get();
                 $diantar = $data1->count();
 
-                $data2 = pesanan::where('id_rumputlaut', $encodedSku)->where('konfirmasi_pesanan', 'Ditolak')->get();
+                $data2 = pesanan::whereIn('id_rumputlaut', $encodedSku)->where('konfirmasi_pesanan', 'Ditolak')->get();
                 $batal = $data2->count();
 
-                $data3 = pesanan::where('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
+                $data3 = pesanan::whereIn('id_rumputlaut', $encodedSku)->where('status_pesanan', 'Selesai')->get();
                 $total = $data3->sum('total_pesanan');
 
-                $data4 = pesanan::where('id_rumputlaut', $encodedSku)->get();
+                $data4 = pesanan::whereIn('id_rumputlaut', $encodedSku)->get();
                 $rating = $data4->avg('bintang_testimoni');
 
 
@@ -121,17 +121,19 @@ class HomeController extends Controller
                 //dd($da);
                 $datap = DB::table('produks')->select('id_rumputlaut', 'noktp_pembudidaya')->where('noktp_pembudidaya', '=', $no_ktp)->get('id_rumputlaut');
 
+                //$notif = pesanan::whereIn('id_rumputlaut', $encodedSku)->get()->take(5);
+                $notif = pesanan::where('noktp_pembudidaya', $no_ktp)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
                 $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
                     ->GroupBy(DB::raw("Month(tgl_pesanan)"))
-                    ->Wherein('id_rumputlaut',   $encodedSku)
+                    ->whereIn('id_rumputlaut',   $encodedSku)
                     ->orderBy(DB::raw("Month(tgl_pesanan)"))
                     ->pluck('jumlah_pesanan');
                 //dd($total_pesanan);
                 //dd($total_pesanan);
                 $bulan = Pesanan::select(DB::raw("MONTHNAME(tgl_pesanan) as bulan"))
                     ->GroupBy(DB::raw("MONTHNAME(tgl_pesanan)"))
-                    ->Wherein('id_rumputlaut',   $encodedSku)
+                    ->WhereIn('id_rumputlaut',   $encodedSku)
                     //     ->join('produks','pesanans.id_rumputlaut', '=','produks.')
                     ->orderBy(DB::raw("Month(tgl_pesanan)"))
                     ->pluck('bulan');
@@ -174,7 +176,7 @@ class HomeController extends Controller
                 $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
                 return view('admin.adminhome', compact('saran', 'user', 'bulan', 'total_pesanan', 'selesai', 'diantar', 'batal', 'total', 'rating', 'notif'));
             }
-
+            //   dd($data);
 
             $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
             //dd($user);
@@ -182,7 +184,6 @@ class HomeController extends Controller
 
 
 
-            $notif = pesanan::where('noktp_pelanggan', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
 
             $saran = Saran::all();
 
@@ -272,6 +273,8 @@ class HomeController extends Controller
 
         foreach ($request->user_id as $key => $user_id) {
 
+            DB::table('carts')->where('user_id', $user_id)->delete();
+
             $data = new Pesanan();
             $today = Carbon::today()->setTime(9, 30, 0);
             $time = Carbon::now('utc')->format('H:i:s');
@@ -284,7 +287,19 @@ class HomeController extends Controller
             $data->waktu_pesanan = $time;
             $data->jumlah_pesanan = $request->jumlah_pesanan[$key];
             $data->total_pesanan = $request->total_pesanan[$key];
-            $data->bukti_pembayaran = $request->bukti_pembayaran;
+
+
+            $image = $request->bukti_pembayaran;
+
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+
+            $request->bukti_pembayaran->move('bukti_pembayaran', $imagename);
+
+            $data->bukti_pembayaran = $imagename;
+
+
+
+
             $data->ekspedisi_pesanan = $request->ekspedisi_pesanan;
             // $data->address = $request->address;
             // $data->testimoni = $request->pesan;
@@ -355,11 +370,11 @@ class HomeController extends Controller
 
     public function saran(Request $request)
     {
-        $id = Auth::user()->no_ktp;
-        if (Auth::id() == null) {
-            return redirect()->back()->with('toast_error', 'Login terlebih dahulu!');;
-        } else {
 
+        if (Auth::id() == null) {
+            return redirect('/login');
+        } else {
+            $id = Auth::user()->no_ktp;
             $data = new saran;
             $today = Carbon::today()->setTime(9, 30, 0);
             $data->isi_saran = $request->saran;
