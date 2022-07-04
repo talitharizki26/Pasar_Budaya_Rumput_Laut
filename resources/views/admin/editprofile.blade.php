@@ -18,16 +18,8 @@
 
 		<div class="main-panel">
 			<div class="content-wrapper">
-				<div class="page-header">
-					<h3 class="page-title"> Edit Profil</h3>
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#">Edit Profil</a></li>
-						</ol>
-					</nav>
-				</div>
 				<div class="row">
-					<div class="col-md-12 grid-margin stretch-card">
+					<div class="col-sm-6 grid-margin">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Form Edit Profil</h4>
@@ -84,6 +76,36 @@
 							</div>
 						</div>
 					</div>
+
+
+
+					@foreach($akun as $data)
+					<div class="col-sm-6 grid-margin">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title">Form Ubah Password</h4>
+								<form class="forms-sample" action="{{url('/updateprofile',$data->id_user)}}" method="post" enctype="multipart/form-data">
+									@csrf
+									<!-- <div class="form-group">
+										<label for="nama"></label>
+										<input class="form-control" name="nama_pembudidaya" value="{{$data->email}}" required>
+									</div> -->
+									<div class="form-group">
+										<label for="alamat">Password</label>
+										<input class="form-control" name="alamat_pembudidaya" value="{{$data->password}}" required>
+									</div>
+
+									<button type="submit" class="btn btn-primary mr-2" value="Save">Edit Profile</button>
+									<a href="{{url('/redirects')}}" class="btn btn-dark">Batal</a>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					@endforeach
+
+
+
 				</div>
 			</div>
 			<!-- content-wrapper ends -->

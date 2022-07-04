@@ -48,7 +48,10 @@
 									</div>
 									<div class="form-group">
 										<label for="gambar">Gambar Artikel</label>
-										<input type="file" class="form-control" name="gambar_artikel" required>
+										<input type="file" class="form-control" name="gambar_artikel" >
+										@error('gambar_artikel')
+                      <span class="text-danger">{{$message}}</span>
+                    @enderror
 									</div>
 									<button type="submit" class="btn btn-primary mr-2" value="Save">Tambah Artikel</button>
 									<button type="reset" class="btn btn-dark">Batal</button>
@@ -118,30 +121,5 @@
 
 </body>
 
-
-<script>
-	// $('.delete').click(function() {
-	// var id_artikel = $(this).attr('id-artikel');
-	// swal({
-	// title: "Ingin Menghapus Data Artikel?",
-	// text: "Data tidak dapat dikembalikan!",
-	// icon: "warning",
-	// buttons: true,
-	// dangerMode: true,
-	// })
-	// .then((willDelete) => {
-	// 	console.log(willDelete);
-	// 	if (willDelete) {
-	// 		window.location = "{{url('/hapusartikel',$data->id_artikel)}}";
-	// swal("Artikel Berhasil Dihapus!", {
-	// 	icon: "success",
-	// });
-	// 			} else {
-	// 				swal("Data Gagal Dihapus!");
-	// 			}
-	// 		});
-	// });
-	//
-</script>
 
 </html>

@@ -23,15 +23,14 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-        // Validator::make($input, [
-        //     'no_ktp' => ['required', 'integer'],
-        //     'no_hp' => ['required', 'integer'],
-        //     'nama' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'foto' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
-        //     'password' => $this->passwordRules(),
-        //     'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
-        // ])->validate();
+        Validator::make($input, [
+            'no_ktp' => ['required', 'integer','digits:16'],
+            // 'no_hp' => ['required','max:14'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'foto' => [ 'mimes:jpg,jpeg,png'],
+             'password' => $this->passwordRules(),
+            // 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
+        ])->validate();
         if ($input['role'] == "Pelanggan") {
             $o = "0";
             $data = new Pelanggan;
@@ -60,7 +59,7 @@ class CreateNewUser implements CreatesNewUsers
             //     'foto_pelanggan' => $input['foto'],
             //     'jenkel_pelanggan' => $input['jenkel'],
             // ]);
-            User::create([
+            return User::create([
                 'email' => $input['email'],
                 'role' => $input['role'],
                 'usertype' => $o,
@@ -68,7 +67,8 @@ class CreateNewUser implements CreatesNewUsers
                 'no_ktp' => $input['no_ktp'],
 
             ]);
-
+            
+         
         } else {
             $o = "1";
             $data = new Pembudidaya;
@@ -96,7 +96,7 @@ class CreateNewUser implements CreatesNewUsers
             //     'foto_pembudidaya' => $input['foto'],
             //     'jenkel_pembudidaya' => $input['jenkel'],
             // ]);
-            User::create([
+           return User::create([
                 'email' => $input['email'],
                 'role' => $input['role'],
                 'usertype' => $o,
@@ -104,6 +104,7 @@ class CreateNewUser implements CreatesNewUsers
                 'no_ktp' => $input['no_ktp'],
 
             ]);
+            return redirect('/');
         }
 
 
@@ -120,5 +121,6 @@ class CreateNewUser implements CreatesNewUsers
         //     'alamat' => $input['alamat'],
         //     'foto' => $input['foto'],
         // ]);
+        return redirect('/');
     }
 }

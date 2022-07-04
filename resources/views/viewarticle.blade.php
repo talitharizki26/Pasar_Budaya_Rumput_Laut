@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Ruang Berproses</title>
+    <title>Article</title>
     <link rel="icon" href="img/icon.png" type="image/png" sizes="16x16">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,20 +13,34 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.1/assets/owl.carousel.min.css'>
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="css/artikel_konten.css?v=<?php echo time(); ?>">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+
+<link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
+
+<link rel="stylesheet" href="assets/css/owl-carousel.css">
+
+<link rel="stylesheet" href="assets/css/lightbox.css">
 </head>
 
 
 <body class="hero-section">
+
 
     <main>
 
     @foreach($data2 as $data2)
         <div class="section visi-misi">
             <div class="container">
+            <a href="{{url('/redirects')}}" class="logo">
+<i class="fa fa-arrow-left fa-1x" aria-hidden="true"> Kembali</i>
+                        </a>
                 <div class="row justify-content-between">
                     <div class="col-lg-9 col-md-9 col-sm-9 col-12 text-center">
                         <h2>{{$data2->judul_artikel}}</h2>
-                        <h6>Sumber Artikel :<a href="{{$data2->sumber_artikel}}">{{$data2->sumber_artikel}}</a></h6>
+                        <h6>Sumber Artikel : {{$data2->sumber_artikel}}</a></h6>
                         <hr>
                         <img src='/artikelimage/{{$data2->gambar_artikel}}' alt="Hero Image" width="60%">
                         <!-- <a href="http://www.freepik.com">Designed by stories / Freepik</a> -->
@@ -48,10 +62,10 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-12 text-md-left text-center">
                         <h4>Artikel Lainnya</h4>
-                        @foreach($data3 as $data3)
+                        @foreach($data3 as $data2)
                         <hr class="garis-judul">
-                        <a class="artikel-link" href="{{$data3->sumber_artikel}}">{{$data3->judul_artikel}}</a>
-     
+                        <a class="artikel-link" href="{{url('/showarticle',$data2->id_artikel)}}">{{$data2->judul_artikel}}</a>
+
     
                         @endforeach
 

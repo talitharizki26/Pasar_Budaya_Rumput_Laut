@@ -156,14 +156,19 @@ https://templatemo.com/tm-558-klassy-cafe
                                     @auth
                             </li>
 
+
+
+
+                            @foreach($foto as $data)
                             <li class="nav-item dropdown">
                                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                                     <div class="navbar-profile row">
-                                        <img class="img-xs rounded-circle" width="22%" src="admin/assets/images/faces/face15.jpg" alt="">
+                                        <img class="img-xs rounded-circle" width="22%"  src="userimage/{{$data->foto_pelanggan}}" alt="">
                                         <p style="margin-top: 5px; margin-left: 15px;" class="mb-0 d-none d-sm-block navbar-profile-name"> {{ Auth::user()->nama }}</p>
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                     </div>
                                 </a>
+                                @endforeach
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                                     <h6 class="p-3 mb-0">Edit Profil Anda atau Keluar dari Aplikasi?</h6>
                                     <div class="dropdown-divider"></div>

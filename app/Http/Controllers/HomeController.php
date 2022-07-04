@@ -51,7 +51,7 @@ class HomeController extends Controller
 
 
         $id = Auth::id();
-
+// dd($id);
         $count = cart::where('user_id', $id)->count();
 
 
@@ -75,8 +75,12 @@ class HomeController extends Controller
 
         $data3 = pesanan::all();
 
-        $usertype = Auth::user()->usertype;
-
+        $userty = Auth::id();
+     
+if($userty == null){
+    return redirect('/');
+}
+$usertype = Auth::user()->usertype;
         if ($usertype == '1') {
 
             $id = Auth::id();
@@ -191,20 +195,22 @@ class HomeController extends Controller
             return view('admin.adminhome', compact('saran', 'user', 'bulan', 'total_pesanan', 'selesai', 'diantar', 'batal', 'total', 'rating', 'notif'));
         } else {
 
-            $user_id = Auth::id();
-            // dd($user_id);
+            $user_id = Auth::user()->no_ktp;
+             //dd($user_id);
             $usertype = Auth::user()->no_ktp;
             $count = cart::where('user_id', $user_id)->count();
+     
             // dd($usertype);
             $user = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->first('nama_pelanggan');
+            $foto = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->get();
 
             //dd($user);
             // $orang = Auth::where('user_')
 
+//dd($foto);
 
 
-
-            return view('home', compact('produk', 'data2', 'count', 'data3', 'data4', 'data5', 'user'));
+            return view('home', compact('foto','produk', 'data2', 'count', 'data3', 'data4', 'data5', 'user'));
         }
     }
 
@@ -324,10 +330,14 @@ class HomeController extends Controller
     {
 
         $data2 = artikel::where('id_artikel', '=', $id)->get();
+        $id = Auth::id();
+        $usertype = Auth::user()->no_ktp;
+
+        $count = cart::where('user_id', $id)->count();
         $data3 = DB::table('artikels')->get()->take(5);
-
-
-        return view("viewarticle", compact("data2", "data3"));
+        $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
+        $foto = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->get();
+        return view("viewarticle", compact("data2", "data3",'count','data5','foto'));
     }
 
 
@@ -425,8 +435,8 @@ class HomeController extends Controller
 
 
         $data->save();
-        dd("oke");
-        return redirect('produk')->with('toast_success', 'Rumput Laut Berhasil Diedit!');;
+        //dd("oke");
+        return redirect('redirects');
     }
 
 

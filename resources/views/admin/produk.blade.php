@@ -35,22 +35,23 @@
                   <div class="form-group">
                     <label for="jenis">Jenis Rumput Laut</label>
                     <input class="form-control" name="jenis_rumputlaut" placeholder="Jenis Rumput Laut" required>
+
                   </div>
                   <div class="form-group">
                     <label for="deskripsi">Deskripsi Rumput Laut</label>
-                    <textarea rows="7" class="form-control" name="deskripsi_rumputlaut" placeholder="Deskripsi Rumput Laut" required></textarea>
+                    <textarea rows="7" class="form-control" name="deskripsi_rumputlaut" placeholder="Deskripsi Rumput Laut"required ></textarea>
                   </div>
                   <div class="form-group">
                     <label for="harga">Harga Rumput Laut</label>
-                    <input class="form-control" name="harga_rumputlaut" placeholder="Rp. " required>
+                    <input type="number" class="form-control" name="harga_rumputlaut" placeholder="Rp. "required >
                   </div>
                   <div class="form-group">
                     <label for="lokasi">Lokasi Rumput Laut</label>
-                    <input class="form-control" name="lokasi_rumputlaut" placeholder="Lokasi Rumput Laut" required>
+                    <input class="form-control" name="lokasi_rumputlaut" placeholder="Lokasi Rumput Laut"required >
                   </div>
                   <div class="form-group">
                     <label for="durasi">Durasi Tahan Rumput Laut</label>
-                    <input class="form-control" name="durasitahan_rumputlaut" placeholder="Hari" required>
+                    <input type="number" class="form-control" name="durasitahan_rumputlaut" placeholder="Hari" required>
                   </div>
                   <div class="form-group">
                     <label for="stok">Stok Rumput Laut</label>
@@ -80,7 +81,10 @@
                   </div> -->
                   <div class="form-group">
                     <label for="gambar">Foto Rumput Laut</label>
-                    <input type="file" class="form-control" name="gambar_rumputlaut" required>
+                    <input type="file" class="form-control" name="gambar_rumputlaut" >
+                    @error('gambar_rumputlaut')
+                      <span class="text-danger">{{$message}}</span>
+                    @enderror
                   </div>
                   <button type="submit" class="btn btn-primary mr-2" value="Save">Tambah Produk</button>
                   <button type="reset" class="btn btn-dark">Batal</button>
@@ -157,28 +161,6 @@
 
 </body>
 
-<script>
-  // $('.delete').click(function() {
-  //   var id_artikel = $(this).attr('id-produk');
-  //   swal({
-  //       title: "Ingin Menghapus Data Rumput Laut?",
-  //       text: "Data tidak dapat dikembalikan!",
-  //       icon: "warning",
-  //       buttons: true,
-  //       dangerMode: true,
-  //     })
-  //     .then((willDelete) => {
-  //       console.log(willDelete);
-  //       if (willDelete) {
-  //         window.location = "{{url('/hapusproduk',$data->id_rumputlaut)}}";
-  //         swal("Rumput Laut Berhasil Dihapus!", {
-  //           icon: "success",
-  //         });
-  //       } else {
-  //         swal("Data Gagal Dihapus!");
-  //       }
-  //     });
-  // });
-</script>
+
 
 </html>
