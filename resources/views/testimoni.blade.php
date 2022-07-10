@@ -17,7 +17,7 @@
 
                 @foreach($data3 as $data)
 
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <div class="chef-item">
                         <div class="thumb">
                             <div class="overlay"></div>
@@ -26,7 +26,12 @@
                             </ul>
                         </div>
                         <div class="down-content">
-                            <h4>{{$data->isi_testimoni}}</h4>
+                            <!-- <p>{{$data->id_pesanan}}</p> -->
+                            <h4>{{$data->isi_testimoni}}</h4>~~~~~~~~~~~~~~~~~~~~~~
+                            <br>
+                            Pelanggan: <h6>{{$data->nama_pelanggan}}</h6>
+                            ~<p>{{$data->tgl_testimoni}} /</p>
+                            <p>{{$data->waktu_testimoni}}</p>
                         </div>
                     </div>
                 </div>

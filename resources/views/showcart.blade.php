@@ -229,15 +229,15 @@ https://templatemo.com/tm-558-klassy-cafe
                         {{$data->jenis_rumputlaut}}
                     </td>
                     <td>
-                        {{$data->harga_rumputlaut}}
+                        Rp. {{$data->harga_rumputlaut}}
                     </td>
                     <td>
                         <input type="text" name="jumlah_pesanan[]" value="{{$data->jumlah}}" hidden="">
-                        {{$data->jumlah}}
+                        {{$data->jumlah}} Kg
                     </td>
                     <td>
                         <input type="text" name="total_pesanan[]" value="{{$data->harga_rumputlaut*$data->jumlah}}" hidden="">
-                        {{$data->harga_rumputlaut*$data->jumlah}}
+                        Rp. {{$data->harga_rumputlaut*$data->jumlah}}
                     </td>
                     <td>
                         <a class="btn btn-danger" style="padding-top:2px;" href="{{url('/remove',$data->id)}}">Hapus</a>

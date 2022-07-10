@@ -69,11 +69,19 @@ class HomeController extends Controller
 
 
 
-        $produk = produk::all();
+        $produk = produk::where('stok_rumputlaut', '>', '0')
+            ->orderBy('id_rumputlaut', 'desc')
+            ->get()
+            ->take(100);
 
         $data2 = artikel::all();
 
-        $data3 = pesanan::all();
+        $data3 = pesanan::where('status_pesanan', 'Selesai')
+            ->whereNotNull('isi_testimoni')
+            ->join('pelanggans', 'pesanans.noktp_pelanggan', '=', 'pelanggans.noktp_pelanggan')
+            ->orderBy('id_pesanan', 'desc')
+            ->get()
+            ->take(10);
 
         $userty = Auth::id();
 
@@ -225,7 +233,11 @@ class HomeController extends Controller
 
             $id_rumputlaut = $id;
             $jumlah = $request->jumlah;
-
+            // $stok = $request->stok_rumputlaut;
+            // //dd($stok);
+            // if ($jumlah > $stok) {
+            //     return redirect()->back()->with('toast_error', 'Persediaan Rumput Laut Pembudidaya Kurang!');;
+            // } else {
             $cart = new cart;
             $cart->user_id = $no_ktp;
             $cart->id_rumputlaut = $id_rumputlaut;
@@ -233,8 +245,8 @@ class HomeController extends Controller
 
             $cart->save();
 
-
             return redirect()->back();
+            // }
         } else {
 
             return redirect('/login');
@@ -293,7 +305,7 @@ class HomeController extends Controller
             $data->waktu_pesanan = $time;
             $data->jumlah_pesanan = $request->jumlah_pesanan[$key];
             $data->total_pesanan = $request->total_pesanan[$key];
-
+            $data->status_pesanan = "Belum Disiapkan";
 
             $image = $request->bukti_pembayaran;
 
@@ -369,9 +381,11 @@ class HomeController extends Controller
     {
         $data = Pesanan::find($id);
         $today = Carbon::today()->setTime(9, 30, 0);
+        $now = date('H:i:s');
         $data->isi_testimoni = $request->isi_testimoni;
         $data->bintang_testimoni = $request->bintang_testimoni;
         $data->tgl_testimoni = $today;
+        $data->waktu_testimoni = $now;
         $data->save();
         // dd($data);
         return redirect('redirects');
@@ -411,6 +425,13 @@ class HomeController extends Controller
     {
         $data = pelanggan::find($id);
 
+        $request->validate([
+            'nama_pelanggan'  => 'alpha',
+            'gambar'  => 'mimes:jpg,jpeg,png',
+            'tgllahir_pelanggan' => 'before:-17 years',
+
+        ]);
+
         $image = $request->gambar;
 
         if ($image) {
@@ -422,21 +443,16 @@ class HomeController extends Controller
             $data->foto_pelanggan = $imagename;
         }
 
-
         $data->nama_pelanggan = $request->nama_pelanggan;
-
         $data->alamat_pelanggan = $request->alamat_pelanggan;
-
         $data->nohp_pelanggan = $request->nohp_pelanggan;
-
         $data->jenkel_pelanggan = $request->jenkel_pelanggan;
-
         $data->tgllahir_pelanggan = $request->tgllahir_pelanggan;
 
-
         $data->save();
+        return redirect()->back();
         //dd("oke");
-        return redirect('redirects');
+        //return redirect('redirects');
     }
 
 

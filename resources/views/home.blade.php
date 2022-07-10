@@ -163,8 +163,8 @@ https://templatemo.com/tm-558-klassy-cafe
                             <li class="nav-item dropdown">
                                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                                     <div class="navbar-profile row">
-                                        <img class="img-xs rounded-circle" width="22%"  src="userimage/{{$data->foto_pelanggan}}" alt="">
-                                        <p style="margin-top: 5px; margin-left: 15px;" class="mb-0 d-none d-sm-block navbar-profile-name"> {{ Auth::user()->nama }}</p>
+                                        <img class="img-xs rounded-circle" width="22%" src="userimage/{{$data->foto_pelanggan}}" alt="">
+                                        <p style="margin-top: 5px; margin-left: 15px;" class="mb-0 d-none d-sm-block navbar-profile-name">{{$data->nama_pelanggan}}</p>
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                     </div>
                                 </a>

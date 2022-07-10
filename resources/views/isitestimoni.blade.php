@@ -223,11 +223,11 @@ https://templatemo.com/tm-558-klassy-cafe
                                 <fieldset>
                                     <select name="bintang_testimoni" id="bintang_testimoni">
                                         <option value="-">Berapa Penilaian Pesanan ini?</option>
-                                        <option value=1>1</option>
-                                        <option value=2>2</option>
-                                        <option value=3>3</option>
-                                        <option value=4>4</option>
-                                        <option value=5>5</option>
+                                        <option value=1>1 (Sangat Tidak Bagus)</option>
+                                        <option value=2>2 (Tidak Bagus)</option>
+                                        <option value=3>3 (Biasa)</option>
+                                        <option value=4>4 (Bagus)</option>
+                                        <option value=5>5 (Sangat Bagus)</option>
                                     </select>
                                 </fieldset>
                             </div>

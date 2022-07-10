@@ -35,12 +35,13 @@
                                 <p class='description'>{{$data->deskripsi_rumputlaut}}</p>
                                 <p class='description'>Ketahanan: {{$data->durasitahan_rumputlaut}} Hari</p>
                                 <p class='description'>Lokasi: {{$data->lokasi_rumputlaut}}</p>
+                                <p class='description'>Stok: {{$data->stok_rumputlaut}}</p>
                             </div>
                         </div>
 
                         <div style="margin-top:10px;" class="contact-form">
                             <fieldset>
-                                <input type="number" name="jumlah" min="1" value="1" style="width: 100%;">
+                                <input type="number" name="jumlah" min="1" max="20" placeholder="Beli Berapa Kg?" style="width: 100%;">
                             </fieldset>
                         </div>
                         <input type="submit" class="btn btn-new" value="Tambah Keranjang" style="width: 100%;">

@@ -262,7 +262,7 @@ class AdminController extends Controller
     $data->stok_rumputlaut = $request->stok_rumputlaut;
 
     $data->save();
-    return redirect('produk')->with('toast_success', 'Rumput Laut Berhasil Diedit!');;
+    return redirect('produk')->with('toast_success', 'Rumput Laut Berhasil Diedit!');
   }
 
   public function hapusproduk($id)
@@ -270,7 +270,7 @@ class AdminController extends Controller
     $data = produk::find($id);
 
     $data->delete();
-    return redirect()->back()->with('toast_success', 'Rumput Laut Berhasil Dihapus!');;
+    return redirect()->back()->with('toast_success', 'Rumput Laut Berhasil Dihapus!');
   }
 
   // End Produk
