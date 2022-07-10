@@ -152,7 +152,7 @@
           <h6 class="p-3 mb-0">Notifikasi</h6>
           <div class="dropdown-divider"></div>
           @foreach($notif as $data)
-          <a class="dropdown-item preview-item">
+          <a class="dropdown-item preview-item" href="{{url('/pesanan')}}">
             <div class="preview-thumbnail">
               <div class="preview-icon bg-dark rounded-circle">
                 <i class="mdi mdi-package-variant-closed text-success"></i>

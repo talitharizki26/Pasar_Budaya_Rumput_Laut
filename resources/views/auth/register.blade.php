@@ -33,22 +33,22 @@
                                 @csrf
                                 <div class="form-group">
                                     <label>No. KTP</label>
-                                    <input type="text" class="form-control p_input" id="no_ktp" name="no_ktp" :value="old('no_ktp')" required autofocus autocomplete="no_ktp">
+                                    <input type="text" class="form-control p_input" id="no_ktp" name="no_ktp" value="{{ old('no_ktp') }}" required autofocus autocomplete="no_ktp">
                                 </div>
                                 <div class="form-group">
                                     <label>Nama</label>
-                                    <input type="text" class="form-control p_input" id="nama" name="nama" :value="old('nama')" required autofocus autocomplete="nama">
+                                    <input type="text" class="form-control p_input" id="nama" name="nama" value="{{ old('nama') }}" required autofocus autocomplete="nama">
                                 </div>
                                 <div class="form-group">
                                     <label>Registrasi Sebagai</label>
                                     <div class="form-check">
                                         <label for="roleN" class="form-check-label">
-                                            <input type="radio" class="form-control p_input" name="role" id="roleN" value="Pelanggan">Pelanggan
+                                            <input type="radio" class="form-control p_input" name="role" id="roleN" value="Pelanggan" required>Pelanggan
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label for="roleA" class="form-check-label">
-                                            <input type="radio" class="form-control p_input" name="role" id="roleA" value="Pembudidaya">
+                                            <input type="radio" class="form-control p_input" name="role" id="roleA" value="Pembudidaya" required>
                                             Pembudidaya
                                         </label>
                                     </div>
@@ -56,38 +56,38 @@
 
                                 <div class="form-group">
                                     <label>No. HP</label>
-                                    <input type="text" class="form-control p_input" id="no_hp" name="no_hp" :value="old('no_hp')" required autofocus autocomplete="no_hp">
+                                    <input type="text" class="form-control p_input" id="no_hp" name="no_hp" value="{{ old('no_hp') }}" required autofocus autocomplete="no_hp">
                                 </div>
                                 <div class="form-group">
                                     <label>Jenis Kelamin</label>
                                     <div class="col-sm-7">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-control p_input" name="jenkel" id="P" value="Perempuan"> Perempuan </label>
+                                                <input type="radio" class="form-control p_input" name="jenkel" id="P" value="Perempuan" required> Perempuan </label>
                                         </div>
                                     </div>
                                     <div class="col-sm-10">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-control p_input" name="jenkel" id="L" value="Laki-laki"> Laki-laki </label>
+                                                <input type="radio" class="form-control p_input" name="jenkel" id="L" value="Laki-laki" required> Laki-laki </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal Lahir</label>
-                                    <input type="date" class="form-control p_input" id="tgl_lahir" name="tgl_lahir" :value="old('tgl_lahir')" required autofocus autocomplete="tgl_lahir">
+                                    <input type="date" class="form-control p_input" id="tgl_lahir" name="tgl_lahir" value="{{ old('tgl_lahir') }}" required autofocus autocomplete="tgl_lahir">
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat Lengkap</label>
-                                    <textarea class="form-control p_input" rows="3" id="alamat" name="alamat" :value="old('alamat')" required autofocus autocomplete="alamat"></textarea>
+                                    <input type="text" class="form-control p_input" rows="3" id="alamat" name="alamat" value="{{ old('alamat') }}" required autofocus autocomplete="alamat"></input>
                                 </div>
                                 <div class="form-group">
                                     <label>Foto</label>
-                                    <input type="file" class="form-control p_input" id="foto" :value="old('foto')" name="foto" required>
+                                    <input type="file" class="form-control p_input" id="foto" value="{{ old('foto') }}" name="foto" required>
                                 </div>
                                 <div class="form-group">
                                     <label>E-mail</label>
-                                    <input type="email" class="form-control p_input" id="email" name="email" :value="old('email')" required>
+                                    <input type="email" class="form-control p_input" id="email" name="email" value="{{ old('email') }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Kata Sandi</label>

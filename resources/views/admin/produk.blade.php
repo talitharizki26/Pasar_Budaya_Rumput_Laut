@@ -34,28 +34,28 @@
                   @csrf
                   <div class="form-group">
                     <label for="jenis">Jenis Rumput Laut</label>
-                    <input class="form-control" name="jenis_rumputlaut" placeholder="Jenis Rumput Laut" required>
+                    <input class="form-control" name="jenis_rumputlaut" placeholder="Jenis Rumput Laut" value="{{ old('deskripsi_rumputlaut') }}" required>
 
                   </div>
                   <div class="form-group">
                     <label for="deskripsi">Deskripsi Rumput Laut</label>
-                    <textarea rows="7" class="form-control" name="deskripsi_rumputlaut" placeholder="Deskripsi Rumput Laut"required ></textarea>
+                    <input rows="7" class="form-control" name="deskripsi_rumputlaut" placeholder="Deskripsi Rumput Laut" value="{{ old('deskripsi_rumputlaut') }}" required></input>
                   </div>
                   <div class="form-group">
                     <label for="harga">Harga Rumput Laut</label>
-                    <input type="number" class="form-control" name="harga_rumputlaut" placeholder="Rp. "required >
+                    <input type="number" class="form-control" name="harga_rumputlaut" placeholder="Rp. " min="1000" value="{{ old('harga_rumputlaut') }}" required>
                   </div>
                   <div class="form-group">
                     <label for="lokasi">Lokasi Rumput Laut</label>
-                    <input class="form-control" name="lokasi_rumputlaut" placeholder="Lokasi Rumput Laut"required >
+                    <input class="form-control" name="lokasi_rumputlaut" placeholder="Lokasi Rumput Laut" value="{{ old('lokasi_rumputlaut') }}" required>
                   </div>
                   <div class="form-group">
                     <label for="durasi">Durasi Tahan Rumput Laut</label>
-                    <input type="number" class="form-control" name="durasitahan_rumputlaut" placeholder="Hari" required>
+                    <input type="number" class="form-control" name="durasitahan_rumputlaut" placeholder="Hari" min="1" value="{{ old('durasitahan_rumputlaut') }}" required>
                   </div>
                   <div class="form-group">
                     <label for="stok">Stok Rumput Laut</label>
-                    <input type="number" class="form-control" name="stok_rumputlaut" placeholder="Kilogram" required>
+                    <input type="number" class="form-control" name="stok_rumputlaut" placeholder="Kilogram" min="0" value="{{ old('stok_rumputlaut') }}" required>
                   </div>
 
                   <!-- <div class="form-group">
@@ -81,9 +81,9 @@
                   </div> -->
                   <div class="form-group">
                     <label for="gambar">Foto Rumput Laut</label>
-                    <input type="file" class="form-control" name="gambar_rumputlaut" >
+                    <input type="file" class="form-control" name="gambar_rumputlaut" value="{{ old('gambar_rumputlaut') }}" required>
                     @error('gambar_rumputlaut')
-                      <span class="text-danger">{{$message}}</span>
+                    <span class="text-danger">{{$message}}</span>
                     @enderror
                   </div>
                   <button type="submit" class="btn btn-primary mr-2" value="Save">Tambah Produk</button>

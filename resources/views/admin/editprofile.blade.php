@@ -19,7 +19,7 @@
 		<div class="main-panel">
 			<div class="content-wrapper">
 				<div class="row">
-					<div class="col-sm-6 grid-margin">
+					<div class="col-sm-12 grid-margin">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Form Edit Profil</h4>
@@ -69,6 +69,10 @@
 									<div class="form-group">
 										<label for="gambar">Gambar Baru</label>
 										<input type="file" class="form-control" name="gambar">
+										@error('gambar_artikel')
+										<span class="text-danger">{{$message}}</span>
+										@enderror
+
 									</div>
 									<button type="submit" class="btn btn-primary mr-2" value="Save">Edit Profile</button>
 									<a href="{{url('/redirects')}}" class="btn btn-dark">Batal</a>
@@ -79,18 +83,18 @@
 
 
 
-					@foreach($akun as $data)
+					<!-- @foreach($akun as $data)
 					<div class="col-sm-6 grid-margin">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Form Ubah Password</h4>
 								<form class="forms-sample" action="{{url('/updateprofile',$data->id_user)}}" method="post" enctype="multipart/form-data">
-									@csrf
-									<!-- <div class="form-group">
+									@csrf -->
+					<!-- <div class="form-group">
 										<label for="nama"></label>
 										<input class="form-control" name="nama_pembudidaya" value="{{$data->email}}" required>
 									</div> -->
-									<div class="form-group">
+					<!-- <div class="form-group">
 										<label for="alamat">Password</label>
 										<input class="form-control" name="alamat_pembudidaya" value="{{$data->password}}" required>
 									</div>
@@ -102,7 +106,7 @@
 						</div>
 					</div>
 
-					@endforeach
+					@endforeach -->
 
 
 

@@ -56,6 +56,9 @@
 									<div class="form-group">
 										<label for="gambar">Gambar Baru</label>
 										<input type="file" class="form-control" name="gambar_artikel">
+										@error('gambar_artikel')
+										<span class="text-danger">{{$message}}</span>
+										@enderror
 									</div>
 									<button type="submit" class="btn btn-primary mr-2" value="Update Chef">Edit Artikel</button>
 									<a href="{{url('/artikel')}}" class="btn btn-dark">Batal</a>

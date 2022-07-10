@@ -7,17 +7,14 @@
 	@include("admin.admincss")
 
 	<script>
+		function disable() {
+			document.getElementById("inlineRadio22").disabled = true;
+		}
 
-
-function disable() {
-  document.getElementById("inlineRadio22").disabled = true;
-}
-
-function undisable() {
-  document.getElementById("inlineRadio22").disabled = false;
-}
-
-</script>
+		function undisable() {
+			document.getElementById("inlineRadio22").disabled = false;
+		}
+	</script>
 </head>
 
 <body>
@@ -127,7 +124,7 @@ function undisable() {
 
 																<label for="">Konfirmasi Pesanan</label>
 																<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" onclick="undisable()"  value="Dikonfirmasi" {{ $data->konfirmasi_pesanan == 'Dikonfirmasi' ? 'checked' : '' }}>
+																	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" onclick="undisable()" value="Dikonfirmasi" {{ $data->konfirmasi_pesanan == 'Dikonfirmasi' ? 'checked' : '' }}>
 																	<label class="form-check-label" for="inlineRadio1">Pesanan Dikonfirmasi</label>
 																	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" onclick="disable()" value="Ditolak" {{ $data->konfirmasi_pesanan == 'Ditolak' ? 'checked' : '' }}>
 																	<label class="form-check-label" for="inlineRadio2">Pesanan Ditolak</label>
@@ -137,10 +134,10 @@ function undisable() {
 																<div class="form-check form-check-inline" id="upear">
 																	<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio11" value="Disiapkan" {{ $data->status_pesanan == 'Disiapkan' ? 'checked' : '' }}>
 																	<label class="form-check-label" for="inlineRadio11">Pesanan Disiapkan</label>
-																
+
 																	<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio22" value="Diantar" {{ $data->status_pesanan == 'Diantar' ? 'checked' : '' }}>
 																	<label class="form-check-label" for="inlineRadio22">Pesanan Diantar</label>
-															
+
 																	<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="Selesai" {{ $data->status_pesanan == 'Selesai' ? 'checked' : '' }}>
 																	<label class="form-check-label" for="inlineRadio33">Pesanan Selesai</label>
 																</div>
@@ -189,20 +186,20 @@ function undisable() {
 	@include("admin.adminscript")
 
 	<script>
-function disable() {
-  document.getElementById("inlineRadio11").disabled = true;
-  document.getElementById("inlineRadio22").disabled = true;
-  document.getElementById("inlineRadio33").disabled = true;
-}
+		function disable() {
+			document.getElementById("inlineRadio11").disabled = true;
+			document.getElementById("inlineRadio22").disabled = true;
+			document.getElementById("inlineRadio33").disabled = true;
+		}
 
-function undisable() {
-  document.getElementById("inlineRadio11").disabled = false;
-  document.getElementById("inlineRadio22").disabled = false;
-  document.getElementById("inlineRadio33").disabled = false;
-}
-</script>
+		function undisable() {
+			document.getElementById("inlineRadio11").disabled = false;
+			document.getElementById("inlineRadio22").disabled = false;
+			document.getElementById("inlineRadio33").disabled = false;
+		}
+	</script>
 
-<script src="assets/js/jquery-2.1.0.min.js"></script>
+	<script src="assets/js/jquery-2.1.0.min.js"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

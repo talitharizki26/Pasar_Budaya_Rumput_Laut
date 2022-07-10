@@ -51,7 +51,7 @@ class HomeController extends Controller
 
 
         $id = Auth::id();
-// dd($id);
+        // dd($id);
         $count = cart::where('user_id', $id)->count();
 
 
@@ -76,11 +76,11 @@ class HomeController extends Controller
         $data3 = pesanan::all();
 
         $userty = Auth::id();
-     
-if($userty == null){
-    return redirect('/');
-}
-$usertype = Auth::user()->usertype;
+
+        if ($userty == null) {
+            return redirect('/');
+        }
+        $usertype = Auth::user()->usertype;
         if ($usertype == '1') {
 
             $id = Auth::id();
@@ -126,7 +126,7 @@ $usertype = Auth::user()->usertype;
                 $datap = DB::table('produks')->select('id_rumputlaut', 'noktp_pembudidaya')->where('noktp_pembudidaya', '=', $no_ktp)->get('id_rumputlaut');
 
                 //$notif = pesanan::whereIn('id_rumputlaut', $encodedSku)->get()->take(5);
-                $notif = pesanan::where('noktp_pembudidaya', $no_ktp)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
+                $notif = pesanan::where('noktp_pembudidaya', $no_ktp)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
 
                 $total_pesanan = Pesanan::select(DB::raw("CAST(SUM(jumlah_pesanan) as int) as jumlah_pesanan"))
                     ->GroupBy(DB::raw("Month(tgl_pesanan)"))
@@ -174,7 +174,7 @@ $usertype = Auth::user()->usertype;
                     ->pluck('bulan');
 
 
-                $notif = pesanan::where('noktp_pelanggan', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->get()->take(5);
+                $notif = pesanan::where('noktp_pelanggan', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
 
                 $saran = Saran::all();
                 $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $usertype)->get();
@@ -196,10 +196,10 @@ $usertype = Auth::user()->usertype;
         } else {
 
             $user_id = Auth::user()->no_ktp;
-             //dd($user_id);
+            //dd($user_id);
             $usertype = Auth::user()->no_ktp;
             $count = cart::where('user_id', $user_id)->count();
-     
+
             // dd($usertype);
             $user = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->first('nama_pelanggan');
             $foto = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->get();
@@ -207,10 +207,10 @@ $usertype = Auth::user()->usertype;
             //dd($user);
             // $orang = Auth::where('user_')
 
-//dd($foto);
+            //dd($foto);
 
 
-            return view('home', compact('foto','produk', 'data2', 'count', 'data3', 'data4', 'data5', 'user'));
+            return view('home', compact('foto', 'produk', 'data2', 'count', 'data3', 'data4', 'data5', 'user'));
         }
     }
 
@@ -337,7 +337,7 @@ $usertype = Auth::user()->usertype;
         $data3 = DB::table('artikels')->get()->take(5);
         $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
         $foto = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->get();
-        return view("viewarticle", compact("data2", "data3",'count','data5','foto'));
+        return view("viewarticle", compact("data2", "data3", 'count', 'data5', 'foto'));
     }
 
 

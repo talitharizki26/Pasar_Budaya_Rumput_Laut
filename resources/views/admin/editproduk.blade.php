@@ -43,7 +43,7 @@
 									</div>
 									<div class="form-group">
 										<label for="harga">Harga Rumput Laut (Rupiah)</label>
-										<input class="form-control" name="harga_rumputlaut" value="{{$data->harga_rumputlaut}}" required>
+										<input type="number" class="form-control" name="harga_rumputlaut" min="1000" value="{{$data->harga_rumputlaut}}" required>
 									</div>
 									<div class="form-group">
 										<label for="lokasi">Lokasi Rumput Laut</label>
@@ -51,11 +51,11 @@
 									</div>
 									<div class="form-group">
 										<label for="durasitahan">Durasi Ketahanan Rumput Laut (Hari)</label>
-										<input class="form-control" name="durasitahan_rumputlaut" value="{{$data->durasitahan_rumputlaut}}" required>
+										<input type="number" class="form-control" name="durasitahan_rumputlaut" min="1" value="{{$data->durasitahan_rumputlaut}}" required>
 									</div>
 									<div class="form-group">
 										<label for="stok">Stok Rumput Laut (Kilogram)</label>
-										<input type="number" class="form-control" name="stok_rumputlaut" value="{{$data->stok_rumputlaut}}" required>
+										<input type="number" class="form-control" name="stok_rumputlaut" min="0" value="{{$data->stok_rumputlaut}}" required>
 									</div>
 									<!-- <div class="form-group">
 										<div class="col-sm-5">
@@ -78,6 +78,9 @@
 									<div class="form-group">
 										<label for="gambar">Gambar Baru</label>
 										<input type="file" class="form-control" name="gambar_rumputlaut">
+										@error('gambar_rumputlaut')
+										<span class="text-danger">{{$message}}</span>
+										@enderror
 									</div>
 									<button type="submit" class="btn btn-primary mr-2" value="Save">Edit Produk</button>
 									<a href="{{url('/produk')}}" class="btn btn-dark">Batal</a>

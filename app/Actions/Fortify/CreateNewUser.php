@@ -24,11 +24,13 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         Validator::make($input, [
-            'no_ktp' => ['required', 'integer','digits:16'],
-            // 'no_hp' => ['required','max:14'],
-            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'foto' => [ 'mimes:jpg,jpeg,png'],
-             'password' => $this->passwordRules(),
+            'no_ktp' => ['required', 'numeric', 'digits:16', 'unique:users'],
+            'nama' => ['required', 'alpha'],
+            'no_hp' => ['required', 'numeric', 'min:9'],
+            'tgl_lahir' => ['required', 'date', 'before:-17 years'],
+            'email' => ['required', 'string', 'email', 'unique:users'],
+            'foto' => ['mimes:jpg,jpeg,png'],
+            'password' => $this->passwordRules(),
             // 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
         if ($input['role'] == "Pelanggan") {
@@ -41,12 +43,12 @@ class CreateNewUser implements CreatesNewUsers
             $data->nohp_pelanggan = $input['no_hp'];
             $data->jenkel_pelanggan = $input['jenkel'];
 
-            $image =$input['foto'];
+            $image = $input['foto'];
 
             $imagename = time() . '.' . $image->getClientOriginalExtension();
-        
+
             $input['foto']->move('userimage', $imagename);
-        
+
             $data->foto_pelanggan = $imagename;
             $data->save();
 
@@ -67,8 +69,6 @@ class CreateNewUser implements CreatesNewUsers
                 'no_ktp' => $input['no_ktp'],
 
             ]);
-            
-         
         } else {
             $o = "1";
             $data = new Pembudidaya;
@@ -79,12 +79,12 @@ class CreateNewUser implements CreatesNewUsers
             $data->nohp_pembudidaya = $input['no_hp'];
             $data->jenkel_pembudidaya = $input['jenkel'];
 
-            $image =$input['foto'];
+            $image = $input['foto'];
 
             $imagename = time() . '.' . $image->getClientOriginalExtension();
-        
+
             $input['foto']->move('userimage', $imagename);
-        
+
             $data->foto_pembudidaya = $imagename;
             $data->save();
             // Pembudidaya::create([
@@ -96,7 +96,7 @@ class CreateNewUser implements CreatesNewUsers
             //     'foto_pembudidaya' => $input['foto'],
             //     'jenkel_pembudidaya' => $input['jenkel'],
             // ]);
-           return User::create([
+            return User::create([
                 'email' => $input['email'],
                 'role' => $input['role'],
                 'usertype' => $o,

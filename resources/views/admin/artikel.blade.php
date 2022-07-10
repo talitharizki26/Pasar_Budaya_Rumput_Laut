@@ -32,26 +32,26 @@
 									@csrf
 									<div class="form-group">
 										<label for="judul">Judul Artikel</label>
-										<input class="form-control" name="judul_artikel" placeholder=" Judul Artikel" required>
+										<input class="form-control" name="judul_artikel" placeholder=" Judul Artikel" value="{{ old('judul_artikel') }}" required>
 									</div>
 									<div class="form-group">
 										<label for="isi">Isi Artikel</label>
-										<textarea rows="10" class="form-control" name="isi_artikel" placeholder="Isi Artikel" required></textarea>
+										<input rows="10" class="form-control" name="isi_artikel" placeholder="Isi Artikel" value="{{ old('isi_artikel') }}" required></input>
 									</div>
 									<div class="form-group">
 										<label for="sumber">Sumber Artikel</label>
-										<input class="form-control" name="sumber_artikel" placeholder="Sumber Artikel" required>
+										<input class="form-control" name="sumber_artikel" placeholder="Sumber Artikel" value="{{ old('sumber_artikel') }}" required>
 									</div>
 									<div class="form-group">
 										<label for="tglupload">Tanggal Upload Artikel</label>
-										<input type="date" class="form-control" name="tglupload_artikel" placeholder="Tgl Upload Artikel" required>
+										<input type="date" class="form-control" name="tglupload_artikel" placeholder="Tgl Upload Artikel" value="<?php echo date('Y-m-d'); ?>" required>
 									</div>
 									<div class="form-group">
 										<label for="gambar">Gambar Artikel</label>
-										<input type="file" class="form-control" name="gambar_artikel" >
+										<input type="file" class="form-control" name="gambar_artikel" required value="{{ old('gambar_artikel') }}">
 										@error('gambar_artikel')
-                      <span class="text-danger">{{$message}}</span>
-                    @enderror
+										<span class="text-danger">{{$message}}</span>
+										@enderror
 									</div>
 									<button type="submit" class="btn btn-primary mr-2" value="Save">Tambah Artikel</button>
 									<button type="reset" class="btn btn-dark">Batal</button>
