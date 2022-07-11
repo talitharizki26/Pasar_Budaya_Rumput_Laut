@@ -16,13 +16,13 @@
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
-<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
 
-<link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
+    <link rel="stylesheet" href="assets/css/templatemo-klassy-cafe.css">
 
-<link rel="stylesheet" href="assets/css/owl-carousel.css">
+    <link rel="stylesheet" href="assets/css/owl-carousel.css">
 
-<link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
 </head>
 
 
@@ -31,12 +31,12 @@
 
     <main>
 
-    @foreach($data2 as $data2)
+        @foreach($data2 as $data2)
         <div class="section visi-misi">
             <div class="container">
-            <a href="{{url('/redirects')}}" class="logo">
-<i class="fa fa-arrow-left fa-1x" aria-hidden="true"> Kembali</i>
-                        </a>
+                <a href="{{url('/redirects')}}" class="logo">
+                    <i class="fa fa-arrow-left fa-1x" aria-hidden="true"> Kembali</i>
+                </a>
                 <div class="row justify-content-between">
                     <div class="col-lg-9 col-md-9 col-sm-9 col-12 text-center">
                         <h2>{{$data2->judul_artikel}}</h2>
@@ -45,28 +45,37 @@
                         <img src='/artikelimage/{{$data2->gambar_artikel}}' alt="Hero Image" width="60%">
                         <!-- <a href="http://www.freepik.com">Designed by stories / Freepik</a> -->
                         <hr>
-                     
-<table border = 0>
-    <tr>
-        <td>
-            <p>
-            {{$data2->isi_artikel}}
-            </p>
-        </td>
-    </tr>
-</table>
-@endforeach 
-                      
+
+                        <table border=0>
+                            <tr>
+                                <td>
+                                    <p>
+                                        {{$data2->isi_artikel}}
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+
+
 
 
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-12 text-md-left text-center">
+                        <h4>Apakah Anda Menyukai Artikel Ini?</h4><br>
+                        <a href="{{url('/tambahlike',$data2->id_artikel)}}">
+                            <span class="menu-icon">
+                                <i class="fa fa-heart fa-2x text-danger"> {{$data2->suka_artikel}} Suka</i>
+                            </span>
+                        </a>
+                        @endforeach
+
+                        <br><br><br>
                         <h4>Artikel Lainnya</h4>
                         @foreach($data3 as $data2)
                         <hr class="garis-judul">
                         <a class="artikel-link" href="{{url('/showarticle',$data2->id_artikel)}}">{{$data2->judul_artikel}}</a>
 
-    
+
                         @endforeach
 
 
@@ -137,6 +146,3 @@
 <script src="js/associate.js"></script>
 
 </html>
-
-
-

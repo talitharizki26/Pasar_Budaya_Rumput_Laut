@@ -71,6 +71,7 @@ Route::post("/updateartikel/{id}", [AdminController::class, "updateartikel"]);
 
 Route::get("/hapusartikel/{id}", [AdminController::class, "hapusartikel"]);
 
+Route::get("/tambahlike/{id}", [HomeController::class, "tambahlike"]);
 
 Route::get("/showarticle/{id}", [HomeController::class, "showarticle"]);
 

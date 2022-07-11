@@ -340,16 +340,21 @@ class HomeController extends Controller
 
     public function showarticle(Request $request, $id)
     {
+        if (Auth::id()) {
 
-        $data2 = artikel::where('id_artikel', '=', $id)->get();
-        $id = Auth::id();
-        $usertype = Auth::user()->no_ktp;
+            $data2 = artikel::where('id_artikel', '=', $id)->get();
+            $id = Auth::id();
+            $usertype = Auth::user()->no_ktp;
 
-        $count = cart::where('user_id', $id)->count();
-        $data3 = DB::table('artikels')->get()->take(5);
-        $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
-        $foto = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->get();
-        return view("viewarticle", compact("data2", "data3", 'count', 'data5', 'foto'));
+            $count = cart::where('user_id', $id)->count();
+            $data3 = DB::table('artikels')->get()->take(5);
+            $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
+            $foto = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->get();
+            return view("viewarticle", compact("data2", "data3", 'count', 'data5', 'foto'));
+        } else {
+
+            return redirect('/login');
+        }
     }
 
 
@@ -457,6 +462,25 @@ class HomeController extends Controller
 
 
 
+
+
+    public function tambahlike(Request $request, $id_artikel)
+    {
+        $data = artikel::find($id_artikel);
+        $suka = DB::table('artikels')->where('id_artikel', $id_artikel)->value('suka_artikel');
+        $angka = 1;
+        $tambah = $suka + $angka;
+        $kurang = $suka - $angka;
+        if ($suka) {
+            $data->suka_artikel = $tambah;
+            $data->save();
+            return redirect()->back();
+        } else {
+            $data->suka_artikel = $kurang;
+            $data->save();
+            return redirect()->back();
+        }
+    }
 
 
 
