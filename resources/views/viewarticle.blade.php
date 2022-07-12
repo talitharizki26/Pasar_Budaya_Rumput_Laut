@@ -62,9 +62,14 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-12 text-md-left text-center">
                         <h4>Apakah Anda Menyukai Artikel Ini?</h4><br>
-                        <a href="{{url('/tambahlike',$data2->id_artikel)}}">
+                        <a style="margin-right:40px; " href="{{url('/like',$data2->id_artikel)}}">
                             <span class="menu-icon">
-                                <i class="fa fa-heart fa-2x text-danger"> {{$data2->suka_artikel}} Suka</i>
+                                <i class="fa fa-thumbs-up fa-1x"> {{$suka}} Suka</i>
+                            </span>
+                        </a>
+                        <a href="{{url('/dislike',$data2->id_artikel)}}">
+                            <span class="menu-icon">
+                                <i class="fa fa-thumbs-down fa-1x text-dark"> {{$tidaksuka}} Tidak Suka</i>
                             </span>
                         </a>
                         @endforeach

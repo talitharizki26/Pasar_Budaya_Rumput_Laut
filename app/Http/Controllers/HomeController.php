@@ -22,6 +22,10 @@ use App\Models\Pesanan;
 
 use App\Models\Saran;
 
+use App\Models\Suka;
+
+use App\Models\Tidaksuka;
+
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -342,6 +346,12 @@ class HomeController extends Controller
     {
         if (Auth::id()) {
 
+            $data6 = suka::where('id_artikel', $id);
+            $suka = $data6->count();
+
+            $data7 = tidaksuka::where('id_artikel', $id);
+            $tidaksuka = $data7->count();
+
             $data2 = artikel::where('id_artikel', '=', $id)->get();
             $id = Auth::id();
             $usertype = Auth::user()->no_ktp;
@@ -350,7 +360,7 @@ class HomeController extends Controller
             $data3 = DB::table('artikels')->get()->take(5);
             $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
             $foto = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->get();
-            return view("viewarticle", compact("data2", "data3", 'count', 'data5', 'foto'));
+            return view("viewarticle", compact("data2", "data3", 'count', 'data5', 'foto', 'suka', 'tidaksuka'));
         } else {
 
             return redirect('/login');
@@ -464,20 +474,44 @@ class HomeController extends Controller
 
 
 
-    public function tambahlike(Request $request, $id_artikel)
+    public function like($id_artikel)
     {
-        $data = artikel::find($id_artikel);
-        $suka = DB::table('artikels')->where('id_artikel', $id_artikel)->value('suka_artikel');
-        $angka = 1;
-        $tambah = $suka + $angka;
-        $kurang = $suka - $angka;
+
+        //$data = suka::find($id_artikel);
+        $id = Auth::user()->no_ktp;
+        //$suka = DB::table('sukas')->where('id_artikel', $id_artikel)->where('noktp_pelanggan', $id)->first();
+        $suka = Suka::where('id_artikel', $id_artikel)->where('noktp_pelanggan', $id)->first();
+
         if ($suka) {
-            $data->suka_artikel = $tambah;
-            $data->save();
+            $suka->delete();
+            return redirect()->back();
+            //return "hapus like";
+        } else {
+            //return "tambah like";
+            Suka::create([
+                'id_artikel' => $id_artikel,
+                'noktp_pelanggan' => $id
+            ]);
+            //$data->id_artikel = $id_artikel;
+            //$data->noktp_pelanggan = $id;
+            //$data->save();
+            return redirect()->back();
+        }
+    }
+
+    public function dislike($id_artikel)
+    {
+        $id = Auth::user()->no_ktp;
+        $dislike = Tidaksuka::where('id_artikel', $id_artikel)->where('noktp_pelanggan', $id)->first();
+
+        if ($dislike) {
+            $dislike->delete();
             return redirect()->back();
         } else {
-            $data->suka_artikel = $kurang;
-            $data->save();
+            Tidaksuka::create([
+                'id_artikel' => $id_artikel,
+                'noktp_pelanggan' => $id
+            ]);
             return redirect()->back();
         }
     }
