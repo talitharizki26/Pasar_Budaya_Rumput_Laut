@@ -129,6 +129,8 @@ Route::post("/updatebalasan/{id}", [AdminController::class, "updatebalasan"]);
 
 Route::get("/showtes/{id}", [HomeController::class, "showtes"]);
 
+Route::get("/konfirmasi/{id}", [HomeController::class, "konfirmasi"]);
+
 Route::post("/uploadtestimoni/{id}", [HomeController::class, "uploadtestimoni"]);
 
 //End Testimoni

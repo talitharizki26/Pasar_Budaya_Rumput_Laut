@@ -63,7 +63,8 @@ class HomeController extends Controller
 
             $data4 = cart::where('user_id', $id)->join('produks', 'carts.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
             $status = "Selesai";
-            $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
+            $no_ktp = Auth::user()->no_ktp;
+            $data5 = pesanan::select('*')->where('noktp_pelanggan', '=', $no_ktp)->where('isi_testimoni', '=', null)->get();
         }
         // dd($data5);
         //  else {
@@ -74,6 +75,7 @@ class HomeController extends Controller
 
 
         $produk = produk::where('stok_rumputlaut', '>', '0')
+            ->join('pembudidayas', 'produks.noktp_pembudidaya', '=', 'pembudidayas.noktp_pembudidaya')
             ->orderBy('id_rumputlaut', 'desc')
             ->get()
             ->take(100);
@@ -368,7 +370,17 @@ class HomeController extends Controller
     }
 
 
+    public function konfirmasi(Request $request, $id_pesanan)
+    {
+        $data2 = Pesanan::find($id_pesanan);
+        //dd($id_pesanan);
+        $id = Auth::id();
+        $count = cart::where('user_id', $id)->count();
+        $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
 
+        // dd($data2);
+        return view('konfirmasi', compact('data2', 'data5', 'count'));
+    }
 
 
 
@@ -379,10 +391,26 @@ class HomeController extends Controller
 
         $count = cart::where('user_id', $id)->count();
 
+        // $disiapkan = pesanan::where('id_pesanan', $id_pesanan)->where('status_pesanan', 'Disiapkan')->get();
+        // $diantar = pesanan::where('id_pesanan', $id_pesanan)->where('status_pesanan', 'Diantar')->get();
+        // $selesai = pesanan::where('id_pesanan', $id_pesanan)->where('status_pesanan', 'Selesai')->get();
+
+        // if ($disiapkan) {
+        //     return "pesanan disiapkan";
+        //     //return view('home', compact('disiapkan', 'count', 'data2', 'data5',));
+        // } elseif ($diantar) {
+        //     return "pesanan diantar";
+        //     //return redirect()->back();
+        // } elseif ($selesai) {
+        //     //return "pesanan disiapkan";
+        //     return view('isitestimoni', compact('data2', 'data5', 'count'));
+        //     //return view('home', compact('disiapkan', 'count', 'data2', 'data5',));
+        // }
 
         if (Auth::id() == $id) {
 
             $data2 = Pesanan::find($id_pesanan);
+            //dd($data2);
             $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
 
             // dd($data2);
