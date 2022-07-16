@@ -74,9 +74,12 @@ class HomeController extends Controller
 
 
 
-        $produk = produk::where('stok_rumputlaut', '>', '0')
+        $produk = produk::select('*', 'produks.id_rumputlaut AS id_produk', DB::raw('SUM(jumlah) as total_jumlah'))
+            ->where('stok_rumputlaut', '>', '0')
             ->join('pembudidayas', 'produks.noktp_pembudidaya', '=', 'pembudidayas.noktp_pembudidaya')
-            ->orderBy('id_rumputlaut', 'desc')
+            ->leftJoin('carts', 'produks.id_rumputlaut', '=', 'carts.id_rumputlaut')
+            ->orderBy('produks.id_rumputlaut', 'desc')
+            ->groupBy('produks.id_rumputlaut')
             ->get()
             ->take(100);
 
@@ -213,6 +216,9 @@ class HomeController extends Controller
             //dd($user_id);
             $usertype = Auth::user()->no_ktp;
             $count = cart::where('user_id', $user_id)->count();
+            $cart = cart::select('*')->where('user_id', '=', $user_id)->get();
+
+            // $data = cart::where('user_id', $id)->join('produks', 'carts.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
 
             // dd($usertype);
             $user = DB::table('pelanggans')->where('noktp_pelanggan', $usertype)->first('nama_pelanggan');
@@ -224,7 +230,7 @@ class HomeController extends Controller
             //dd($foto);
 
 
-            return view('home', compact('foto', 'produk', 'data2', 'count', 'data3', 'data4', 'data5', 'user'));
+            return view('home', compact('foto', 'produk', 'data2', 'count', 'data3', 'data4', 'data5', 'user', 'cart'));
         }
     }
 

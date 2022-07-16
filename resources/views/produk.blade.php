@@ -18,7 +18,7 @@
 
                 @foreach($produk as $data)
 
-                <form action="{{url('/addcart',$data->id_rumputlaut)}}" method="post">
+                <form action="{{url('/addcart',$data->id_produk)}}" method="post">
 
                     @csrf
 
@@ -35,13 +35,20 @@
                                 <p class='description'>{{$data->deskripsi_rumputlaut}}</p>
                                 <p class='description'>Ketahanan: {{$data->durasitahan_rumputlaut}} Hari</p>
                                 <p class='description'>Lokasi: {{$data->lokasi_rumputlaut}}</p>
-                                <p class='description'>Stok: {{$data->stok_rumputlaut}}</p>
+                                <?php 
+                                    if (!$data->total_jumlah) {
+                                    $sisa = $data->stok_rumputlaut;
+                                    } else {
+                                        $sisa = $data->stok_rumputlaut - $data->total_jumlah;
+                                    }
+                                ?>
+                                <p class='description'>Stok: {{$sisa}}</p>
                             </div>
                         </div>
 
                         <div style="margin-top:10px;" class="contact-form">
                             <fieldset>
-                                <input type="number" name="jumlah" min="1" max="20" placeholder="Beli Berapa Kg?" style="width: 100%;">
+                                <input type="number" name="jumlah" min="1" max="<?= ($sisa > 20) ? "20" : $sisa; ?>" placeholder="Beli Berapa Kg?" style="width: 100%;">
                             </fieldset>
                         </div>
                         <input type="submit" class="btn btn-new" value="Tambah Keranjang" style="width: 100%;">
