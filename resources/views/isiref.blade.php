@@ -204,43 +204,51 @@ https://templatemo.com/tm-558-klassy-cafe
     <div class="container">
         <div id="top" style="overflow-x: hidden;" bgcolor="#89C9D1">
 
-            <h2 style="margin-top:20px;" align="center">Pesanan Anda</h2>
+            <h2 style="margin-top:20px;" align="center">Alasan Refund Pesanan</h2>
             <div class="col-lg-12 ">
                 <div class="contact-form">
-                    @foreach($datarumput as $data2)
-                    <h6><a> Rumput Laut : {{$data2->jenis_rumputlaut}}</a></h6>
-                    <hr>
-                    <img src='/produkimage/{{$data2->gambar_rumputlaut}}' alt="Hero Image" width="40%">
-                    <!-- <a href="http://www.freepik.com">Designed by stories / Freepik</a> -->
-                    <hr>
-                    @endforeach
+                    <form id="contact" action="{{url('/uploadref',$data2->id_pesanan)}}" method="post">
+
+                        @csrf
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <textarea name="isi_testimoni" id="isi_testimoni" placeholder="Isi Feedback" value="{{$data2->balasan_testimoni}}" required></textarea>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <select name="bintang_testimoni" id="bintang_testimoni">
+                                        <option value="-">Alasan Refund?</option>
+                                        <option value=1>Tidak Sesuai Pesanan</option>
+                                        <option value=2>Pesanan Rusak</option>
+                                        <option value=3>Jumlah Pesanan kurang</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="main-button-icon" style="margin-top: 10px;;">Kirim</button>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-6">
+
+                                <button type="reset" class="btn btn-danger" style="margin-top: 10px;">Batal</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                @foreach($data as $data)
-                <h6><a> Tanggal Pesan : {{$data->tgl_pesanan}}</a></h6>
-                <hr>
-                <h6><a> Jumlah Rumput Laut : {{$data->jumlah_pesanan}}</a></h6>
-                <hr>
-                <h6><a> Total Pesanan : {{$data->total_pesanan}}</a></h6>
-
-                <hr>
             </div>
+
+
+
         </div>
 
-        <div class="row">
-            <div class="col-lg-3">
-                <a href="{{url('/showtes',$data->id_pesanan)}}">
-                    <i class="fa fa-check fa-1x" aria-hidden="true"> Sesuai Pesanan</i>
-                </a>
-            </div>
-
-            <div class="col-lg-3">
-                <a href="{{url('/showref',$data->id_pesanan)}}">
-                    <i class="fa fa-times fa-1x" aria-hidden="true"> Tidak Sesuai</i>
-                </a>
-            </div>
-        </div>
-
-        @endforeach
 
     </div>
 

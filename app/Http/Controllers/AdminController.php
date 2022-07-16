@@ -94,12 +94,26 @@ class AdminController extends Controller
     $id = Auth::user()->no_ktp;
     $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
-    $data = pesanan::where('noktp_pembudidaya', $id)
+    $data = pesanan::where('noktp_pembudidaya', $id)->where('status_pesanan', '!=', 'Direfund')
+      ->orWhere('status_pesanan', '=', null)
       ->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')
       ->orderBy('id_pesanan', 'desc')
       ->get();
 
     return view('admin.pesanan', compact('data', 'notif', 'user'));
+  }
+
+  public function refund()
+  {
+    $id = Auth::user()->no_ktp;
+    $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
+    $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
+    $data = pesanan::where('noktp_pembudidaya', $id)->where('status_pesanan', '=', 'Direfund')
+      ->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')
+      ->orderBy('id_pesanan', 'desc')
+      ->get();
+
+    return view('admin.refund', compact('data', 'notif', 'user'));
   }
 
   public function updatepesanan(Request $request, $id)
@@ -307,6 +321,7 @@ class AdminController extends Controller
     $data->sumber_artikel = $request->sumber_artikel;
     $data->tglupload_artikel = $request->tglupload_artikel;
     $data->no_ktp = $no_ktp;
+    $data->status = "preview";
     $data->save();
 
     return redirect()->back()->with('toast_success', 'Artikel Berhasil Ditambahkan!');
@@ -356,6 +371,27 @@ class AdminController extends Controller
     $data->delete();
     return redirect()->back()->with('toast_success', 'Artikel Berhasil Dihapus!');
   }
+
+  public function finalartikel($id)
+  {
+    $data = artikel::find($id);
+
+    $data->status = "final";
+
+    $data->save();
+    return redirect()->back()->with('toast_success', 'Artikel Berhasil Disimpan!');
+  }
+
+
+
+  public function previewartikel($id)
+  {
+
+    $data2 = artikel::where('id_artikel', '=', $id)->get();
+
+    return view("admin.previewartikel", compact("data2"));
+  }
+
 
   // End Artikel
 

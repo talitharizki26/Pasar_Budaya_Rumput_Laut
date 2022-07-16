@@ -71,6 +71,12 @@ Route::post("/updateartikel/{id}", [AdminController::class, "updateartikel"]);
 
 Route::get("/hapusartikel/{id}", [AdminController::class, "hapusartikel"]);
 
+Route::get("/finalartikel/{id}", [AdminController::class, "finalartikel"]);
+
+
+Route::get("/previewartikel/{id}", [AdminController::class, "previewartikel"]);
+
+
 Route::get("/like/{id}", [HomeController::class, "like"]);
 
 Route::get("/dislike/{id}", [HomeController::class, "dislike"]);
@@ -108,7 +114,7 @@ Route::put('/pesanan/{Pesanan}', [AdminController::class, 'updatepesanan']);
 
 Route::get("/pesanan", [AdminController::class, "pesanan"]);
 
-
+Route::get("/refund", [AdminController::class, "refund"]);
 
 
 Route::get('/edittolak/{id}', [AdminController::class, 'edittolak']);
@@ -129,10 +135,13 @@ Route::post("/updatebalasan/{id}", [AdminController::class, "updatebalasan"]);
 
 Route::get("/showtes/{id}", [HomeController::class, "showtes"]);
 
+Route::get("/showref/{id}", [HomeController::class, "showref"]);
+
 Route::get("/konfirmasi/{id}", [HomeController::class, "konfirmasi"]);
 
 Route::post("/uploadtestimoni/{id}", [HomeController::class, "uploadtestimoni"]);
 
+Route::post("/uploadref/{id}", [HomeController::class, "uploadref"]);
 //End Testimoni
 
 // Laporan

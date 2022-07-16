@@ -40,8 +40,7 @@ class HomeController extends Controller
         } else
 
             $produk = produk::all();
-        $data2 = artikel::all();
-
+        $data2 = artikel::where("status", "final")->get();
         $data3 = pesanan::all();
 
         return view("home", compact("produk", "data2", "data3"));
@@ -80,7 +79,7 @@ class HomeController extends Controller
             ->get()
             ->take(100);
 
-        $data2 = artikel::all();
+        $data2 = artikel::where("status", "final")->get();
 
         $data3 = pesanan::where('status_pesanan', 'Selesai')
             ->whereNotNull('isi_testimoni')
@@ -372,14 +371,16 @@ class HomeController extends Controller
 
     public function konfirmasi(Request $request, $id_pesanan)
     {
-        $data2 = Pesanan::find($id_pesanan);
-        //dd($id_pesanan);
+
+        $data = Pesanan::where('id_pesanan', '=', $id_pesanan)->get();
+        $rumput = Pesanan::where('id_pesanan', '=', $id_pesanan)->pluck('id_rumputlaut');
+        $datarumput = Produk::where('id_rumputlaut', '=', $rumput)->get();
         $id = Auth::id();
         $count = cart::where('user_id', $id)->count();
         $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
 
         // dd($data2);
-        return view('konfirmasi', compact('data2', 'data5', 'count'));
+        return view('konfirmasi', compact('data', 'data5', 'count', 'datarumput'));
     }
 
 
@@ -391,21 +392,6 @@ class HomeController extends Controller
 
         $count = cart::where('user_id', $id)->count();
 
-        // $disiapkan = pesanan::where('id_pesanan', $id_pesanan)->where('status_pesanan', 'Disiapkan')->get();
-        // $diantar = pesanan::where('id_pesanan', $id_pesanan)->where('status_pesanan', 'Diantar')->get();
-        // $selesai = pesanan::where('id_pesanan', $id_pesanan)->where('status_pesanan', 'Selesai')->get();
-
-        // if ($disiapkan) {
-        //     return "pesanan disiapkan";
-        //     //return view('home', compact('disiapkan', 'count', 'data2', 'data5',));
-        // } elseif ($diantar) {
-        //     return "pesanan diantar";
-        //     //return redirect()->back();
-        // } elseif ($selesai) {
-        //     //return "pesanan disiapkan";
-        //     return view('isitestimoni', compact('data2', 'data5', 'count'));
-        //     //return view('home', compact('disiapkan', 'count', 'data2', 'data5',));
-        // }
 
         if (Auth::id() == $id) {
 
@@ -415,6 +401,25 @@ class HomeController extends Controller
 
             // dd($data2);
             return view('isitestimoni', compact('data2', 'data5', 'count'));
+        }
+    }
+
+    public function showref(Request $request, $id_pesanan)
+    {
+
+        $id = Auth::id();
+
+        $count = cart::where('user_id', $id)->count();
+
+
+        if (Auth::id() == $id) {
+
+            $data2 = Pesanan::find($id_pesanan);
+            //dd($data2);
+            $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
+
+            // dd($data2);
+            return view('isiref', compact('data2', 'data5', 'count'));
         }
     }
 
@@ -434,6 +439,34 @@ class HomeController extends Controller
         return redirect('redirects');
         // return view('/redirects');
     }
+
+    public function uploadref(Request $request, $id)
+    {
+        // $rumput = Pesanan::where('id_pesanan', '=', $id)->pluck('id_rumputlaut');
+        // $aa = DB::table('pesanans')->where('id_pesanan', $id)->value('jumlah_pesanan');
+        // $stock = DB::table('produks')->where('id_rumputlaut', $rumput)->value('stok_rumputlaut');
+        // $update_stok = produk::find($rumput)->first();
+        // $sisa = $aa + $stock;
+        // $update_stok->stok_rumputlaut = $sisa;
+        // $update_stok->save();
+        // dd($sisa);
+
+        // $datarumput = Produk::where('id_rumputlaut', '=', $rumput)->pluck('stok_rumputlaut');
+        // dd($datarumput);
+        $data = Pesanan::find($id);
+        $today = Carbon::today()->setTime(9, 30, 0);
+        $now = date('H:i:s');
+        $data->isi_testimoni = $request->isi_testimoni;
+        $data->tgl_testimoni = $today;
+        $data->waktu_testimoni = $now;
+        $data->konfirmasi_pesanan = "Belum Dikonfirmasi";
+        $data->status_pesanan = "Direfund";
+        $data->save();
+        // dd($data);
+        return redirect('redirects');
+        // return view('/redirects');
+    }
+
 
     public function saran(Request $request)
     {

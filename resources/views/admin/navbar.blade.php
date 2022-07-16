@@ -71,6 +71,15 @@
       </a>
     </li>
 
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{{url('/refund')}}">
+        <span class="menu-icon">
+          <i class="mdi mdi-format-list-bulleted"></i>
+        </span>
+        <span class="menu-title">Data Refund</span>
+      </a>
+    </li>
+
     <li class="nav-item nav-category">
       <span class="nav-link">Lihat Data</span>
     </li>

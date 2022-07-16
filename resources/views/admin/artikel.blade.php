@@ -90,9 +90,18 @@
 												</td>
 												<td>{{$data->judul_artikel}}</td>
 												<td>{{$data->sumber_artikel}}</td>
-												<td><a class="btn-sm btn-success" href="{{url('/editartikel',$data->id_artikel)}}">Edit</a>
+												<td>
+													@if ($data->status == "final")
+													<a class="btn-sm btn-primary" href="{{url('/editartikel',$data->id_artikel)}}">Edit</a>
 													<!-- <a class="btn-sm btn-danger delete" href="#" id-artikel="{{$data->id_artikel}}">Hapus</a> -->
 													<a href="{{url('/hapusartikel',$data->id_artikel)}}" class="btn-sm btn-danger" onclick=" return confirm('Yakin ingin menghapus data?')">Hapus</a>
+
+													@else
+													<a class="btn-sm btn-info" href="{{url('/previewartikel',$data->id_artikel)}}">Preview</a>
+													<a class="btn-sm btn-primary" href="{{url('/editartikel',$data->id_artikel)}}">Edit</a>
+													<!-- <a class="btn-sm btn-danger delete" href="#" id-artikel="{{$data->id_artikel}}">Hapus</a> -->
+													<a href="{{url('/finalartikel',$data->id_artikel)}}" class="btn-sm btn-success">Upload</a>
+													@endif
 												</td>
 											</tr>
 
