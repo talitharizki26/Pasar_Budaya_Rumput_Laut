@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2022 at 08:54 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.15
+-- Generation Time: Jul 17, 2022 at 01:20 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -223,26 +223,27 @@ CREATE TABLE `pesanans` (
   `tgl_testimoni` date DEFAULT NULL,
   `waktu_testimoni` time DEFAULT NULL,
   `balasan_testimoni` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bintang_testimoni` int(100) DEFAULT NULL
+  `bintang_testimoni` int(100) DEFAULT NULL,
+  `alasan_ditolak` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pesanans`
 --
 
-INSERT INTO `pesanans` (`id_pesanan`, `tgl_pesanan`, `waktu_pesanan`, `id_rumputlaut`, `noktp_pelanggan`, `jumlah_pesanan`, `total_pesanan`, `status_pesanan`, `ekspedisi_pesanan`, `konfirmasi_pesanan`, `bukti_pembayaran`, `isi_testimoni`, `tgl_testimoni`, `waktu_testimoni`, `balasan_testimoni`, `bintang_testimoni`) VALUES
-(28, '2022-05-29', '09:45:12', 18, 78993, 4, 100000, 'Direfund', 'JNE/J&T', 'Pending', 'bukti1.jpg', 'Terima kasih mas', '2022-06-30', NULL, 'Sama-sama bu', 5),
-(29, '2022-02-24', '09:45:12', 24, 78993, 10, 60000, 'Selesai', 'JNE/J&T', 'Ditolak', 'bukti1.jpg', 'Bagus dan cepat sampai', '2022-06-30', '01:16:07', 'Sama-sama bu', 4),
-(30, '2022-03-25', '09:45:12', 18, 78993, 15, 100000, 'Disiapkan', 'JNE/J&T', 'Ditolak', 'bukti1.jpg', 'Terima kasih mas', '2022-06-30', '06:16:23', 'Sama-sama bu', 5),
-(35, '2022-07-04', '00:36:09', 34, 78993, 10, 34000, 'Disiapkan', NULL, 'Dikonfirmasi', '-', NULL, NULL, NULL, NULL, NULL),
-(44, '2022-07-10', '15:31:33', 34, 9875647382918574, 3, 33000, 'Direfund', 'Mitra', 'Pending', '1657467093.jpg', 's', '2022-07-16', '15:22:09', NULL, NULL),
-(45, '2022-07-10', '16:01:10', 24, 78993, 1, 60000, 'Direfund', 'Mitra', 'Pending', '1657468870.jpg', NULL, NULL, NULL, NULL, NULL),
-(46, '2022-07-15', '12:53:26', 34, 9875647382918574, 1, 11000, 'Direfund', 'JNE/J&T', 'Pending', '1657889606.png', 'xcs', '2022-07-16', '15:29:35', NULL, NULL),
-(47, '2022-07-16', '13:32:00', 34, 78993, 4, 44000, 'Belum Disiapkan', 'JNE/J&T', NULL, '1657978320.jpg', NULL, NULL, NULL, NULL, NULL),
-(48, '2022-07-16', '13:32:38', 34, 78993, 4, 44000, 'Belum Disiapkan', 'JNE/J&T', NULL, '1657978358.jpg', NULL, NULL, NULL, NULL, NULL),
-(49, '2022-07-16', '13:34:42', 34, 78993, 20, 220000, 'Disiapkan', 'JNE/J&T', 'Dikonfirmasi', '1657978482.jpg', NULL, NULL, NULL, NULL, NULL),
-(50, '2022-07-16', '13:38:55', 34, 78993, 20, 220000, 'Disiapkan', 'Mitra', 'Dikonfirmasi', '1657978735.jpg', NULL, NULL, NULL, NULL, NULL),
-(51, '2022-07-16', '14:50:05', 34, 78993, 20, 220000, 'Selesai', 'JNE/J&T', 'Dikonfirmasi', '1657983005.jpg', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `pesanans` (`id_pesanan`, `tgl_pesanan`, `waktu_pesanan`, `id_rumputlaut`, `noktp_pelanggan`, `jumlah_pesanan`, `total_pesanan`, `status_pesanan`, `ekspedisi_pesanan`, `konfirmasi_pesanan`, `bukti_pembayaran`, `isi_testimoni`, `tgl_testimoni`, `waktu_testimoni`, `balasan_testimoni`, `bintang_testimoni`, `alasan_ditolak`) VALUES
+(28, '2022-05-29', '09:45:12', 18, 78993, 4, 100000, 'Direfund', 'JNE/J&T', 'Pending', 'bukti1.jpg', 'Terima kasih mas', '2022-06-30', NULL, 'Sama-sama bu', 5, ''),
+(29, '2022-02-24', '09:45:12', 24, 78993, 10, 60000, 'Belum Disiapkan', 'JNE/J&T', 'Ditolak', 'bukti1.jpg', 'Bagus dan cepat sampai', '2022-06-30', '01:16:07', 'Sama-sama bu', 4, 'Uang belum diterima'),
+(30, '2022-03-25', '09:45:12', 18, 78993, 15, 100000, 'Belum Disiapkan', 'JNE/J&T', 'Ditolak', 'bukti1.jpg', 'Terima kasih mas', '2022-06-30', '06:16:23', 'Sama-sama bu', 5, 'Barang rusak'),
+(35, '2022-07-04', '00:36:09', 34, 78993, 10, 34000, 'Disiapkan', NULL, 'Dikonfirmasi', '-', NULL, NULL, NULL, NULL, NULL, ''),
+(44, '2022-07-10', '15:31:33', 34, 9875647382918574, 3, 33000, 'Direfund', 'Mitra', 'Pending', '1657467093.jpg', 's', '2022-07-16', '15:22:09', NULL, NULL, ''),
+(45, '2022-07-10', '16:01:10', 24, 78993, 1, 60000, 'Direfund', 'Mitra', 'Pending', '1657468870.jpg', NULL, NULL, NULL, NULL, NULL, ''),
+(46, '2022-07-15', '12:53:26', 34, 9875647382918574, 1, 11000, 'Direfund', 'JNE/J&T', 'Pending', '1657889606.png', 'xcs', '2022-07-16', '15:29:35', NULL, NULL, ''),
+(47, '2022-07-16', '13:32:00', 34, 78993, 4, 44000, 'Belum Disiapkan', 'JNE/J&T', NULL, '1657978320.jpg', NULL, NULL, NULL, NULL, NULL, ''),
+(48, '2022-07-16', '13:32:38', 34, 78993, 4, 44000, 'Belum Disiapkan', 'JNE/J&T', NULL, '1657978358.jpg', NULL, NULL, NULL, NULL, NULL, ''),
+(49, '2022-07-16', '13:34:42', 34, 78993, 20, 220000, 'Disiapkan', 'JNE/J&T', 'Dikonfirmasi', '1657978482.jpg', NULL, NULL, NULL, NULL, NULL, ''),
+(50, '2022-07-16', '13:38:55', 34, 78993, 20, 220000, 'Disiapkan', 'Mitra', 'Dikonfirmasi', '1657978735.jpg', NULL, NULL, NULL, NULL, NULL, ''),
+(51, '2022-07-16', '14:50:05', 34, 78993, 20, 220000, 'Selesai', 'JNE/J&T', 'Dikonfirmasi', '1657983005.jpg', NULL, NULL, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -315,6 +316,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('27sEN4tOhEvODZogn6HvMNrmaQosXhbStGGIvRdr', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieWZ3TDhZTmttZktVU1dGMjZkVVB1UDNDR1psSTdBTnVpTlFGRG1nVSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly9wYXNhcl9idWRheWFfcnVtcHV0X2xhdXQudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1658041480),
 ('bikeViQnU8yMRZgPSgNUboSrZkDnJHhmckr8OwDH', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiZWJ2dE9rOWtrZkwxTmxWY1dxZ0t2d0R0eWk3eHRsUFB6UXoxRWxnVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1658038372),
 ('nkDOYVtvNvVU3gyWELG44FE2lTO6lxCcWQKyVNFb', 13, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiYnlNMGhsaVU4bVNWVzhveVZqUTZ2c0w2cEVnY3dIdjk4YUp2OUNRdCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zaG93cmVmLzUxIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTM7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRYZktDbDRCUDcxR3BhYXZxcVl1SjkuNGouZ3k1RXg3bG5rUWtZTFBKRzBseDM1dXpBLlJvYSI7fQ==', 1657989486),
 ('SzVE45uuTWkgJPiJMpHsbtsdxKkCC2cGTSdazJ7V', 12, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZmpBZXBnMUcxNHlSSTgxYU5nYlpzOVNwa0xyc3FHZ3NzZGVlZG1KdyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZXNhbmFuIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTI7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCR6MTVUaXJONnBQaVFNZWpsMUs4Wjh1LzI4bVBmN1hHdUtWMnZDay9zeE5VYnlkaDNmODhNNiI7fQ==', 1658039114);
