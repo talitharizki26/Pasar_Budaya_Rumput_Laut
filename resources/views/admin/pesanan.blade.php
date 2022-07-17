@@ -149,8 +149,8 @@
 																	<input class="form-check-input diantar " type="radio" name="inlineRadioOptions2" id="diantar" value="Diantar" {{ $data->status_pesanan == 'Diantar' ? 'checked' : '' }} @disabled($data->status_pesanan == 'Selesai' || $data->konfirmasi_pesanan == 'Ditolak')>
 																	<label class="form-check-label" for="diantar">Pesanan Diantar</label>
 
-																	<input class="form-check-input selesai " type="radio" name="inlineRadioOptions2" id="selesai" value="Selesai" {{ $data->status_pesanan == 'Selesai' ? 'checked' : '' }}>
-																	<label class="form-check-label" for="selesai" @disabled($data->konfirmasi_pesanan == 'Ditolak')>Pesanan Selesai</label>
+																	<input class="form-check-input selesai " type="radio" name="inlineRadioOptions2" id="selesai" value="Selesai" {{ $data->status_pesanan == 'Selesai' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Ditolak')>
+																	<label class="form-check-label" for="selesai" >Pesanan Selesai</label>
 																</div>
 
 
