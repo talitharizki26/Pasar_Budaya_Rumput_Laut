@@ -87,14 +87,14 @@
 													@if ($data->status_pesanan == "Selesai")
 														<span class="btn btn-primary">Pesanan Selesai</span>
 													@elseif ($data->alasan_ditolak != Null || $data->alasan_ditolak != "")
-														<span class="btn btn-danger" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Pesanan ditolak</span>
+														<span class="btn btn-danger tombol_ditolak" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Pesanan ditolak</span>
 													@elseif ($data->konfirmasi_pesanan == "Ditolak")
-														<button class="btn btn-warning" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Beri Alasan ditolak</button>
+														<button class="btn btn-warning tombol_ditolak" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Beri Alasan ditolak</button>
 														
 													@elseif ($data->konfirmasi_pesanan == "Dikonfirmasi")
-														<button class="btn btn-info" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Update Status</button>
+														<button class="btn btn-info tombol_konfirmasi" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Update Status</button>
 													@else
-														<button class="btn btn-success" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Konfirmasi</button>
+														<button class="btn btn-success tombol_konfirmasi" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Konfirmasi</button>
 													@endif
 													
 												</td>
@@ -203,7 +203,7 @@
 
 	<script>
 
-		 $('.dikonfirmasi').on('click', function(e) {
+		$('.dikonfirmasi').on('click', function(e) {
 			$('.alasan_ditolak').attr('disabled', 'disabled');
 			$('.disiapkan').removeAttr('disabled');
 			$('.diantar').removeAttr('disabled');
@@ -214,6 +214,14 @@
 			$('.disiapkan').attr('disabled', 'disabled');
 			$('.diantar').attr('disabled', 'disabled');
 			$('.selesai').attr('disabled', 'disabled');
+        });
+
+		$('.tombol_ditolak').on('click', function(e) {
+            $('.alasan_ditolak').removeAttr('disabled');
+        });
+
+		$('.tombol_konfirmasi').on('click', function(e) {
+            $('.alasan_ditolak')..attr('disabled', 'disabled');
         });
 	</script>
 	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
