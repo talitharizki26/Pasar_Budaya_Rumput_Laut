@@ -130,6 +130,7 @@ class AdminController extends Controller
     $tambah = $request->inlineRadioOptions2;
     $update_barang->konfirmasi_pesanan = $request->inlineRadioOptions;
     $update_barang->status_pesanan = $request->inlineRadioOptions2;
+    $update_barang->alasan_ditolak = $request->alasan_ditolak;
     //dd($kurang);
     if ($kurang == "Dikonfirmasi" && $tambah == "Disiapkan") {
       $sisa = $stock - $totalbeli;

@@ -6,15 +6,7 @@
 
 	@include("admin.admincss")
 
-	<script>
-		function disable() {
-			document.getElementById("inlineRadio22").disabled = true;
-		}
-
-		function undisable() {
-			document.getElementById("inlineRadio22").disabled = false;
-		}
-	</script>
+	
 </head>
 
 <body>
@@ -92,7 +84,19 @@
 													{{$data->status_pesanan}}
 												</td>
 												<td>
-													<button class="btn btn-success" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Konfirmasi</button>
+													@if ($data->status_pesanan == "Selesai")
+														<span class="btn btn-primary">Pesanan Selesai</span>
+													@elseif ($data->alasan_ditolak != Null || $data->alasan_ditolak != "")
+														<span class="btn btn-danger" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Pesanan ditolak</span>
+													@elseif ($data->konfirmasi_pesanan == "Ditolak")
+														<button class="btn btn-warning" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Beri Alasan ditolak</button>
+														
+													@elseif ($data->konfirmasi_pesanan == "Dikonfirmasi")
+														<button class="btn btn-info" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Update Status</button>
+													@else
+														<button class="btn btn-success" data-toggle="modal" data-target="#modalUpdateBarang{{ $data->id_pesanan }}">Konfirmasi</button>
+													@endif
+													
 												</td>
 
 											</tr>
@@ -124,22 +128,29 @@
 
 																<label for="">Konfirmasi Pesanan</label>
 																<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" onclick="undisable()" value="Dikonfirmasi" {{ $data->konfirmasi_pesanan == 'Dikonfirmasi' ? 'checked' : '' }}>
-																	<label class="form-check-label" for="inlineRadio1">Pesanan Dikonfirmasi</label>
-																	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" onclick="disable()" value="Ditolak" {{ $data->konfirmasi_pesanan == 'Ditolak' ? 'checked' : '' }}>
-																	<label class="form-check-label" for="inlineRadio2">Pesanan Ditolak</label>
+																	
+																	<input class="form-check-input dikonfirmasi" type="radio" name="inlineRadioOptions" id="dikonfirmasi" value="Dikonfirmasi" {{ $data->konfirmasi_pesanan == 'Dikonfirmasi' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Ditolak') >
+																	<label class="form-check-label" for="dikonfirmasi">Pesanan Dikonfirmasi</label>
+																	
+																	<input class="form-check-input ditolak" type="radio" name="inlineRadioOptions" id="ditolak" value="Ditolak" {{ $data->konfirmasi_pesanan == 'Ditolak' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Dikonfirmasi')>
+																	<label class="form-check-label" for="ditolak">Pesanan Ditolak</label>
+																	
+																	<div class="form-group">
+																		<label for="alasan_ditolak">Alasan ditolak</label>
+																		<input type="text" class="form-control alasan_ditolak" name="alasan_ditolak" id="alasan_ditolak" value="{{ $data->alasan_ditolak }}" @disabled($data->konfirmasi_pesanan != 'Ditolak')>
+																	</div>
 																</div>
 
 																<label for="">Konfirmasi Status</label>
 																<div class="form-check form-check-inline" id="upear">
-																	<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio11" value="Disiapkan" {{ $data->status_pesanan == 'Disiapkan' ? 'checked' : '' }}>
-																	<label class="form-check-label" for="inlineRadio11">Pesanan Disiapkan</label>
+																	<input class="form-check-input disiapkan " type="radio" name="inlineRadioOptions2" id="disiapkan" value="Disiapkan" {{ $data->status_pesanan == 'Disiapkan' ? 'checked' : '' }} @disabled($data->status_pesanan == 'Diantar' || $data->status_pesanan == 'Selesai' || $data->konfirmasi_pesanan == 'Ditolak')>
+																	<label class="form-check-label" for="disiapkan">Pesanan Disiapkan</label>
 
-																	<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio22" value="Diantar" {{ $data->status_pesanan == 'Diantar' ? 'checked' : '' }}>
-																	<label class="form-check-label" for="inlineRadio22">Pesanan Diantar</label>
+																	<input class="form-check-input diantar " type="radio" name="inlineRadioOptions2" id="diantar" value="Diantar" {{ $data->status_pesanan == 'Diantar' ? 'checked' : '' }} @disabled($data->status_pesanan == 'Selesai' || $data->konfirmasi_pesanan == 'Ditolak')>
+																	<label class="form-check-label" for="diantar">Pesanan Diantar</label>
 
-																	<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="Selesai" {{ $data->status_pesanan == 'Selesai' ? 'checked' : '' }}>
-																	<label class="form-check-label" for="inlineRadio33">Pesanan Selesai</label>
+																	<input class="form-check-input selesai " type="radio" name="inlineRadioOptions2" id="selesai" value="Selesai" {{ $data->status_pesanan == 'Selesai' ? 'checked' : '' }}>
+																	<label class="form-check-label" for="selesai" @disabled($data->konfirmasi_pesanan == 'Ditolak')>Pesanan Selesai</label>
 																</div>
 
 
@@ -185,21 +196,26 @@
 
 	@include("admin.adminscript")
 
-	<script>
-		function disable() {
-			document.getElementById("inlineRadio11").disabled = true;
-			document.getElementById("inlineRadio22").disabled = true;
-			document.getElementById("inlineRadio33").disabled = true;
-		}
-
-		function undisable() {
-			document.getElementById("inlineRadio11").disabled = false;
-			document.getElementById("inlineRadio22").disabled = false;
-			document.getElementById("inlineRadio33").disabled = false;
-		}
-	</script>
+	
 
 	<script src="assets/js/jquery-2.1.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+	<script>
+
+		 $('.dikonfirmasi').on('click', function(e) {
+			$('.alasan_ditolak').attr('disabled', 'disabled');
+			$('.disiapkan').removeAttr('disabled');
+			$('.diantar').removeAttr('disabled');
+			$('.selesai').removeAttr('disabled');
+        });
+		$('.ditolak').on('click', function(e) {
+            $('.alasan_ditolak').removeAttr('disabled');
+			$('.disiapkan').attr('disabled', 'disabled');
+			$('.diantar').attr('disabled', 'disabled');
+			$('.selesai').attr('disabled', 'disabled');
+        });
+	</script>
 	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
