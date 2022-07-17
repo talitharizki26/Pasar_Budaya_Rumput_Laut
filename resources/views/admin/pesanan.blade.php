@@ -137,7 +137,7 @@
 																	
 																	<div class="form-group">
 																		<label for="alasan_ditolak">Alasan ditolak</label>
-																		<input type="text" class="form-control alasan_ditolak" name="alasan_ditolak" id="alasan_ditolak" value="{{ $data->alasan_ditolak }}" @disabled($data->konfirmasi_pesanan != 'Ditolak')>
+																		<input type="text" class="form-control alasan_ditolak" name="alasan_ditolak" id="alasan_ditolak" value="{{ $data->alasan_ditolak }}"  @disabled($data->konfirmasi_pesanan != 'Ditolak')>
 																	</div>
 																</div>
 
@@ -221,7 +221,7 @@
         });
 
 		$('.tombol_konfirmasi').on('click', function(e) {
-            $('.alasan_ditolak')..attr('disabled', 'disabled');
+            $('.alasan_ditolak').attr('disabled', 'disabled');
         });
 	</script>
 	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
