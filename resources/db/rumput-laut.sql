@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2022 at 05:49 PM
+-- Generation Time: Jul 17, 2022 at 08:54 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.15
 
@@ -34,21 +34,23 @@ CREATE TABLE `artikels` (
   `sumber_artikel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tglupload_artikel` date NOT NULL,
   `gambar_artikel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_ktp` bigint(100) UNSIGNED NOT NULL
+  `no_ktp` bigint(100) UNSIGNED NOT NULL,
+  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `artikels`
 --
 
-INSERT INTO `artikels` (`id_artikel`, `judul_artikel`, `isi_artikel`, `sumber_artikel`, `tglupload_artikel`, `gambar_artikel`, `no_ktp`) VALUES
-(29, 'Potensi Rumput Laut Indonesia Raya', 'aaaaaaaaa', 'Kementrian P&K', '2022-07-05', '1656957812.png', 3333333333333333),
-(30, 'Pentingnya panen rumput laut sebelum 45 hari', 'aaaaaaaaaaaqq', 'qqqqqqq', '2022-07-05', '1656958455.png', 3333333333333333),
-(32, 'Potensi Rumput Laut Indonesia', '->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')', 'Google Gambar', '2022-07-10', '1657439501.jpg', 737109),
-(34, 'aaaaaa', 'aaaaa', 'Google Gambar', '2022-07-04', '1657445688.jpg', 737109),
-(35, 'Potensi Rumput Laut Indonesia', 'zzzzzzzzzzzzzzz', 'Kementrian PK', '2022-07-04', '1657446437.jpg', 737109),
-(37, 'Pentingnya panen rumput laut sebelum 45 hari', 'zzzzzzzzzzzzzzz', 'Google', '2022-07-10', '1657447212.jpg', 737109),
-(38, 'Potensi Rumput Laut Indonesia', 'input type=”number” adalah bidang untuk memasukan angka.  input number akan memvalidasi dan menolak masukan selain angka.  pada saat inputan focus atau hover menggunakan mouse akan tampil panah untuk menambah angka atau menurunkan angkanya.', 'Google', '2022-07-10', '1657447391.jpg', 737109);
+INSERT INTO `artikels` (`id_artikel`, `judul_artikel`, `isi_artikel`, `sumber_artikel`, `tglupload_artikel`, `gambar_artikel`, `no_ktp`, `status`) VALUES
+(29, 'Potensi Rumput Laut Indonesia Raya', 'aaaaaaaaa', 'Kementrian P&K', '2022-07-05', '1656957812.png', 3333333333333333, 'final'),
+(30, 'Pentingnya panen rumput laut sebelum 45 hari', 'aaaaaaaaaaaqq', 'qqqqqqq', '2022-07-05', '1656958455.png', 3333333333333333, ''),
+(32, 'Potensi Rumput Laut Indonesia', '->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')\r\n      ->where(\'sumber_artikel\', \'Like\', \'%\' . $search_artikel . \'%\')', 'Google Gambar', '2022-07-10', '1657439501.jpg', 737109, ''),
+(34, 'aaaaaa', 'aaaaa', 'Google Gambar', '2022-07-04', '1657445688.jpg', 737109, 'final'),
+(35, 'Potensi Rumput Laut Indonesia', 'zzzzzzzzzzzzzzz', 'Kementrian PK', '2022-07-04', '1657446437.jpg', 737109, ''),
+(37, 'Pentingnya panen rumput laut sebelum 45 hari', 'zzzzzzzzzzzzzzz', 'Google', '2022-07-10', '1657447212.jpg', 737109, 'final'),
+(38, 'Potensi Rumput Laut Indonesia', 'input type=”number” adalah bidang untuk memasukan angka.  input number akan memvalidasi dan menolak masukan selain angka.  pada saat inputan focus atau hover menggunakan mouse akan tampil panah untuk menambah angka atau menurunkan angkanya.', 'Google', '2022-07-10', '1657447391.jpg', 737109, 'final'),
+(39, 'coba', 'cobacaaaaaaaaaaaa\'', 'cobaa', '2022-07-16', '1657952756.png', 737109, 'final');
 
 -- --------------------------------------------------------
 
@@ -58,17 +60,10 @@ INSERT INTO `artikels` (`id_artikel`, `judul_artikel`, `isi_artikel`, `sumber_ar
 
 CREATE TABLE `carts` (
   `id` int(100) UNSIGNED NOT NULL,
-  `user_id` int(100) NOT NULL,
+  `user_id` bigint(100) NOT NULL,
   `id_rumputlaut` int(100) NOT NULL,
   `jumlah` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `carts`
---
-
-INSERT INTO `carts` (`id`, `user_id`, `id_rumputlaut`, `jumlah`) VALUES
-(37, 78993, 34, 4);
 
 -- --------------------------------------------------------
 
@@ -153,7 +148,8 @@ CREATE TABLE `pelanggans` (
 INSERT INTO `pelanggans` (`noktp_pelanggan`, `nama_pelanggan`, `alamat_pelanggan`, `nohp_pelanggan`, `jenkel_pelanggan`, `foto_pelanggan`, `tgllahir_pelanggan`, `updated_at`, `created_at`) VALUES
 (78993, 'FeraJulianti', 'Lampung Utara', 8123456789, 'Perempuan', '1657482295.jpeg', '2021-03-09', '2022-07-11 02:55:50', '2022-06-29 16:36:21'),
 (123456, 'Julianti', 'Lampung Selatan', 81245, 'Perempuan', '1656496301.jpeg', '2022-06-22', '2022-06-29 16:51:41', '2022-06-29 16:51:41'),
-(1234567890123456, 'Feraaaaaa', 'Bandung', 8123456789, 'Perempuan', '1657453967.jpg', '2001-08-13', '2022-07-10 18:52:47', '2022-07-10 18:52:47');
+(1234567890123456, 'Feraaaaaa', 'Bandung', 8123456789, 'Perempuan', '1657453967.jpg', '2001-08-13', '2022-07-10 18:52:47', '2022-07-10 18:52:47'),
+(9875647382918574, 'udin', 'bandung sukapura', 85234123745, 'Perempuan', '1657889486.jpeg', '1986-01-15', '2022-07-15 19:51:26', '2022-07-15 19:51:26');
 
 -- --------------------------------------------------------
 
@@ -235,12 +231,18 @@ CREATE TABLE `pesanans` (
 --
 
 INSERT INTO `pesanans` (`id_pesanan`, `tgl_pesanan`, `waktu_pesanan`, `id_rumputlaut`, `noktp_pelanggan`, `jumlah_pesanan`, `total_pesanan`, `status_pesanan`, `ekspedisi_pesanan`, `konfirmasi_pesanan`, `bukti_pembayaran`, `isi_testimoni`, `tgl_testimoni`, `waktu_testimoni`, `balasan_testimoni`, `bintang_testimoni`) VALUES
-(28, '2022-05-29', '09:45:12', 18, 78993, 4, 100000, NULL, 'JNE/J&T', 'Ditolak', 'bukti1.jpg', 'Terima kasih mas', '2022-06-30', NULL, 'Sama-sama bu', 5),
-(29, '2022-02-24', '09:45:12', 24, 78993, 10, 60000, 'Selesai', 'JNE/J&T', 'Dikonfirmasi', 'bukti1.jpg', 'Bagus dan cepat sampai', '2022-06-30', '01:16:07', 'Sama-sama bu', 4),
-(30, '2022-03-25', '09:45:12', 18, 78993, 15, 100000, 'Selesai', 'JNE/J&T', 'Dikonfirmasi', 'bukti1.jpg', 'Terima kasih mas', '2022-06-30', '06:16:23', 'Sama-sama bu', 5),
+(28, '2022-05-29', '09:45:12', 18, 78993, 4, 100000, 'Direfund', 'JNE/J&T', 'Pending', 'bukti1.jpg', 'Terima kasih mas', '2022-06-30', NULL, 'Sama-sama bu', 5),
+(29, '2022-02-24', '09:45:12', 24, 78993, 10, 60000, 'Selesai', 'JNE/J&T', 'Ditolak', 'bukti1.jpg', 'Bagus dan cepat sampai', '2022-06-30', '01:16:07', 'Sama-sama bu', 4),
+(30, '2022-03-25', '09:45:12', 18, 78993, 15, 100000, 'Disiapkan', 'JNE/J&T', 'Ditolak', 'bukti1.jpg', 'Terima kasih mas', '2022-06-30', '06:16:23', 'Sama-sama bu', 5),
 (35, '2022-07-04', '00:36:09', 34, 78993, 10, 34000, 'Disiapkan', NULL, 'Dikonfirmasi', '-', NULL, NULL, NULL, NULL, NULL),
-(44, '2022-07-10', '15:31:33', 34, 78993, 3, 33000, 'Selesai', 'Mitra', NULL, '1657467093.jpg', NULL, NULL, NULL, NULL, NULL),
-(45, '2022-07-10', '16:01:10', 24, 78993, 1, 60000, 'Belum Disiapkan', 'Mitra', NULL, '1657468870.jpg', NULL, NULL, NULL, NULL, NULL);
+(44, '2022-07-10', '15:31:33', 34, 9875647382918574, 3, 33000, 'Direfund', 'Mitra', 'Pending', '1657467093.jpg', 's', '2022-07-16', '15:22:09', NULL, NULL),
+(45, '2022-07-10', '16:01:10', 24, 78993, 1, 60000, 'Direfund', 'Mitra', 'Pending', '1657468870.jpg', NULL, NULL, NULL, NULL, NULL),
+(46, '2022-07-15', '12:53:26', 34, 9875647382918574, 1, 11000, 'Direfund', 'JNE/J&T', 'Pending', '1657889606.png', 'xcs', '2022-07-16', '15:29:35', NULL, NULL),
+(47, '2022-07-16', '13:32:00', 34, 78993, 4, 44000, 'Belum Disiapkan', 'JNE/J&T', NULL, '1657978320.jpg', NULL, NULL, NULL, NULL, NULL),
+(48, '2022-07-16', '13:32:38', 34, 78993, 4, 44000, 'Belum Disiapkan', 'JNE/J&T', NULL, '1657978358.jpg', NULL, NULL, NULL, NULL, NULL),
+(49, '2022-07-16', '13:34:42', 34, 78993, 20, 220000, 'Disiapkan', 'JNE/J&T', 'Dikonfirmasi', '1657978482.jpg', NULL, NULL, NULL, NULL, NULL),
+(50, '2022-07-16', '13:38:55', 34, 78993, 20, 220000, 'Disiapkan', 'Mitra', 'Dikonfirmasi', '1657978735.jpg', NULL, NULL, NULL, NULL, NULL),
+(51, '2022-07-16', '14:50:05', 34, 78993, 20, 220000, 'Selesai', 'JNE/J&T', 'Dikonfirmasi', '1657983005.jpg', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -267,7 +269,7 @@ CREATE TABLE `produks` (
 INSERT INTO `produks` (`id_rumputlaut`, `jenis_rumputlaut`, `deskripsi_rumputlaut`, `harga_rumputlaut`, `lokasi_rumputlaut`, `durasitahan_rumputlaut`, `stok_rumputlaut`, `gambar_rumputlaut`, `noktp_pembudidaya`) VALUES
 (18, 'Euchema cottonii', 'spesies dari Rhodophyta (rumput laut merah)', 100000, 'Bantaeng', 110, 9997, '1657795853.jpg', 737109),
 (24, 'Euchema spinosum', 'spesies dari Rhodophyta (rumput laut merah)', 60000, 'Bantaeng', 20, 2996, '1656490520.jpg', 737109),
-(34, 'Ganggang Merah', 'aaaaaaaaaaaaa', 11000, 'Bantaeng', 12, 17, '1656956491.png', 3333333333333333);
+(34, 'Ganggang Merah', 'aaaaaaaaaaaaa', 11000, 'Bantaeng', 12, 5, '1656956491.png', 737109);
 
 -- --------------------------------------------------------
 
@@ -313,9 +315,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('49a7hRRvJfxBzhAQNnylsjkhxs1Gj1kyMVvSojCj', 12, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoidmRoNmlPcVYzVDJLWXhaV05KMlBXQ2FDZFB6b2lvZ2xvbkxWbVVWMCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWsiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTozNTp7aTowO3M6MTg6ImFsZXJ0LmNvbmZpZy50aXRsZSI7aToxO3M6MTc6ImFsZXJ0LmNvbmZpZy50ZXh0IjtpOjI7czoxODoiYWxlcnQuY29uZmlnLnRpbWVyIjtpOjM7czoxODoiYWxlcnQuY29uZmlnLndpZHRoIjtpOjQ7czoyMzoiYWxlcnQuY29uZmlnLmhlaWdodEF1dG8iO2k6NTtzOjIwOiJhbGVydC5jb25maWcucGFkZGluZyI7aTo2O3M6MzA6ImFsZXJ0LmNvbmZpZy5zaG93Q29uZmlybUJ1dHRvbiI7aTo3O3M6Mjg6ImFsZXJ0LmNvbmZpZy5zaG93Q2xvc2VCdXR0b24iO2k6ODtzOjI5OiJhbGVydC5jb25maWcudGltZXJQcm9ncmVzc0JhciI7aTo5O3M6MjQ6ImFsZXJ0LmNvbmZpZy5jdXN0b21DbGFzcyI7aToxMDtzOjE3OiJhbGVydC5jb25maWcuaWNvbiI7aToxMTtzOjEyOiJhbGVydC5jb25maWciO2k6MTI7czoxODoiYWxlcnQuY29uZmlnLnRpdGxlIjtpOjEzO3M6MTc6ImFsZXJ0LmNvbmZpZy50ZXh0IjtpOjE0O3M6MTg6ImFsZXJ0LmNvbmZpZy50aW1lciI7aToxNTtzOjE4OiJhbGVydC5jb25maWcud2lkdGgiO2k6MTY7czoyMDoiYWxlcnQuY29uZmlnLnBhZGRpbmciO2k6MTc7czozMDoiYWxlcnQuY29uZmlnLnNob3dDb25maXJtQnV0dG9uIjtpOjE4O3M6Mjg6ImFsZXJ0LmNvbmZpZy5zaG93Q2xvc2VCdXR0b24iO2k6MTk7czoyOToiYWxlcnQuY29uZmlnLnRpbWVyUHJvZ3Jlc3NCYXIiO2k6MjA7czoyNDoiYWxlcnQuY29uZmlnLmN1c3RvbUNsYXNzIjtpOjIxO3M6MTc6ImFsZXJ0LmNvbmZpZy5pY29uIjtpOjIyO3M6MTg6ImFsZXJ0LmNvbmZpZy50b2FzdCI7aToyMztzOjIxOiJhbGVydC5jb25maWcucG9zaXRpb24iO2k6MjQ7czoxMjoiYWxlcnQuY29uZmlnIjtpOjI1O3M6MTg6ImFsZXJ0LmNvbmZpZy50aXRsZSI7aToyNjtzOjE3OiJhbGVydC5jb25maWcudGV4dCI7aToyNztzOjMwOiJhbGVydC5jb25maWcuc2hvd0NvbmZpcm1CdXR0b24iO2k6Mjg7czoyOToiYWxlcnQuY29uZmlnLnRpbWVyUHJvZ3Jlc3NCYXIiO2k6Mjk7czoyNDoiYWxlcnQuY29uZmlnLmN1c3RvbUNsYXNzIjtpOjMwO3M6MTc6ImFsZXJ0LmNvbmZpZy5pY29uIjtpOjMxO3M6MTg6ImFsZXJ0LmNvbmZpZy50b2FzdCI7aTozMjtzOjIxOiJhbGVydC5jb25maWcucG9zaXRpb24iO2k6MzM7czoyODoiYWxlcnQuY29uZmlnLnNob3dDbG9zZUJ1dHRvbiI7aTozNDtzOjEyOiJhbGVydC5jb25maWciO31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjEyO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkejE1VGlyTjZwUGlRTWVqbDFLOFo4dS8yOG1QZjdYR3VLVjJ2Q2svc3hOVWJ5ZGgzZjg4TTYiO3M6NToiYWxlcnQiO2E6MDp7fX0=', 1657796192),
-('VvLtp2V3MxU7TUApWrgdgVoR9K3jD7eIDrSz0AdT', 13, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiY0drdHFxOFllQUV3azB1YzVDRm5YbTNGZldodHY1Y29lVHB0TmpSUCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yZWRpcmVjdHMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMztzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJFhmS0NsNEJQNzFHcGFhdnFxWXVKOS40ai5neTVFeDdsbmtRa1lMUEpHMGx4MzV1ekEuUm9hIjt9', 1657656732),
-('y3beT2fd8zp89LwlDjGm7k90zFXBtV10RrX9NbDZ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTXh6N2Ewc05ORDUwYkhlV3k0TmNEbXBMNmdBeURjVXc5NHZBb1lUaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1657688860);
+('bikeViQnU8yMRZgPSgNUboSrZkDnJHhmckr8OwDH', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiZWJ2dE9rOWtrZkwxTmxWY1dxZ0t2d0R0eWk3eHRsUFB6UXoxRWxnVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1658038372),
+('nkDOYVtvNvVU3gyWELG44FE2lTO6lxCcWQKyVNFb', 13, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiYnlNMGhsaVU4bVNWVzhveVZqUTZ2c0w2cEVnY3dIdjk4YUp2OUNRdCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zaG93cmVmLzUxIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTM7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRYZktDbDRCUDcxR3BhYXZxcVl1SjkuNGouZ3k1RXg3bG5rUWtZTFBKRzBseDM1dXpBLlJvYSI7fQ==', 1657989486),
+('SzVE45uuTWkgJPiJMpHsbtsdxKkCC2cGTSdazJ7V', 12, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZmpBZXBnMUcxNHlSSTgxYU5nYlpzOVNwa0xyc3FHZ3NzZGVlZG1KdyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZXNhbmFuIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTI7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCR6MTVUaXJONnBQaVFNZWpsMUs4Wjh1LzI4bVBmN1hHdUtWMnZDay9zeE5VYnlkaDNmODhNNiI7fQ==', 1658039114);
 
 -- --------------------------------------------------------
 
@@ -385,7 +387,8 @@ INSERT INTO `users` (`id_user`, `email`, `role`, `usertype`, `password`, `no_ktp
 (46, 'admin@admin1', 'Pembudidaya', '1', '$2y$10$7QVegdueUzwAfxqO2X08leQwDGssiMx02QLH2GLJexmHoW.sHTona', 7777777777777777),
 (47, 'a@a', 'Pembudidaya', '1', '$2y$10$jgh4smo9W4PYZcuhYBezp.f1kfY.UuSPckPpvWuHQV5WlZQUnoDRS', 6666666666666666),
 (48, 'a@a2', 'Pembudidaya', '1', '$2y$10$A3H6xfpu7fCT5yKe4AOiSOoQMRnl7qr5Jrp8cjcDDc38IcxHxaRoe', 4444444444444444),
-(49, 'fera@gmail.com', 'Pelanggan', '0', '$2y$10$ShfwZJUlM7H1ExVeQxNpS./GKjmXmEhml72ucAlCCQ5ilA.1RUht6', 1234567890123456);
+(49, 'fera@gmail.com', 'Pelanggan', '0', '$2y$10$ShfwZJUlM7H1ExVeQxNpS./GKjmXmEhml72ucAlCCQ5ilA.1RUht6', 1234567890123456),
+(50, 'pelanggan2@gmail.com', 'Pelanggan', '0', '$2y$10$T/wrMHJvqDXAfG8Z1eN6Uua4uJFXKjdOsRxylWVFCzpQX/XptEzpC', 9875647382918574);
 
 --
 -- Indexes for dumped tables
@@ -503,13 +506,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `artikels`
 --
 ALTER TABLE `artikels`
-  MODIFY `id_artikel` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_artikel` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -527,7 +530,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pelanggans`
 --
 ALTER TABLE `pelanggans`
-  MODIFY `noktp_pelanggan` bigint(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6666666666666667;
+  MODIFY `noktp_pelanggan` bigint(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9875647382918575;
 
 --
 -- AUTO_INCREMENT for table `pembudidayas`
@@ -545,7 +548,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `pesanans`
 --
 ALTER TABLE `pesanans`
-  MODIFY `id_pesanan` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_pesanan` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `produks`
@@ -575,7 +578,7 @@ ALTER TABLE `tidaksukas`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_user` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Constraints for dumped tables
