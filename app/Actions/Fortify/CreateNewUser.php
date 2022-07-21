@@ -97,7 +97,7 @@ class CreateNewUser implements CreatesNewUsers
             //     'foto_pembudidaya' => $input['foto'],
             //     'jenkel_pembudidaya' => $input['jenkel'],
             // ]);
-            User::create([
+            return User::create([
                 'email' => $input['email'],
                 'role' => $input['role'],
                 'usertype' => $o,
