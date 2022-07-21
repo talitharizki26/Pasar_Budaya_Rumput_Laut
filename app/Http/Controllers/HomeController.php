@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+
 use Carbon\Carbon;
+
+//use Illuminate\Support\Carbon;
+
 use App\Models\Pelanggan;
 
 use App\Models\Produk;
@@ -56,7 +60,8 @@ class HomeController extends Controller
         $id = Auth::id();
         // dd($id);
         $count = cart::where('user_id', $id)->count();
-
+        $user = Auth::user();
+        // dd($user);
 
         if (Auth::id() == $id) {
 
@@ -463,6 +468,7 @@ class HomeController extends Controller
         $today = Carbon::today()->setTime(9, 30, 0);
         $now = date('H:i:s');
         $data->isi_testimoni = $request->isi_testimoni;
+        $data->alasan_refund = $request->alasan_refund;
         $data->tgl_testimoni = $today;
         $data->waktu_testimoni = $now;
         $data->konfirmasi_pesanan = "Belum Dikonfirmasi";

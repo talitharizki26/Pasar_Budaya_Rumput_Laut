@@ -229,13 +229,13 @@ https://templatemo.com/tm-558-klassy-cafe
         <div class="row">
             <div class="col-lg-3">
                 <a href="{{url('/showtes',$data->id_pesanan)}}">
-                    <i class="fa fa-check fa-1x" aria-hidden="true"> Sesuai Pesanan</i>
+                    <i class="fa fa-check fa-1x" aria-hidden="true"> Berikan Testimoni</i>
                 </a>
             </div>
 
             <div class="col-lg-3">
                 <a href="{{url('/showref',$data->id_pesanan)}}">
-                    <i class="fa fa-times fa-1x" aria-hidden="true"> Tidak Sesuai</i>
+                    <i class="fa fa-times fa-1x" aria-hidden="true"> Ajukan Refund dan Retur</i>
                 </a>
             </div>
         </div>

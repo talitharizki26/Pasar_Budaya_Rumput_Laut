@@ -204,7 +204,7 @@ https://templatemo.com/tm-558-klassy-cafe
     <div class="container">
         <div id="top" style="overflow-x: hidden;" bgcolor="#89C9D1">
 
-            <h2 style="margin-top:20px;" align="center">Alasan Refund Pesanan</h2>
+            <h2 style="margin-top:20px;" align="center">Alasan Refund dan Retur Pesanan</h2>
             <div class="col-lg-12 ">
                 <div class="contact-form">
                     <form id="contact" action="{{url('/uploadref',$data2->id_pesanan)}}" method="post">
@@ -214,19 +214,20 @@ https://templatemo.com/tm-558-klassy-cafe
                         <div class="row">
                             <div class="col-lg-12">
                                 <fieldset>
-                                    <textarea name="isi_testimoni" id="isi_testimoni" placeholder="Isi Feedback" value="{{$data2->balasan_testimoni}}" required></textarea>
+                                    <select name="alasan_refund" id="alasan_refund">
+                                        <option value="-">Alasan Refund dan Retur Pesanan?</option>
+                                        <option value="Pesanan Tidak Sesuai">Pesanan Tidak Sesuai</option>
+                                        <option value="Pesanan Rusak">Pesanan Rusak</option>
+                                        <option value="Jumlah Pesanan Kurang">Jumlah Pesanan Kurang</option>
+                                        <option value="Lainnya">Lainnya</option>
+                                    </select>
                                 </fieldset>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <fieldset>
-                                    <select name="bintang_testimoni" id="bintang_testimoni">
-                                        <option value="-">Alasan Refund?</option>
-                                        <option value=1>Tidak Sesuai Pesanan</option>
-                                        <option value=2>Pesanan Rusak</option>
-                                        <option value=3>Jumlah Pesanan kurang</option>
-                                    </select>
+                                    <textarea name="isi_testimoni" id="isi_testimoni" placeholder="Cerikan Komplain dan Pengalaman Anda" value="{{$data2->balasan_testimoni}}" required></textarea>
                                 </fieldset>
                             </div>
                         </div>
