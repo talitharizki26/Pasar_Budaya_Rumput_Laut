@@ -35,15 +35,14 @@ class HomeController extends Controller
     {
 
         if (Auth::id()) {
-
             return redirect('redirects');
-        } else
-
+        } else {
             $produk = produk::all();
-        $data2 = artikel::where("status", "final")->get();
-        $data3 = pesanan::all();
+            $data2 = artikel::where("status", "final")->get();
+            $data3 = pesanan::all();
 
-        return view("home", compact("produk", "data2", "data3"));
+            return view("home", compact("produk", "data2", "data3"));
+        }
     }
 
 
@@ -58,7 +57,7 @@ class HomeController extends Controller
         $count = cart::where('user_id', $id)->count();
 
 
-        if (Auth::id() == $id) {
+        if ($id) {
 
             $data4 = cart::where('user_id', $id)->join('produks', 'carts.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
             $status = "Selesai";
