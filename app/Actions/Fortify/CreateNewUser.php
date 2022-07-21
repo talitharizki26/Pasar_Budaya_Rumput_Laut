@@ -61,7 +61,7 @@ class CreateNewUser implements CreatesNewUsers
             //     'foto_pelanggan' => $input['foto'],
             //     'jenkel_pelanggan' => $input['jenkel'],
             // ]);
-            return User::create([
+            User::create([
                 'email' => $input['email'],
                 'role' => $input['role'],
                 'usertype' => $o,
@@ -69,6 +69,7 @@ class CreateNewUser implements CreatesNewUsers
                 'no_ktp' => $input['no_ktp'],
 
             ]);
+            return redirect('/');
         } else {
             $o = "1";
             $data = new Pembudidaya;
@@ -96,7 +97,7 @@ class CreateNewUser implements CreatesNewUsers
             //     'foto_pembudidaya' => $input['foto'],
             //     'jenkel_pembudidaya' => $input['jenkel'],
             // ]);
-            return User::create([
+            User::create([
                 'email' => $input['email'],
                 'role' => $input['role'],
                 'usertype' => $o,
