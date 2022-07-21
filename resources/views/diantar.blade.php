@@ -3,6 +3,8 @@
 
 <head>
 
+    <base href="/public">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -14,7 +16,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.css">
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
     <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
-    <link rel="stylesheet" href="admin/assets/css/style.css">
 
     <link href="assets/images/pbrl-tab.png" rel="icon">
     <title>Pasar Budaya Rumput Laut</title>
@@ -36,10 +37,9 @@ https://templatemo.com/tm-558-klassy-cafe
 
     <link rel="stylesheet" href="assets/css/lightbox.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
-
-
-
 
 <body>
 
@@ -120,7 +120,6 @@ https://templatemo.com/tm-558-klassy-cafe
                             @endguest --}}
                             </li>
 
-
                             <li class="scroll-to-section dropdown border-left border-right">
                                 <a class=" fa fa-bell " id="notificationDropdown" href="#" data-toggle="dropdown">
                                 </a>
@@ -132,62 +131,21 @@ https://templatemo.com/tm-558-klassy-cafe
                                     @foreach ($data5 as $item)
 
                                     <div class="preview-item-content">
-
-                                        @if ($item->status_pesanan == "Selesai")
-                                        <a href="{{url('/konfirmasi',$item->id_pesanan)}}" class="dropdown-item preview-item">
-
+                                        <a href="{{url('/showtes',$item->id_pesanan)}}" class="dropdown-item preview-item">
                                             <p class="text-muted ellipsis mb-2">{{$item->id_pesanan}} : <b>{{$item->status_pesanan}} </b></p>
                                         </a>
-
-                                        @elseif ($item->status_pesanan == "Ditolak")
-                                        <a href="{{url('/alasantolak',$item->id_pesanan)}}" class="dropdown-item preview-item">
-
-                                            <p class="text-muted ellipsis mb-2">{{$item->id_pesanan}} : <b>{{$item->status_pesanan}} </b></p>
-                                        </a>
-
-                                        @elseif ($item->status_pesanan == "Belum Dikonfirmasi")
-                                        <a href="{{url('/belumdikonfirmasi',$item->id_pesanan)}}" class="dropdown-item preview-item">
-
-                                            <p class="text-muted ellipsis mb-2">{{$item->id_pesanan}} : <b>{{$item->status_pesanan}} </b></p>
-                                        </a>
-
-                                        @elseif ($item->status_pesanan == "Disiapkan")
-                                        <a href="{{url('/disiapkan',$item->id_pesanan)}}" class="dropdown-item preview-item">
-
-                                            <p class="text-muted ellipsis mb-2">{{$item->id_pesanan}} : <b>{{$item->status_pesanan}} </b></p>
-                                        </a>
-
-                                        @elseif ($item->status_pesanan == "Diantar")
-                                        <a href="{{url('/diantar',$item->id_pesanan)}}" class="dropdown-item preview-item">
-
-                                            <p class="text-muted ellipsis mb-2">{{$item->id_pesanan}} : <b>{{$item->status_pesanan}} </b></p>
-                                        </a>
-
-                                        @elseif ($item->status_pesanan == "Direfund")
-                                        <a href="{{url('/direfund',$item->id_pesanan)}}" class="dropdown-item preview-item">
-
-                                            <p class="text-muted ellipsis mb-2">{{$item->id_pesanan}} : <b>{{$item->status_pesanan}} </b></p>
-                                        </a>
-
-                                        @else
-
-                                        <a href="#" class="dropdown-item preview-item">
-                                            <p class="text-muted ellipsis mb-2">{{$item->id_pesanan}} : <b>{{$item->status_pesanan}} </b></p>
-                                        </a>
-                                        @endif
-
                                         @endforeach
                                     </div>
                                 </div>
                             </li>
 
-                            @endauth
+                            <!-- @endauth
 
                             @guest
 
+                            <i class="fa fa-shopping-cart"></i>[0]
 
-
-                            @endguest
+                            @endguest -->
 
 
                             <li>
@@ -197,25 +155,20 @@ https://templatemo.com/tm-558-klassy-cafe
                                     @auth
                             </li>
 
-
-
-
-                            @foreach($foto as $data)
                             <li class="nav-item dropdown">
                                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                                     <div class="navbar-profile row">
-                                        <img class="img-xs rounded-circle" width="22%" src="userimage/{{$data->foto_pelanggan}}" alt="">
-                                        <p style="margin-top: 5px; margin-left: 15px;" class="mb-0 d-none d-sm-block navbar-profile-name">{{$data->nama_pelanggan}}</p>
+                                        <img class="img-xs rounded-circle" width="17%" src="admin/assets/images/faces/face15.jpg" alt="">
+                                        <p style="margin-top: 5px; margin-left: 5px;" class="mb-0 d-none d-sm-block navbar-profile-name"> {{ Auth::user()->nama }}</p>
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                     </div>
                                 </a>
-                                @endforeach
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                                     <h6 class="p-3 mb-0">Edit Profil Anda atau Keluar dari Aplikasi?</h6>
                                     <div class="dropdown-divider"></div>
-                                    <a href="{{url('/editprofil',Auth::user()->no_ktp)}}">
+                                    <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                         {{ __('Edit Profil') }}
-                                    </a><br>
+                                    </x-jet-dropdown-link><br>
                                     <div class="dropdown-divider"></div>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
@@ -248,112 +201,89 @@ https://templatemo.com/tm-558-klassy-cafe
             </div>
         </div>
     </header>
-    <!-- ***** Header Area End ***** -->
-
-
-
-    <!-- ***** Main Banner Area Start ***** -->
-    <div id="top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="left-content">
-                        <div class="inner-content">
-                            <center>
-                                <h4>Pasar Budaya</h4>
-                                <h6> Rumput Laut</h6>
-
-                                <div class="main-white-button scroll-to-section">
-                                    <a href="#produk">Pesan Sekarang</a>
-                                </div>
-                            </center>
-                        </div>
-                    </div>
+    <div class="container">
+        <hr>
+        <div id="top" style="overflow-x: hidden; margin-top: 150px;" bgcolor="#89C9D1">
+            <div class="col-lg-12 ">
+                <div class="contact-form">
+                    @foreach($data as $data)
+                    <h2 style="margin-top:20px;" align="center">Pesanan anda sedang diantar. Silahkan tunggu atau hubungi pembudidaya untuk info lebih lanjut.</h2>
+                    @endforeach
                 </div>
-                <div class="col-lg-8">
-                    <div class="main-banner header-text">
-                        <div class="Modern-Slider">
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="img-fill">
-                                    <img src="assets/images/pembudidaya1.jpg" alt="">
-                                </div>
-                            </div>
-                            <!-- // Item -->
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="img-fill">
-                                    <img src="assets/images/pembudidaya2.jpg" alt="">
-                                </div>
-                            </div>
-                            <!-- // Item -->
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="img-fill">
-                                    <img src="assets/images/pembudidaya3.jpg" alt="">
-                                </div>
-                            </div>
-                            <!-- // Item -->
-                        </div>
-                    </div>
-                </div>
+
+                <hr style="margin-bottom: 250px;">
             </div>
         </div>
+
+
     </div>
-    <!-- ***** Main Banner Area End ***** -->
 
-    <!-- ***** About Area Starts ***** -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-xs-12">
-                    <div class="left-text-content">
-                        <div class="section-heading">
-                            <h6>Tentang Kami</h6>
-                            <h2>Aplikasi Pasar Budaya Rumput Laut</h2>
-                        </div>
-                        <p>Aplikasi "Pasar Budaya Rumput Laut" merupakan aplikasi pemasaran rumput laut berbasis website yang dibuat untuk membantu pembudidaya rumput laut dalam menjual dan mempromosikan rumput lautnya serta membantu pelanggan dalam melakukan pembelian rumput laut secara cepat, mudah dan aman.</p>
-                        <div class="row">
-                            <div class="col-4">
-                                <img src="assets/images/rumputlaut1.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img src="assets/images/rumputlaut2.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img src="assets/images/rumputlaut3.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-12">
-                    <div class="right-content">
-                        <div class="thumb">
-                            <a rel="nofollow" href="https://www.youtube.com/watch?v=XOSoT_r5YYU"><i class="fa fa-play"></i></a>
-                            <img src="assets/images/pembudidaya4.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** About Area Ends ***** -->
-
-
-    @include("produk")
-
-    @include("artikel")
-
-    @include("testimoni")
-
-    @include("kontak")
-
-    <!-- ***** Menu Area Starts ***** -->
-
-    <!-- ***** Chefs Area Ends ***** -->
 
 
     @include("footer")
+
+
+    <script type="text/javascript">
+        $("#order").click(
+
+            function() {
+                $("#appear").show();
+
+            }
+        );
+
+
+
+
+        $("#close").click(
+
+            function() {
+                $("#appear").hide();
+
+            }
+        );
+    </script>
+
+
+
+
+    <!-- jQuery -->
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/accordions.js"></script>
+    <script src="assets/js/datepicker.js"></script>
+    <script src="assets/js/scrollreveal.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/imgfix.min.js"></script>
+    <script src="assets/js/slick.js"></script>
+    <script src="assets/js/lightbox.js"></script>
+    <script src="assets/js/isotope.js"></script>
+
+    <!-- Global Init -->
+    <script src="assets/js/custom.js"></script>
+    <script>
+        $(function() {
+            var selectedClass = "";
+            $("p").click(function() {
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("." + selectedClass).fadeOut();
+                setTimeout(function() {
+                    $("." + selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+
+            });
+        });
+    </script>
+
 
 
 

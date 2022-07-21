@@ -56,6 +56,7 @@
                                                 <th> Jumlah</th>
                                                 <th> Ekspedisi</th>
                                                 <th> Total</th>
+                                                <th> Alasan</th>
                                                 <th> Konfirmasi</th>
                                                 <th> Status</th>
                                                 <th> Aksi </th>
@@ -78,6 +79,7 @@
                                                 <td>{{$data->jumlah_pesanan}} Kg</td>
                                                 <td>{{$data->ekspedisi_pesanan}}</td>
                                                 <td>Rp. {{number_format($data->total_pesanan)}}</td>
+                                                <td>{{$data->alasan_refund}}</td>
                                                 <td>
                                                     {{$data->konfirmasi_pesanan}}
                                                 </td>

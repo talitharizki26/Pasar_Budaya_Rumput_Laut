@@ -67,7 +67,7 @@ class HomeController extends Controller
             $data4 = cart::where('user_id', $id)->join('produks', 'carts.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
             $status = "Selesai";
             $no_ktp = Auth::user()->no_ktp;
-            $data5 = pesanan::select('*')->where('noktp_pelanggan', '=', $no_ktp)->where('isi_testimoni', '=', null)->get();
+            $data5 = pesanan::select('*')->where('noktp_pelanggan', '=', $no_ktp)->where('isi_testimoni', '=', null)->orderby('id_pesanan', 'desc')->get();
         }
         // dd($data5);
         //  else {
@@ -320,7 +320,7 @@ class HomeController extends Controller
             $data->waktu_pesanan = $time;
             $data->jumlah_pesanan = $request->jumlah_pesanan[$key];
             $data->total_pesanan = $request->total_pesanan[$key];
-            $data->status_pesanan = "Belum Disiapkan";
+            $data->status_pesanan = "Belum Dikonfirmasi";
 
             $image = $request->bukti_pembayaran;
 
@@ -393,7 +393,66 @@ class HomeController extends Controller
         return view('konfirmasi', compact('data', 'data5', 'count', 'datarumput'));
     }
 
+    public function alasantolak(Request $request, $id_pesanan)
+    {
 
+        $data = Pesanan::where('id_pesanan', '=', $id_pesanan)->get();
+        $rumput = Pesanan::where('id_pesanan', '=', $id_pesanan)->pluck('id_rumputlaut');
+        $datarumput = Produk::where('id_rumputlaut', '=', $rumput)->get();
+        $id = Auth::id();
+        $count = cart::where('user_id', $id)->count();
+        $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
+
+        // dd($data2);
+        return view('alasantolak', compact('data', 'data5', 'count', 'datarumput'));
+    }
+    public function belumdikonfirmasi(Request $request, $id_pesanan)
+    {
+
+        $data = Pesanan::where('id_pesanan', '=', $id_pesanan)->get();
+        $rumput = Pesanan::where('id_pesanan', '=', $id_pesanan)->pluck('id_rumputlaut');
+        $datarumput = Produk::where('id_rumputlaut', '=', $rumput)->get();
+        $id = Auth::id();
+        $count = cart::where('user_id', $id)->count();
+        $data5 = pesanan::select('*')->where('isi_testimoni', '=', null)->get();
+
+        // dd($data2);
+        return view('belumdikonfirmasi', compact('data', 'data5', 'count', 'datarumput'));
+    }
+
+    public function disiapkan(Request $request, $id_pesanan)
+    {
+
+        $data = Pesanan::where('id_pesanan', '=', $id_pesanan)->get();
+        $rumput = Pesanan::where('id_pesanan', '=', $id_pesanan)->pluck('id_rumputlaut');
+        $datarumput = Produk::where('id_rumputlaut', '=', $rumput)->get();
+        $id = Auth::id();
+        $count = cart::where('user_id', $id)->count();
+        $data5 = pesanan::select('*')
+            ->where('isi_testimoni', '=', null)
+            ->orderby('id_pesanan', 'desc')
+            ->get();
+
+        // dd($data2);
+        return view('disiapkan', compact('data', 'data5', 'count', 'datarumput'));
+    }
+
+    public function diantar(Request $request, $id_pesanan)
+    {
+
+        $data = Pesanan::where('id_pesanan', '=', $id_pesanan)->get();
+        $rumput = Pesanan::where('id_pesanan', '=', $id_pesanan)->pluck('id_rumputlaut');
+        $datarumput = Produk::where('id_rumputlaut', '=', $rumput)->get();
+        $id = Auth::id();
+        $count = cart::where('user_id', $id)->count();
+        $data5 = pesanan::select('*')
+            ->where('isi_testimoni', '=', null)
+            ->orderby('id_pesanan', 'desc')
+            ->get();
+
+        // dd($data2);
+        return view('diantar', compact('data', 'data5', 'count', 'datarumput'));
+    }
 
     public function showtes(Request $request, $id_pesanan)
     {

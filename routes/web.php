@@ -139,6 +139,14 @@ Route::get("/showref/{id}", [HomeController::class, "showref"]);
 
 Route::get("/konfirmasi/{id}", [HomeController::class, "konfirmasi"]);
 
+Route::get("/alasantolak/{id}", [HomeController::class, "alasantolak"]);
+
+Route::get("/belumdikonfirmasi/{id}", [HomeController::class, "belumdikonfirmasi"]);
+
+Route::get("/disiapkan/{id}", [HomeController::class, "disiapkan"]);
+
+Route::get("/diantar/{id}", [HomeController::class, "diantar"]);
+
 Route::post("/uploadtestimoni/{id}", [HomeController::class, "uploadtestimoni"]);
 
 Route::post("/uploadref/{id}", [HomeController::class, "uploadref"]);
