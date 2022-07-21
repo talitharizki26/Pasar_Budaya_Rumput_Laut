@@ -61,7 +61,7 @@ class CreateNewUser implements CreatesNewUsers
             //     'foto_pelanggan' => $input['foto'],
             //     'jenkel_pelanggan' => $input['jenkel'],
             // ]);
-            User::create([
+            return User::create([
                 'email' => $input['email'],
                 'role' => $input['role'],
                 'usertype' => $o,
@@ -69,7 +69,7 @@ class CreateNewUser implements CreatesNewUsers
                 'no_ktp' => $input['no_ktp'],
 
             ]);
-            return redirect('/');
+            // return redirect('/');
         } else {
             $o = "1";
             $data = new Pembudidaya;
@@ -105,7 +105,6 @@ class CreateNewUser implements CreatesNewUsers
                 'no_ktp' => $input['no_ktp'],
 
             ]);
-            return redirect('/');
         }
 
 
@@ -122,6 +121,6 @@ class CreateNewUser implements CreatesNewUsers
         //     'alamat' => $input['alamat'],
         //     'foto' => $input['foto'],
         // ]);
-        return redirect('/');
+        // return redirect('/');
     }
 }

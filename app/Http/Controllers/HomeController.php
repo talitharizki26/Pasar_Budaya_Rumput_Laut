@@ -59,7 +59,7 @@ class HomeController extends Controller
         $id = Auth::id();
         // dd($id);
         $count = cart::where('user_id', $id)->count();
-        $user = Auth::user();
+        // $user = Auth::user();
         // dd($user);
 
         if ($id) {
