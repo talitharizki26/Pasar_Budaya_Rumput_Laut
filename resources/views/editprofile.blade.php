@@ -30,7 +30,7 @@
 						</div>
 						<div class="form-group">
 							<label for="harga">No HP </label>
-							<input class="form-control" name="nohp_pelanggan" value="0{{$data->nohp_pelanggan}}" required>
+							<input type="number" class="form-control" name="nohp_pelanggan" value="0{{$data->nohp_pelanggan}}" required>
 						</div>
 
 
