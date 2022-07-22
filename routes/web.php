@@ -147,6 +147,10 @@ Route::get("/disiapkan/{id}", [HomeController::class, "disiapkan"]);
 
 Route::get("/diantar/{id}", [HomeController::class, "diantar"]);
 
+Route::get("/direfund/{id}", [HomeController::class, "direfund"]);
+
+Route::get("/refselesai/{id}", [HomeController::class, "refselesai"]);
+
 Route::post("/uploadtestimoni/{id}", [HomeController::class, "uploadtestimoni"]);
 
 Route::post("/uploadref/{id}", [HomeController::class, "uploadref"]);

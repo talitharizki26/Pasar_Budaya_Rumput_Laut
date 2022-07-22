@@ -67,7 +67,9 @@ class HomeController extends Controller
             $data4 = cart::where('user_id', $id)->join('produks', 'carts.id_rumputlaut', '=', 'produks.id_rumputlaut')->get();
             $status = "Selesai";
             $no_ktp = Auth::user()->no_ktp;
-            $data5 = pesanan::select('*')->where('noktp_pelanggan', '=', $no_ktp)->where('isi_testimoni', '=', null)->orderby('id_pesanan', 'desc')->get();
+            $data5 = pesanan::select('*')
+                ->where('noktp_pelanggan', '=', $no_ktp)
+                ->orderby('id_pesanan', 'desc')->get();
         }
         // dd($data5);
         //  else {
@@ -452,6 +454,40 @@ class HomeController extends Controller
 
         // dd($data2);
         return view('diantar', compact('data', 'data5', 'count', 'datarumput'));
+    }
+
+    public function direfund(Request $request, $id_pesanan)
+    {
+
+        $data = Pesanan::where('id_pesanan', '=', $id_pesanan)->get();
+        $rumput = Pesanan::where('id_pesanan', '=', $id_pesanan)->pluck('id_rumputlaut');
+        $datarumput = Produk::where('id_rumputlaut', '=', $rumput)->get();
+        $id = Auth::id();
+        $count = cart::where('user_id', $id)->count();
+        $data5 = pesanan::select('*')
+            ->where('isi_testimoni', '=', null)
+            ->orderby('id_pesanan', 'desc')
+            ->get();
+
+        // dd($data2);
+        return view('direfund', compact('data', 'data5', 'count', 'datarumput'));
+    }
+
+    public function refselesai(Request $request, $id_pesanan)
+    {
+
+        $data = Pesanan::where('id_pesanan', '=', $id_pesanan)->get();
+        $rumput = Pesanan::where('id_pesanan', '=', $id_pesanan)->pluck('id_rumputlaut');
+        $datarumput = Produk::where('id_rumputlaut', '=', $rumput)->get();
+        $id = Auth::id();
+        $count = cart::where('user_id', $id)->count();
+        $data5 = pesanan::select('*')
+            ->where('isi_testimoni', '=', null)
+            ->orderby('id_pesanan', 'desc')
+            ->get();
+
+        // dd($data2);
+        return view('refselesai', compact('data', 'data5', 'count', 'datarumput'));
     }
 
     public function showtes(Request $request, $id_pesanan)
