@@ -96,8 +96,7 @@ class AdminController extends Controller
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
     $data = pesanan::where('noktp_pembudidaya', $id)
       ->where('status_pesanan', '!=', 'Direfund')
-      ->orwhere('status_pesanan', '!=', 'Refund Ditolak')
-      ->orwhere('status_pesanan', '!=', 'Refund Selesai')
+      //->orWhere('konfirmasi_pesanan', '!=', 'Refund Ditolak')
       ->orWhere('status_pesanan', '=', null)
       ->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')
       ->join('pelanggans', 'pesanans.noktp_pelanggan', '=', 'pelanggans.noktp_pelanggan')
@@ -114,7 +113,7 @@ class AdminController extends Controller
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
     $data = pesanan::where('noktp_pembudidaya', $id)
       ->where('status_pesanan', '=', 'Direfund')
-      ->orwhere('konfirmasi_pesanan', '=', 'Refund dikonfirmasi')
+      //->orWhere('konfirmasi_pesanan', '=', 'Refund Ditolak')
       ->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')
       ->join('pelanggans', 'pesanans.noktp_pelanggan', '=', 'pelanggans.noktp_pelanggan')
       ->orderBy('id_pesanan', 'desc')
@@ -141,6 +140,10 @@ class AdminController extends Controller
     if ($update_barang->konfirmasi_pesanan == "Ditolak") {
       $update_barang->status_pesanan = "Ditolak";
     }
+
+    // if ($update_barang->konfirmasi_pesanan == "Refund Ditolak") {
+    //   $update_barang->status_pesanan = "Refund Ditolak";
+    // }
     //dd($kurang);
     if ($kurang == "Dikonfirmasi" && $tambah == "Disiapkan") {
       $sisa = $stock - $totalbeli;
