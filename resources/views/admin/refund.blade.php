@@ -127,12 +127,13 @@
                                                                     <input type="text" class="form-control" id="updateJumlahBarang" name="updateJumlahBarang" value="{{ $data->status_pesanan}}">
                                                                 </div> --}}
 
-                                                                <label for="">Konfirmasi Pesanan</label>
+                                                                <label for="">Konfirmasi Refnud Pesanan</label>
                                                                 <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input dikonfirmasi" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Refund dikonfirmasi" {{ $data->konfirmasi_pesanan == 'Refund dikonfirmasi' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Refund ditolak')>
-                                                                    <label class="form-check-label" for="inlineRadio1">Refund Dikonfirmasi</label>
-                                                                    <input class="form-check-input ditolak" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Refund ditolak" {{ $data->konfirmasi_pesanan == 'Refund ditolak' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Refund dikonfirmasi')>
-                                                                    <label class="form-check-label" for="inlineRadio2">Refund Ditolak</label>
+                                                                    <input class="form-check-input dikonfirmasi" type="radio" name="konfirmasi_pesanan" id="refund_dikonfirmasi" value="Refund dikonfirmasi" {{ $data->konfirmasi_pesanan == 'Refund dikonfirmasi' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Refund ditolak')>
+                                                                    <label class="form-check-label" for="refund_dikonfirmasi">Refund Dikonfirmasi</label>
+
+                                                                    <input class="form-check-input ditolak" type="radio" name="konfirmasi_pesanan" id="refund_ditolak" value="Refund ditolak" {{ $data->konfirmasi_pesanan == 'Refund ditolak' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Refund dikonfirmasi')>
+                                                                    <label class="form-check-label" for="refund_ditolak">Refund Ditolak</label>
                                                                     <div class="form-group">
                                                                         <label for="alasan_tolakrefund">Alasan ditolak</label>
                                                                         <input type="text" class="form-control refund_ditolak" name="alasan_tolakrefund" id="alasan_tolakrefund" value="{{ $data->alasan_tolakrefund }}" @disabled($data->konfirmasi_pesanan != 'Refund ditolak')>
@@ -141,7 +142,7 @@
 
                                                                 <label for="">Konfirmasi Status</label>
                                                                 <div class="form-check form-check-inline" id="upear">
-                                                                    <input class="form-check-input selesai" type="radio" name="inlineRadioOptions2" id="selesai" value="Refund Selesai" {{ $data->status_pesanan == 'Refund Selesai' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Refund ditolak')>
+                                                                    <input class="form-check-input selesai" type="radio" name="status_pesanan" id="selesai" value="Refund Selesai" {{ $data->status_pesanan == 'Refund Selesai' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Refund ditolak')>
                                                                     <label class="form-check-label" for="selesai">Refund Selesai</label>
                                                                 </div>
 

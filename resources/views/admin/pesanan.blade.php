@@ -30,7 +30,7 @@
 					</nav>
 				</div>
 				<div class="row">
-					<div class="col-lg-12 grid-margin stretch-card">
+					<div class="col-md-12 grid-margin stretch-card">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Tabel Pesanan</h4>
@@ -135,10 +135,10 @@
 																<label for="">Konfirmasi Pesanan</label>
 																<div class="form-check form-check-inline">
 
-																	<input class="form-check-input dikonfirmasi" type="radio" name="inlineRadioOptions" id="dikonfirmasi" value="Dikonfirmasi" {{ $data->konfirmasi_pesanan == 'Dikonfirmasi' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Ditolak') >
+																	<input class="form-check-input dikonfirmasi" type="radio" name="konfirmasi_pesanan" id="dikonfirmasi" value="Dikonfirmasi" {{ $data->konfirmasi_pesanan == 'Dikonfirmasi' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Ditolak') >
 																	<label class="form-check-label" for="dikonfirmasi">Pesanan Dikonfirmasi</label>
 
-																	<input class="form-check-input ditolak" type="radio" name="inlineRadioOptions" id="ditolak" value="Ditolak" {{ $data->konfirmasi_pesanan == 'Ditolak' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Dikonfirmasi')>
+																	<input class="form-check-input ditolak" type="radio" name="konfirmasi_pesanan" id="ditolak" value="Ditolak" {{ $data->konfirmasi_pesanan == 'Ditolak' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Dikonfirmasi')>
 																	<label class="form-check-label" for="ditolak">Pesanan Ditolak</label>
 
 																	<div class="form-group">
@@ -149,13 +149,13 @@
 
 																<label for="">Konfirmasi Status</label>
 																<div class="form-check form-check-inline" id="upear">
-																	<input class="form-check-input disiapkan " type="radio" name="inlineRadioOptions2" id="disiapkan" value="Disiapkan" {{ $data->status_pesanan == 'Disiapkan' ? 'checked' : '' }} @disabled($data->status_pesanan == 'Diantar' || $data->status_pesanan == 'Selesai' || $data->konfirmasi_pesanan == 'Ditolak')>
+																	<input class="form-check-input disiapkan " type="radio" name="status_pesanan" id="disiapkan" value="Disiapkan" {{ $data->status_pesanan == 'Disiapkan' ? 'checked' : '' }} @disabled($data->status_pesanan == 'Diantar' || $data->status_pesanan == 'Selesai' || $data->konfirmasi_pesanan == 'Ditolak')>
 																	<label class="form-check-label" for="disiapkan">Pesanan Disiapkan</label>
 
-																	<input class="form-check-input diantar " type="radio" name="inlineRadioOptions2" id="diantar" value="Diantar" {{ $data->status_pesanan == 'Diantar' ? 'checked' : '' }} @disabled($data->status_pesanan == 'Selesai' || $data->konfirmasi_pesanan == 'Ditolak')>
+																	<input class="form-check-input diantar " type="radio" name="status_pesanan" id="diantar" value="Diantar" {{ $data->status_pesanan == 'Diantar' ? 'checked' : '' }} @disabled($data->status_pesanan == 'Selesai' || $data->konfirmasi_pesanan == 'Ditolak')>
 																	<label class="form-check-label" for="diantar">Pesanan Diantar</label>
 
-																	<input class="form-check-input selesai " type="radio" name="inlineRadioOptions2" id="selesai" value="Selesai" {{ $data->status_pesanan == 'Selesai' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Ditolak')>
+																	<input class="form-check-input selesai " type="radio" name="status_pesanan" id="selesai" value="Selesai" {{ $data->status_pesanan == 'Selesai' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Ditolak')>
 																	<label class="form-check-label" for="selesai">Pesanan Selesai</label>
 																</div>
 
