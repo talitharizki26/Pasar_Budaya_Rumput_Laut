@@ -109,6 +109,7 @@
                     <thead>
                       <tr align="center">
                         <th> Gambar</th>
+                        <th> ID Produk </th>
                         <th> Jenis </th>
                         <th> Harga </th>
                         <th> Lokasi </th>
@@ -126,7 +127,7 @@
                             <img height="200" width="200" src="/produkimage/{{$data->gambar_rumputlaut}}">
                           </a>
                         </td>
-
+                        <td>{{$data->id_rumputlaut}}</td>
                         <td>{{$data->jenis_rumputlaut}}</td>
                         <td>Rp. {{number_format($data->harga_rumputlaut)}}</td>
                         <td>{{$data->lokasi_rumputlaut}}</td>
