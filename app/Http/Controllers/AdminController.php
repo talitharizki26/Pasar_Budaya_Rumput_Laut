@@ -96,6 +96,7 @@ class AdminController extends Controller
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
     $data = pesanan::where('noktp_pembudidaya', $id)
       ->where('status_pesanan', '!=', 'Direfund')
+      ->orWhere('status_pesanan', '!=', 'Refund Selesai')
       //->orWhere('konfirmasi_pesanan', '!=', 'Refund Ditolak')
       ->orWhere('status_pesanan', '=', null)
       ->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')
@@ -113,6 +114,7 @@ class AdminController extends Controller
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
     $data = pesanan::where('noktp_pembudidaya', $id)
       ->where('status_pesanan', '=', 'Direfund')
+      ->orWhere('status_pesanan', 'Refund Selesai')
       //->orWhere('konfirmasi_pesanan', '=', 'Refund Ditolak')
       ->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')
       ->join('pelanggans', 'pesanans.noktp_pelanggan', '=', 'pelanggans.noktp_pelanggan')
@@ -132,13 +134,17 @@ class AdminController extends Controller
     $stock = DB::table('produks')->where('id_rumputlaut', $id_rumputlaut)->value('stok_rumputlaut');
     $totalbeli = DB::table('pesanans')->where('id_pesanan', $id)->value('jumlah_pesanan');
     // dd($totalbeli);
-    $kurang = $request->inlineRadioOptions;
-    $tambah = $request->inlineRadioOptions2;
-    $update_barang->konfirmasi_pesanan = $request->inlineRadioOptions;
-    $update_barang->status_pesanan = $request->inlineRadioOptions2;
+    $kurang = $request->konfirmasi_pesanan;
+    $tambah = $request->status_pesanan;
+    $update_barang->konfirmasi_pesanan = $request->konfirmasi_pesanan;
+    $update_barang->status_pesanan = $request->status_pesanan;
     $update_barang->alasan_ditolak = $request->alasan_ditolak;
     if ($update_barang->konfirmasi_pesanan == "Ditolak") {
       $update_barang->status_pesanan = "Ditolak";
+    } elseif ($update_barang->konfirmasi_pesanan == "Refund dikonfirmasi" || $update_barang->konfirmasi_pesanan == "Refund ditolak") {
+      $update_barang->status_pesanan = "Direfund";
+    } elseif ($update_barang->status_pesanan == "Refund Selesai") {
+      $update_barang->konfirmasi_pesanan == "Refund dikonfirmasi";
     }
 
     // if ($update_barang->konfirmasi_pesanan == "Refund Ditolak") {
