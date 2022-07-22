@@ -96,9 +96,9 @@ class AdminController extends Controller
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
     $data = pesanan::where('noktp_pembudidaya', $id)
       ->where('status_pesanan', '!=', 'Direfund')
-      ->orWhere('status_pesanan', '!=', 'Refund Selesai')
+      ->Where('status_pesanan', '!=', 'Refund Selesai')
       //->orWhere('konfirmasi_pesanan', '!=', 'Refund Ditolak')
-      ->orWhere('status_pesanan', '=', null)
+      // ->orWhere('status_pesanan', '=', null)
       ->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')
       ->join('pelanggans', 'pesanans.noktp_pelanggan', '=', 'pelanggans.noktp_pelanggan')
       ->orderBy('id_pesanan', 'desc')
