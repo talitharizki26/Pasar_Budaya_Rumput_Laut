@@ -133,31 +133,25 @@ class AdminController extends Controller
     $update_stok = produk::find($id_rumputlaut);
     $stock = DB::table('produks')->where('id_rumputlaut', $id_rumputlaut)->value('stok_rumputlaut');
     $totalbeli = DB::table('pesanans')->where('id_pesanan', $id)->value('jumlah_pesanan');
-    // dd($totalbeli);
     $kurang = $request->konfirmasi_pesanan;
     $tambah = $request->status_pesanan;
     $update_barang->konfirmasi_pesanan = $request->konfirmasi_pesanan;
     $update_barang->status_pesanan = $request->status_pesanan;
     $update_barang->alasan_ditolak = $request->alasan_ditolak;
-    if ($update_barang->konfirmasi_pesanan == "Ditolak") {
+    if ($request->konfirmasi_pesanan == "Ditolak") {
       $update_barang->status_pesanan = "Ditolak";
-    } elseif ($update_barang->konfirmasi_pesanan == "Refund dikonfirmasi" || $update_barang->konfirmasi_pesanan == "Refund ditolak") {
+    } elseif ($request->status_pesanan == "Refund Selesai") {
+      $update_barang->konfirmasi_pesanan = "Refund Selesai";
+    } elseif ($request->konfirmasi_pesanan == "Refund dikonfirmasi" || $request->konfirmasi_pesanan == "Refund ditolak") {
       $update_barang->status_pesanan = "Direfund";
-    } elseif ($update_barang->status_pesanan == "Refund Selesai") {
-      $update_barang->konfirmasi_pesanan == "Refund dikonfirmasi";
     }
     $update_barang->alasan_tolakrefund = $request->alasan_tolakrefund;
-    // if ($update_barang->konfirmasi_pesanan == "Refund Ditolak") {
-    //   $update_barang->status_pesanan = "Refund Ditolak";
-    // }
-    //dd($kurang);
     if ($kurang == "Dikonfirmasi" && $tambah == "Disiapkan") {
       $sisa = $stock - $totalbeli;
       $update_stok->stok_rumputlaut = $sisa;
       $update_stok->save();
     }
     $update_barang->save();
-    // return dd($update_barang);
     return redirect()->back();
   }
 
