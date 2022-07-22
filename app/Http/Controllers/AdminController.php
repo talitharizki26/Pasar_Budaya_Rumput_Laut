@@ -141,6 +141,7 @@ class AdminController extends Controller
     $update_barang->alasan_ditolak = $request->alasan_ditolak;
     if ($update_barang->konfirmasi_pesanan == "Ditolak") {
       $update_barang->status_pesanan = "Ditolak";
+      $update_barang->alasan_tolakrefund = $request->alasan_tolakrefund;
     } elseif ($update_barang->konfirmasi_pesanan == "Refund dikonfirmasi" || $update_barang->konfirmasi_pesanan == "Refund ditolak") {
       $update_barang->status_pesanan = "Direfund";
     } elseif ($update_barang->status_pesanan == "Refund Selesai") {
