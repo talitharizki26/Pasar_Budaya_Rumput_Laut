@@ -94,7 +94,9 @@ class AdminController extends Controller
     $id = Auth::user()->no_ktp;
     $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
-    $data = pesanan::where('noktp_pembudidaya', $id)->where('status_pesanan', '!=', 'Direfund')
+    $data = pesanan::where('noktp_pembudidaya', $id)
+      ->where('status_pesanan', '!=', 'Direfund')
+      //->orWhere('konfirmasi_pesanan', '!=', 'Refund Ditolak')
       ->orWhere('status_pesanan', '=', null)
       ->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')
       ->join('pelanggans', 'pesanans.noktp_pelanggan', '=', 'pelanggans.noktp_pelanggan')
@@ -109,7 +111,9 @@ class AdminController extends Controller
     $id = Auth::user()->no_ktp;
     $user = Pembudidaya::select('*')->where('noktp_pembudidaya', '=', $id)->get();
     $notif = pesanan::where('noktp_pembudidaya', $id)->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')->orderBy('id_pesanan', 'desc')->get()->take(5);
-    $data = pesanan::where('noktp_pembudidaya', $id)->where('status_pesanan', '=', 'Direfund')
+    $data = pesanan::where('noktp_pembudidaya', $id)
+      ->where('status_pesanan', '=', 'Direfund')
+      //->orWhere('konfirmasi_pesanan', '=', 'Refund Ditolak')
       ->join('produks', 'pesanans.id_rumputlaut', '=', 'produks.id_rumputlaut')
       ->join('pelanggans', 'pesanans.noktp_pelanggan', '=', 'pelanggans.noktp_pelanggan')
       ->orderBy('id_pesanan', 'desc')
@@ -133,6 +137,13 @@ class AdminController extends Controller
     $update_barang->konfirmasi_pesanan = $request->inlineRadioOptions;
     $update_barang->status_pesanan = $request->inlineRadioOptions2;
     $update_barang->alasan_ditolak = $request->alasan_ditolak;
+    if ($update_barang->konfirmasi_pesanan == "Ditolak") {
+      $update_barang->status_pesanan = "Ditolak";
+    }
+
+    // if ($update_barang->konfirmasi_pesanan == "Refund Ditolak") {
+    //   $update_barang->status_pesanan = "Refund Ditolak";
+    // }
     //dd($kurang);
     if ($kurang == "Dikonfirmasi" && $tambah == "Disiapkan") {
       $sisa = $stock - $totalbeli;

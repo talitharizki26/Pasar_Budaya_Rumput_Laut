@@ -56,6 +56,7 @@
                                                 <th> Jumlah</th>
                                                 <th> Ekspedisi</th>
                                                 <th> Total</th>
+                                                <th> Komplain</th>
                                                 <th> Konfirmasi</th>
                                                 <th> Status</th>
                                                 <th> Aksi </th>
@@ -78,6 +79,7 @@
                                                 <td>{{$data->jumlah_pesanan}} Kg</td>
                                                 <td>{{$data->ekspedisi_pesanan}}</td>
                                                 <td>Rp. {{number_format($data->total_pesanan)}}</td>
+                                                <td>{{$data->alasan_refund}}</td>
                                                 <td>
                                                     {{$data->konfirmasi_pesanan}}
                                                 </td>
@@ -132,8 +134,8 @@
                                                                     <input class="form-check-input ditolak" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Refund ditolak" {{ $data->konfirmasi_pesanan == 'Refund ditolak' ? 'checked' : '' }} @disabled($data->konfirmasi_pesanan == 'Refund dikonfirmasi')>
                                                                     <label class="form-check-label" for="inlineRadio2">Refund Ditolak</label>
                                                                     <div class="form-group">
-                                                                        <label for="refund_ditolak">Alasan ditolak</label>
-                                                                        <input type="text" class="form-control refund_ditolak" name="refund_ditolak" id="refund_ditolak" value="{{ $data->refund_ditolak }}" @disabled($data->konfirmasi_pesanan != 'Refund ditolak')>
+                                                                        <label for="alasan_tolakrefund">Alasan ditolak</label>
+                                                                        <input type="text" class="form-control refund_ditolak" name="alasan_tolakrefund" id="alasan_tolakrefund" value="{{ $data->alasan_tolakrefund }}" @disabled($data->konfirmasi_pesanan != 'Refund ditolak')>
                                                                     </div>
                                                                 </div>
 
